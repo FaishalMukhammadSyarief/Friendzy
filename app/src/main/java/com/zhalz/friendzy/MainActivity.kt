@@ -16,9 +16,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            binding.iv.setRenderEffect(RenderEffect.createBlurEffect(10F,10F,Shader.TileMode.MIRROR))
-        }
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+//            binding.iv.setRenderEffect(RenderEffect.createBlurEffect(10F,10F,Shader.TileMode.MIRROR))
+//        }
 
         binding.title.isSelected = true
 
