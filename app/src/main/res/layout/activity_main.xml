@@ -1,4 +1,4 @@
-<!--Verse 1-->
+<!--Verse 2-->
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -25,12 +25,8 @@
             <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:layout_width="match_parent"
                 android:layout_height="440dp"
-                app:collapsedTitleTextColor="@color/white"
                 app:contentScrim="@color/black"
-                app:expandedTitleTextColor="@color/white"
-                app:layout_scrollFlags="scroll|snap|exitUntilCollapsed"
-                app:title="Faishal Mukhammad Syarief"
-                app:titleCollapseMode="scale">
+                app:layout_scrollFlags="scroll|snap|exitUntilCollapsed">
 
                 <ImageView
                     android:id="@+id/iv"
@@ -49,7 +45,23 @@
                     app:layout_collapseMode="pin"
                     app:menu="@menu/detail_toolbar"
                     app:navigationIcon="@drawable/ic_back"
-                    app:navigationIconTint="@color/white" />
+                    app:navigationIconTint="@color/white" >
+
+                    <TextView
+                        android:id="@+id/title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/my_name"
+                        android:textSize="22sp"
+                        android:singleLine="true"
+                        android:ellipsize="marquee"
+                        android:scrollHorizontally="true"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:textColor="@color/white"/>
+
+                </com.google.android.material.appbar.MaterialToolbar>
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
 

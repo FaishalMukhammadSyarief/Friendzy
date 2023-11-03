@@ -5,7 +5,6 @@ import android.graphics.Shader
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.ImageView
 import androidx.databinding.DataBindingUtil
 import com.zhalz.friendzy.databinding.ActivityMainBinding
 
@@ -20,5 +19,8 @@ class MainActivity : AppCompatActivity() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             binding.iv.setRenderEffect(RenderEffect.createBlurEffect(10F,10F,Shader.TileMode.MIRROR))
         }
+
+        binding.title.isSelected = true
+
     }
 }
