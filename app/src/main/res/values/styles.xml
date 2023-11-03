@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <style name="MyAppBar" parent="ThemeOverlay.AppCompat.Light">
+        <item name="colorControlHighlight">#C8C7C7</item>
+        <item name="android:textColorPrimary">@color/white</item>
+    </style>
+    
+    <style name="ToolbarTitleTextAppearance">
+        <item name="android:textSize">40sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+    
+</resources>
