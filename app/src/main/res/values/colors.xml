@@ -4,5 +4,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="green">#226B03</color>
     <color name="transparent">#00FFFFFF</color>
-    <color name="semi_transparent">#65FFFFFF</color>
+    <color name="semi_transparent_white">#BFFFFFFF</color>
+    <color name="semi_transparent_black">#BF000000</color>
 </resources>

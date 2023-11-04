@@ -1,5 +1,6 @@
 package com.zhalz.friendzy
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
@@ -12,6 +13,11 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        binding.cardItem.setOnClickListener{
+            val toDetail = Intent(this, DetailActivity::class.java)
+            startActivity(toDetail)
+        }
 
     }
 }
