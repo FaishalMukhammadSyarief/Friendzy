@@ -22,6 +22,7 @@
                 android:layout_height="?attr/actionBarSize"
                 app:layout_scrollFlags="scroll|enterAlwaysCollapsed|enterAlways"
                 app:menu="@menu/toolbar_home"
+                app:titleTextAppearance="@style/ToolbarTitle"
                 app:title="Friendzy" />
 
         </com.google.android.material.appbar.AppBarLayout>
