@@ -20,8 +20,8 @@
                 android:id="@+id/top_appbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                app:menu="@menu/toolbar_home"
                 app:layout_scrollFlags="scroll|enterAlwaysCollapsed|enterAlways"
+                app:menu="@menu/toolbar_home"
                 app:title="Friendzy" />
 
         </com.google.android.material.appbar.AppBarLayout>
@@ -58,51 +58,43 @@
                         android:background="@drawable/grad_white" />
 
                     <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        style="@style/TextTitle"
                         android:layout_marginHorizontal="8dp"
                         android:ellipsize="end"
-                        android:gravity="center"
-                        android:singleLine="true"
                         android:text="@string/my_name"
                         android:textColor="@color/semi_transparent_white"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        app:layout_constraintBottom_toTopOf="@+id/birthday" />
+
+                        app:layout_constraintBottom_toTopOf="@+id/birthday"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
 
                     <TextView
+                        style="@style/TextSubtitle"
                         android:id="@+id/birthday"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
                         android:layout_marginHorizontal="8dp"
                         android:layout_marginBottom="12dp"
                         android:ellipsize="end"
-                        android:gravity="center"
-                        android:singleLine="true"
                         android:text="@string/my_birthday"
                         android:textColor="@color/semi_transparent_white"
-                        android:textSize="12sp"
-                        android:textStyle="italic"
-                        app:layout_constraintBottom_toBottomOf="@+id/imageView" />
+
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </com.google.android.material.card.MaterialCardView>
 
             <View
-                android:layout_width="150dp"
-                android:layout_height="3dp"
-                android:layout_gravity="center"
-                android:backgroundTint="@color/black"
-                android:layout_marginVertical="16dp"
-                android:background="@drawable/bg_shape_4round" />
+                style="@style/Divider"
+                android:backgroundTint="@color/black" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 app:spanCount="2"
-                tools:listitem="@layout/item_friends"
-                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager" />
+                tools:listitem="@layout/item_friends" />
 
         </LinearLayout>
 
