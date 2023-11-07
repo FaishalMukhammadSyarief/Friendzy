@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="name"
+            type="String" />
+
+        <variable
+            name="birth"
+            type="String" />
+
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="300dp"
         app:cardUseCompatPadding="true"
@@ -23,9 +37,10 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/grad_white" />
+                android:background="@drawable/grad_black"/>
 
             <TextView
+                android:id="@+id/tv_name"
                 style="@style/TextTitle"
                 android:layout_marginHorizontal="8dp"
                 android:ellipsize="end"
@@ -33,12 +48,12 @@
                 android:textColor="@color/semi_transparent_white"
                 android:textSize="16sp"
 
-                app:layout_constraintBottom_toTopOf="@+id/birthday"
+                app:layout_constraintBottom_toTopOf="@+id/tv_birth"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
-                android:id="@+id/birthday"
+                android:id="@+id/tv_birth"
                 style="@style/TextSubtitle"
                 android:layout_marginHorizontal="8dp"
                 android:layout_marginBottom="12dp"
@@ -53,3 +68,4 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.card.MaterialCardView>
+</layout>
