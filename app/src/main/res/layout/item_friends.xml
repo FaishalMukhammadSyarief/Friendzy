@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        
         <variable
-            name="name"
-            type="String" />
-
-        <variable
-            name="birth"
-            type="String" />
+            name="friendData"
+            type="com.zhalz.friendzy.data.Friend" />
 
     </data>
 
@@ -44,7 +41,8 @@
                 style="@style/TextTitle"
                 android:layout_marginHorizontal="8dp"
                 android:ellipsize="end"
-                android:text="@string/my_name"
+                android:text="@{friendData.name}"
+                tools:text="@string/my_name"
                 android:textColor="@color/semi_transparent_white"
                 android:textSize="16sp"
 
@@ -58,7 +56,8 @@
                 android:layout_marginHorizontal="8dp"
                 android:layout_marginBottom="12dp"
                 android:ellipsize="end"
-                android:text="@string/my_birthday"
+                android:text="@{friendData.birth}"
+                tools:text="@string/my_birthday"
                 android:textColor="@color/semi_transparent_white"
 
                 app:layout_constraintBottom_toBottomOf="@+id/imageView"

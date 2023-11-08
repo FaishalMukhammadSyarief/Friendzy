@@ -8,22 +8,17 @@ import com.zhalz.friendzy.R
 import com.zhalz.friendzy.data.Friend
 import com.zhalz.friendzy.databinding.ItemFriendsBinding
 
-class FriendAdapter(var items: List<Friend>): RecyclerView.Adapter<FriendAdapter.ItemViewHolder>() {
+class FriendAdapter(private var items: List<Friend>): RecyclerView.Adapter<FriendAdapter.ItemViewHolder>() {
 
-    inner class ItemViewHolder(var binding: ItemFriendsBinding) : RecyclerView.ViewHolder(binding.root) {
-
-    }
+    inner class ItemViewHolder(var binding: ItemFriendsBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         return ItemViewHolder(DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.item_friends, parent, false))
     }
 
-    override fun getItemCount(): Int {
-        return items.size
-    }
+    override fun getItemCount(): Int = items.size
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        holder.binding.tvName.text = items[position].name
-        holder.binding.tvBirth.text = items[position].birth
+        holder.binding.friendData = items[position]
     }
 }
