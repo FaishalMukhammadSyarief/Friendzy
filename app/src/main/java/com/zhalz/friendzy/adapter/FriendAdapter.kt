@@ -5,10 +5,10 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.zhalz.friendzy.R
-import com.zhalz.friendzy.data.Friend
+import com.zhalz.friendzy.data.database.FriendEntity
 import com.zhalz.friendzy.databinding.ItemFriendsBinding
 
-class FriendAdapter(private var items: List<Friend>): RecyclerView.Adapter<FriendAdapter.ItemViewHolder>() {
+class FriendAdapter(private var items: List<FriendEntity>): RecyclerView.Adapter<FriendAdapter.ItemViewHolder>() {
 
     inner class ItemViewHolder(var binding: ItemFriendsBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -20,5 +20,6 @@ class FriendAdapter(private var items: List<Friend>): RecyclerView.Adapter<Frien
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         holder.binding.friendData = items[position]
+        holder.binding.executePendingBindings()
     }
 }

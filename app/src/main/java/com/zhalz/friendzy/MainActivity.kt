@@ -4,17 +4,21 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.lifecycleScope
 import com.zhalz.friendzy.adapter.FriendAdapter
-import com.zhalz.friendzy.data.Friend
+import com.zhalz.friendzy.data.database.AppDatabase
+import com.zhalz.friendzy.data.database.FriendDao
 import com.zhalz.friendzy.databinding.ActivityMainBinding
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
     private val binding: ActivityMainBinding by lazy {
-        DataBindingUtil.setContentView(
-            this,
-            R.layout.activity_main
-        )
+        DataBindingUtil.setContentView(this, R.layout.activity_main)
+    }
+
+    private val friendManager: FriendDao by lazy {
+        AppDatabase.getInstance(this).friendDao()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,18 +30,13 @@ class MainActivity : AppCompatActivity() {
             startActivity(toDetail)
         }
 
-        val friendList = listOf(
-            Friend("Fabe", "26 November 2006", "Devout Muslim"),
-            Friend("Fabe", "26 November 2006", "Devout Muslim"),
-            Friend("Fabe", "26 November 2006", "Devout Muslim"),
-            Friend("Fabe", "26 November 2006", "Devout Muslim"),
-            Friend("Fabe", "26 November 2006", "Devout Muslim"),
-            Friend("Fabe", "26 November 2006", "Devout Muslim"),
-            Friend("Fabe", "26 November 2006", "Devout Muslim")
-        )
+        lifecycleScope.launch {
+            friendManager.getAll().collect{
+                binding.friendAdapter = FriendAdapter(it)
 
-        val friendAdapter = FriendAdapter(friendList)
-        binding.friendAdapter = friendAdapter
+            }
+        }
+
 
     }
 }
