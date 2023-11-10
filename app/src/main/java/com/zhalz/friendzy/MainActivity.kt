@@ -33,7 +33,6 @@ class MainActivity : AppCompatActivity() {
         lifecycleScope.launch {
             friendManager.getAll().collect{
                 binding.friendAdapter = FriendAdapter(it)
-
             }
         }
 
