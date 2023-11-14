@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FFFFFFFF</color>
+    <color name="white">#FF000000</color>
+
+    <!--  Special Component  -->
+    <color name="fab_color">#252525</color>
+<!--    <color name="fab_color">#252525</color>-->
+
+    <!--  Transparent Color  -->
+    <color name="semi_transparent_white">#BF000000</color>
+    <color name="semi_transparent_black">#BFFFFFFF</color>
+</resources>

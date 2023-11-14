@@ -2,7 +2,15 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="green">#226B03</color>
+
+    <!--  Brand Color  -->
+    <color name="green">#447c74</color>
+
+    <!--  Special Component  -->
+    <color name="fab_color">#447c74</color>
+    <color name="always_white">#FFFFFFFF</color>
+
+    <!--  Transparent Color  -->
     <color name="transparent">#00FFFFFF</color>
     <color name="semi_transparent_white">#BFFFFFFF</color>
     <color name="semi_transparent_black">#BF000000</color>
