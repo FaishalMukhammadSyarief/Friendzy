@@ -24,5 +24,6 @@
     <string name="cd_search">Search</string>
     <string name="cd_favorites">Favorites</string>
     <string name="cd_profile">Profile</string>
+    <string name="cd_construction">This page is under construction\n</string>
 
 </resources>
