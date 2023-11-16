@@ -4,12 +4,16 @@
 
     <data>
 
+        <variable
+            name="activity"
+            type="com.zhalz.friendzy.ui.MainActivity" />
+
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MainActivity">
+        tools:context=".ui.MainActivity">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appbar_layout"
@@ -22,7 +26,7 @@
                 android:layout_height="?attr/actionBarSize"
                 app:layout_scrollFlags="scroll|enterAlwaysCollapsed|enterAlways"
                 app:menu="@menu/toolbar_home"
-                app:title="Friendzy"
+                app:title="@string/app_name"
                 app:titleTextAppearance="@style/ToolbarTitle" />
 
         </com.google.android.material.appbar.AppBarLayout>
@@ -73,7 +77,7 @@
         </com.google.android.material.bottomappbar.BottomAppBar>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab"
+            android:id="@+id/fab_create"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/green"
@@ -81,6 +85,7 @@
             app:layout_anchor="@id/bottom_app_bar"
             app:shapeAppearanceOverlay="@style/fab_shape"
             app:srcCompat="@drawable/ic_add"
+            android:onClick="@{() -> activity.toAdd()}"
             app:tint="@color/white" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

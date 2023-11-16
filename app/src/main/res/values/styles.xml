@@ -10,8 +10,8 @@
     </style>
 
     <style name="Divider">
-        <item name="android:layout_width">150dp</item>
-        <item name="android:layout_height">4dp</item>
+        <item name="android:layout_width">200dp</item>
+        <item name="android:layout_height">3dp</item>
         <item name="android:layout_gravity">center</item>
         <item name="android:layout_marginVertical">16dp</item>
         <item name="android:background">@drawable/shape_round</item>
@@ -56,6 +56,14 @@
 
     <style name="App.Custom.Indicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
         <item name="android:color">@color/green</item>
+    </style>
+
+    <style name="Et_Input">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginHorizontal">12dp</item>
+        <item name="endIconMode">clear_text</item>
+        <item name="errorEnabled">true</item>
     </style>
 
 </resources>

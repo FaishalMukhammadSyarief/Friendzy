@@ -1,4 +1,4 @@
-package com.zhalz.friendzy.fragment
+package com.zhalz.friendzy.ui.fragment
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
-import com.zhalz.friendzy.DetailActivity
+import com.zhalz.friendzy.ui.DetailActivity
 import com.zhalz.friendzy.R
 import com.zhalz.friendzy.adapter.FriendAdapter
 import com.zhalz.friendzy.data.database.AppDatabase

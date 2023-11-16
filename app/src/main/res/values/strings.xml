@@ -25,5 +25,9 @@
     <string name="cd_favorites">Favorites</string>
     <string name="cd_profile">Profile</string>
     <string name="cd_construction">This page is under construction\n</string>
+    <string name="name_hint">Full Name</string>
+    <string name="date_hint">Date Birth</string>
+    <string name="description_hint">Description</string>
+    <string name="cd_delete">Delete this friend</string>
 
 </resources>

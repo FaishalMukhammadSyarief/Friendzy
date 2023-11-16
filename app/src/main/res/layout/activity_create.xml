@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="activity"
+            type="com.zhalz.friendzy.ui.CreateActivity" />
+
+        <variable
+            name="image"
+            type="android.graphics.Bitmap" />
+
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.CreateActivity">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/top_appbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_scrollFlags="scroll|enterAlwaysCollapsed|enterAlways"
+                app:title="Create"
+                app:titleCentered="true"
+                app:titleTextAppearance="@style/ToolbarTitle"
+                app:navigationIcon="@drawable/ic_back"
+                app:navigationIconTint="@color/black"
+                app:menu="@menu/toolbar_edit"
+                app:navigationOnClickListener="@{() -> activity.finishActivity()}"/>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:layout_gravity="center"
+                    app:shapeAppearance="@style/fab_shape"
+                    android:scaleType="centerCrop"
+                    android:layout_marginVertical="12dp"
+                    android:src="@drawable/deer"
+                    app:strokeWidth="3dp"
+                    android:padding="5dp"
+                    app:strokeColor="@color/green" />
+
+                <View style="@style/Divider" />
+
+                <!-- Name -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/et_name"
+                    style="@style/Et_Input"
+                    android:hint="@string/name_hint"
+                    app:boxCornerRadiusTopEnd="50dp"
+                    app:counterEnabled="true"
+                    android:layout_marginTop="12dp"
+                    app:counterMaxLength="30"
+                    app:startIconDrawable="@drawable/ic_profile">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textCapWords"
+                        android:maxLength="30"
+                        tools:ignore="TextContrastCheck,VisualLintTextFieldSize" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- School -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/et_school"
+                    style="@style/Et_Input"
+                    android:hint="@string/date_hint"
+                    app:startIconDrawable="@drawable/ic_calendar">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="date"
+                        android:maxLength="30"
+                        tools:ignore="TextContrastCheck,VisualLintTextFieldSize" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Description -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/et_description"
+                    style="@style/Et_Input"
+                    android:hint="@string/description_hint"
+                    app:boxCornerRadiusBottomEnd="50dp"
+                    app:startIconDrawable="@drawable/ic_info">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"
+                        android:inputType="textMultiLine"
+                        tools:ignore="TextContrastCheck,VisualLintTextFieldSize" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/green"
+            android:contentDescription="@string/cd_add"
+            app:shapeAppearanceOverlay="@style/fab_shape"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="12dp"
+            app:srcCompat="@drawable/ic_check"
+            app:tint="@color/white" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>
