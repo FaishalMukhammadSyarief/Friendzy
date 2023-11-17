@@ -32,6 +32,7 @@ class HomeFragment : Fragment() {
         binding.homeFragment = this
 
         lifecycleScope.launch {
+
             friendManager.getAll().collect{
                 binding.friendAdapter = FriendAdapter(it)
             }
@@ -43,7 +44,6 @@ class HomeFragment : Fragment() {
     fun toDetail(){
         val toDetail = Intent(requireContext(), DetailActivity::class.java)
         startActivity(toDetail)
-//        findNavController().navigate(R.id.action_homeFragment_to_mainActivity)
     }
 
 }
