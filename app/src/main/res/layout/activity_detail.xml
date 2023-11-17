@@ -62,7 +62,8 @@
                             android:focusableInTouchMode="true"
                             android:marqueeRepeatLimit="marquee_forever"
                             android:scrollHorizontally="true"
-                            android:text="@string/my_name"
+                            tools:text="@string/my_name"
+                            android:text="@{activity.name}"
                             android:textColor="@color/always_white"
 
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -103,19 +104,22 @@
 
                 <TextView
                     style="@style/TextTitle"
-                    android:text="@string/my_name"
+                    android:text="@{activity.name}"
+                    tools:text="@string/my_name"
                     android:layout_marginTop="4dp" />
 
                 <TextView
                     style="@style/TextSubtitle"
-                    android:text="@string/my_birthday"
+                    tools:text="@string/my_birthday"
+                    android:text="@{activity.birth}"
                     android:textSize="16sp" />
 
                 <View style="@style/Divider" />
 
                 <TextView
                     style="@style/TextDescription"
-                    android:text="@string/my_desc"
+                    tools:text="@string/my_desc"
+                    android:text="@{activity.description}"
                     android:textSize="16sp"
                     tools:ignore="VisualLintLongText" />
 

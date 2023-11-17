@@ -8,7 +8,7 @@ import com.zhalz.friendzy.R
 import com.zhalz.friendzy.data.database.FriendEntity
 import com.zhalz.friendzy.databinding.ItemFriendsBinding
 
-class FriendAdapter(private var items: List<FriendEntity>): RecyclerView.Adapter<FriendAdapter.ItemViewHolder>() {
+class FriendAdapter(private var items: List<FriendEntity>, val onItemClick : (FriendEntity) -> Unit): RecyclerView.Adapter<FriendAdapter.ItemViewHolder>() {
 
     inner class ItemViewHolder(var binding: ItemFriendsBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -20,6 +20,7 @@ class FriendAdapter(private var items: List<FriendEntity>): RecyclerView.Adapter
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         holder.binding.friendData = items[position]
+        holder.itemView.setOnClickListener { onItemClick(items[position]) }
         holder.binding.executePendingBindings()
     }
 }

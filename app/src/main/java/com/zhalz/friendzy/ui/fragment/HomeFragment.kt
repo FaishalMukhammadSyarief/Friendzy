@@ -13,6 +13,7 @@ import com.zhalz.friendzy.R
 import com.zhalz.friendzy.adapter.FriendAdapter
 import com.zhalz.friendzy.data.database.AppDatabase
 import com.zhalz.friendzy.data.database.FriendDao
+import com.zhalz.friendzy.data.database.FriendEntity
 import com.zhalz.friendzy.databinding.FragmentHomeBinding
 import kotlinx.coroutines.launch
 
@@ -32,17 +33,23 @@ class HomeFragment : Fragment() {
         binding.homeFragment = this
 
         lifecycleScope.launch {
-
             friendManager.getAll().collect{
-                binding.friendAdapter = FriendAdapter(it)
+                binding.friendAdapter = FriendAdapter(it) { data ->
+                    toDetail(data)
+                }
             }
         }
 
         return binding.root
     }
 
-    fun toDetail(){
-        val toDetail = Intent(requireContext(), DetailActivity::class.java)
+    fun toDetail(data: FriendEntity){
+        val toDetail = Intent(requireContext(), DetailActivity::class.java).apply {
+            putExtra("name", data.name)
+            putExtra("birth", data.birth)
+            putExtra("description", data.description)
+            putExtra("id", data.id)
+        }
         startActivity(toDetail)
     }
 
