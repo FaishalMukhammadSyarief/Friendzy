@@ -33,8 +33,7 @@
                 app:navigationIcon="@drawable/ic_back"
                 app:navigationIconTint="@color/black"
                 app:navigationOnClickListener="@{() -> activity.finishActivity()}"
-                tools:title="Create"
-                app:title="@{activity.toolbarTitle}"
+                app:title="CREATE"
                 app:titleCentered="true"
                 app:titleTextAppearance="@style/ToolbarTitle" />
 

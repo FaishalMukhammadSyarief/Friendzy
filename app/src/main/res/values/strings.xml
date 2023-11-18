@@ -8,26 +8,35 @@
     <string name="cd_edit">Edit this creature</string>
     <string name="cd_favorite">Add this to favorite</string>
     <string name="cd_menu">Open menu option</string>
-
-    <!--  My Data  -->
-    <string name="my_name">Faishal Mukhammad Syarief</string>
-    <string name="my_birthday">26 Oktober 2006</string>
-    <string name="my_desc">Faishal was born on October 26, 2006, in Banyumas. He is a beginner programmer with a strong desire to learn and grow in the world of technology. Faishal is a devout Muslim and believes in the potential of programming to make a positive impact.\n\nStanding at 170cm tall and weighing 48kg, Faishal is on his journey to becoming a proficient programmer. Currently, he is a student at SMKN 1 Purwokerto, where he is eager to acquire the skills and knowledge needed to excel in the field.</string>
-
-    <string name="favorite">Favorite</string>
-    <string name="menu">Menu</string>
     <string name="cd_question_icon">Who is this Friend?</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="cd_add">Add Friend Here</string>
     <string name="cd_home">Home</string>
     <string name="cd_search">Search</string>
     <string name="cd_favorites">Favorites</string>
     <string name="cd_profile">Profile</string>
     <string name="cd_construction">This page is under construction\n</string>
+    <string name="cd_delete">Delete this friend</string>
+
+    <!--  My Data  -->
+    <string name="my_name">Faishal Mukhammad Syarief</string>
+    <string name="my_birthday">26 Oktober 2006</string>
+    <string name="my_desc">Faishal was born on October 26, 2006, in Banyumas. He is a beginner programmer with a strong desire to learn and grow in the world of technology. Faishal is a devout Muslim and believes in the potential of programming to make a positive impact.\n\nStanding at 170cm tall and weighing 48kg, Faishal is on his journey to becoming a proficient programmer. Currently, he is a student at SMKN 1 Purwokerto, where he is eager to acquire the skills and knowledge needed to excel in the field.</string>
+
+    <!--  Hint  -->
     <string name="name_hint">Full Name</string>
     <string name="date_hint">Date Birth</string>
     <string name="description_hint">Description</string>
-    <string name="cd_delete">Delete this friend</string>
+
+    <!--  Dialog  -->
+    <string name="msg_error">Cannot be Empty</string>
+    <string name="msg_create">Do you want to Create this Friend?</string>
+    <string name="msg_edit">Do you want to Edit this Friend?</string>
+    <string name="msg_delete">Do you want to Delete this Friend?</string>
+    <string name="title_create">CREATE</string>
+    <string name="title_edit">EDIT</string>
+    <string name="title_delete">DDELETE</string>
+
+    <string name="favorite">Favorite</string>
+    <string name="menu">Menu</string>
 
 </resources>

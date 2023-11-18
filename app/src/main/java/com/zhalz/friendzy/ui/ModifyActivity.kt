@@ -21,7 +21,6 @@ class ModifyActivity : AppCompatActivity() {
     var birth = ""
     var description = ""
     private var idFriend = 0
-    var toolbarTitle = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,25 +32,7 @@ class ModifyActivity : AppCompatActivity() {
         description = intent.getStringExtra("description") ?: ""
         idFriend = intent.getIntExtra("id", 0)
 
-        toolbarTitle =
-            if (isEdit())"EDIT"
-            else "CREATE"
-
-        if (isEdit()){
-            binding.toolbar.inflateMenu(R.menu.toolbar_edit)
-        }
-
-        binding.toolbar.setOnMenuItemClickListener {
-            when (it.itemId) {
-                R.id.menu_delete ->
-                    showConfirmation(
-                        "Delete",
-                        "Are you sure want to delete?",
-                        ::deleteFriend
-                    )
-            }
-            true
-        }
+        toolbarConfiguration()
 
     }
 
@@ -59,32 +40,44 @@ class ModifyActivity : AppCompatActivity() {
         return idFriend != 0
     }
 
+    private fun toolbarConfiguration(){
+        if (isEdit()){
+            binding.toolbar.title = "EDIT"
+            binding.toolbar.inflateMenu(R.menu.toolbar_edit)
+
+            binding.toolbar.setOnMenuItemClickListener {
+                when (it.itemId) {
+                    R.id.menu_delete ->
+                        showConfirmation(
+                            getString(R.string.title_delete),
+                            getString(R.string.msg_delete),
+                            ::deleteFriend
+                        )
+                }
+                true
+            }
+
+        }
+    }
+
     fun save() {
 
-        if (name.isEmpty()) {
-            binding.etName.error = "Cannot Empty"
-        }
+        if (name.isEmpty()) binding.etName.error = getString(R.string.msg_error)
+        if (birth.isEmpty()) binding.etBirth.error = getString(R.string.msg_error)
+        if (description.isEmpty()) binding.etDescription.error = getString(R.string.msg_error)
 
-        if (birth.isEmpty()) {
-            binding.etBirth.error = "Cannot Empty"
-        }
-
-        if (description.isEmpty()) {
-            binding.etDescription.error = "Cannot Empty"
-        }
-
-        if (isEdit()) {
+        else if (isEdit()) {
             showConfirmation(
-                "EDIT",
-                "Are you sure to edit this Friend?",
+                getString(R.string.title_edit),
+                getString(R.string.msg_edit),
                 ::editFriend
             )
         }
 
         else {
             showConfirmation(
-                "CREATE",
-                "Are you sure to create this Friend?",
+                getString(R.string.title_create),
+                getString(R.string.msg_create),
                 ::createFriend
             )
         }
@@ -94,19 +87,21 @@ class ModifyActivity : AppCompatActivity() {
     private fun createFriend() {
         val newFriend = FriendEntity(name, birth, description)
 
-        lifecycleScope.launch {
-            friendManager.insert(newFriend)
-            finish()
-        }
+            lifecycleScope.launch {
+                friendManager.insert(newFriend)
+                finish()
+            }
+
     }
 
     private fun editFriend() {
         val newFriend = FriendEntity(name, birth, description).apply { id = idFriend }
 
-        lifecycleScope.launch {
-            friendManager.update(newFriend)
-            finish()
-        }
+            lifecycleScope.launch {
+                friendManager.update(newFriend)
+                finish()
+            }
+
     }
 
     private fun deleteFriend() {
@@ -116,6 +111,7 @@ class ModifyActivity : AppCompatActivity() {
             friendManager.delete(savedFriend)
             finish()
         }
+
     }
 
     private fun showConfirmation(
@@ -140,4 +136,5 @@ class ModifyActivity : AppCompatActivity() {
     fun finishActivity() {
         finish()
     }
+
 }
