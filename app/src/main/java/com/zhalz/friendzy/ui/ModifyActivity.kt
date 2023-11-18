@@ -34,8 +34,25 @@ class ModifyActivity : AppCompatActivity() {
         idFriend = intent.getIntExtra("id", 0)
 
         toolbarTitle =
-            if (isEdit()){"EDIT"}
-            else {"CREATE"}
+            if (isEdit())"EDIT"
+            else "CREATE"
+
+        if (isEdit()){
+            binding.toolbar.inflateMenu(R.menu.toolbar_edit)
+        }
+
+        binding.toolbar.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.menu_delete ->
+                    showConfirmation(
+                        "Delete",
+                        "Are you sure want to delete?",
+                        ::deleteFriend
+                    )
+            }
+            true
+        }
+
     }
 
     private fun isEdit(): Boolean{
@@ -88,6 +105,15 @@ class ModifyActivity : AppCompatActivity() {
 
         lifecycleScope.launch {
             friendManager.update(newFriend)
+            finish()
+        }
+    }
+
+    private fun deleteFriend() {
+        val savedFriend = FriendEntity(name, birth, description).apply { id = idFriend }
+
+        lifecycleScope.launch {
+            friendManager.delete(savedFriend)
             finish()
         }
     }
