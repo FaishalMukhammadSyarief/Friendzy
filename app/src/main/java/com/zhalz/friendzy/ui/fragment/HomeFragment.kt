@@ -43,7 +43,7 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
-    fun toDetail(data: FriendEntity){
+    private fun toDetail(data: FriendEntity){
         val toDetail = Intent(requireContext(), DetailActivity::class.java).apply {
             putExtra("name", data.name)
             putExtra("birth", data.birth)

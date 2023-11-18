@@ -28,8 +28,8 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigation.setupWithNavController(navController)
     }
 
-    fun toAdd() {
-        val toAdd = Intent(this, CreateActivity::class.java)
+    fun toCreate() {
+        val toAdd = Intent(this, ModifyActivity::class.java)
         startActivity(toAdd)
     }
 

@@ -29,7 +29,7 @@ class DetailActivity : AppCompatActivity() {
     }
 
     fun toEdit(){
-        val toEdit = Intent(this, CreateActivity::class.java).apply {
+        val toEdit = Intent(this, ModifyActivity::class.java).apply {
             putExtra("name", name)
             putExtra("birth", birth)
             putExtra("description", description)

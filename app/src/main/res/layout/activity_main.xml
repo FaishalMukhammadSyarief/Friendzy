@@ -85,7 +85,7 @@
             app:layout_anchor="@id/bottom_app_bar"
             app:shapeAppearanceOverlay="@style/fab_shape"
             app:srcCompat="@drawable/ic_add"
-            android:onClick="@{() -> activity.toAdd()}"
+            android:onClick="@{() -> activity.toCreate()}"
             app:tint="@color/white" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

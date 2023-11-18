@@ -7,7 +7,7 @@
 
         <variable
             name="activity"
-            type="com.zhalz.friendzy.ui.CreateActivity" />
+            type="com.zhalz.friendzy.ui.ModifyActivity" />
 
         <variable
             name="image"
@@ -18,7 +18,7 @@
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.CreateActivity">
+        tools:context=".ui.ModifyActivity">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appbar_layout"

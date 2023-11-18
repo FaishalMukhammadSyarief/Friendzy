@@ -9,12 +9,12 @@ import com.zhalz.friendzy.R
 import com.zhalz.friendzy.data.database.AppDatabase
 import com.zhalz.friendzy.data.database.FriendDao
 import com.zhalz.friendzy.data.database.FriendEntity
-import com.zhalz.friendzy.databinding.ActivityCreateBinding
+import com.zhalz.friendzy.databinding.ActivityModifyBinding
 import kotlinx.coroutines.launch
 
-class CreateActivity : AppCompatActivity() {
+class ModifyActivity : AppCompatActivity() {
 
-    private val binding: ActivityCreateBinding by lazy { DataBindingUtil.setContentView(this, R.layout.activity_create) }
+    private val binding: ActivityModifyBinding by lazy { DataBindingUtil.setContentView(this, R.layout.activity_modify) }
     private val friendManager: FriendDao by lazy { AppDatabase.getInstance(this).friendDao() }
 
     var name = ""
