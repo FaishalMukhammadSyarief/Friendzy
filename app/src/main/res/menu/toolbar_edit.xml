@@ -7,8 +7,6 @@
         android:contentDescription="@string/cd_delete"
         android:icon="@drawable/ic_delete"
         android:title="@string/menu"
-        android:enabled="false"
-        android:visible="false"
         app:showAsAction="ifRoom" />
 
 </menu>

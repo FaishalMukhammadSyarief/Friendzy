@@ -1,5 +1,6 @@
 package com.zhalz.friendzy.ui
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
@@ -25,6 +26,17 @@ class DetailActivity : AppCompatActivity() {
         birth = intent.getStringExtra("birth") ?: ""
         description = intent.getStringExtra("description") ?: ""
         id = intent.getIntExtra("id", 0)
+    }
+
+    fun toEdit(){
+        val toEdit = Intent(this, CreateActivity::class.java).apply {
+            putExtra("name", name)
+            putExtra("birth", birth)
+            putExtra("description", description)
+            putExtra("id", id)
+        }
+        startActivity(toEdit)
+        finish()
     }
 
     fun finishActivity() {

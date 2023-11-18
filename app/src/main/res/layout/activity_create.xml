@@ -26,7 +26,7 @@
             android:layout_height="wrap_content">
 
             <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/top_appbar"
+                android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_scrollFlags="scroll|enterAlwaysCollapsed|enterAlways"
@@ -34,7 +34,8 @@
                 app:navigationIcon="@drawable/ic_back"
                 app:navigationIconTint="@color/black"
                 app:navigationOnClickListener="@{() -> activity.finishActivity()}"
-                app:title="Create"
+                tools:title="Create"
+                app:title="@{activity.toolbarTitle}"
                 app:titleCentered="true"
                 app:titleTextAppearance="@style/ToolbarTitle" />
 

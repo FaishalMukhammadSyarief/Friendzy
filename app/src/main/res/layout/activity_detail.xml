@@ -136,6 +136,7 @@
             app:fabCustomSize="80dp"
             app:layout_anchor="@id/app_bar_layout"
             app:layout_anchorGravity="center|bottom"
+            android:onClick="@{() -> activity.toEdit()}"
             app:maxImageSize="40dp"
             app:shapeAppearanceOverlay="@style/fab_shape"
             app:tint="@color/white"

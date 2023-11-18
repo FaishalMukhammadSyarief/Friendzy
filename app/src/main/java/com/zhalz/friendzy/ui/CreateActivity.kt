@@ -14,23 +14,32 @@ import kotlinx.coroutines.launch
 
 class CreateActivity : AppCompatActivity() {
 
-    private val binding: ActivityCreateBinding by lazy {
-        DataBindingUtil.setContentView(
-            this,
-            R.layout.activity_create
-        )
-    }
+    private val binding: ActivityCreateBinding by lazy { DataBindingUtil.setContentView(this, R.layout.activity_create) }
     private val friendManager: FriendDao by lazy { AppDatabase.getInstance(this).friendDao() }
 
     var name = ""
     var birth = ""
     var description = ""
+    private var idFriend = 0
+    var toolbarTitle = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding.activity = this
 
+        name = intent.getStringExtra("name") ?: ""
+        birth = intent.getStringExtra("birth") ?: ""
+        description = intent.getStringExtra("description") ?: ""
+        idFriend = intent.getIntExtra("id", 0)
+
+        toolbarTitle =
+            if (isEdit()){"EDIT"}
+            else {"CREATE"}
+    }
+
+    private fun isEdit(): Boolean{
+        return idFriend != 0
     }
 
     fun save() {
@@ -47,11 +56,18 @@ class CreateActivity : AppCompatActivity() {
             binding.etDescription.error = "Cannot Empty"
         }
 
+        if (isEdit()) {
+            showConfirmation(
+                "EDIT",
+                "Are you sure to edit this Friend?",
+                ::editFriend
+            )
+        }
+
         else {
             showConfirmation(
                 "CREATE",
                 "Are you sure to create this Friend?",
-                "YES",
                 ::createFriend
             )
         }
@@ -59,9 +75,19 @@ class CreateActivity : AppCompatActivity() {
     }
 
     private fun createFriend() {
+        val newFriend = FriendEntity(name, birth, description)
+
         lifecycleScope.launch {
-            val newFriend = FriendEntity(name, birth, description)
             friendManager.insert(newFriend)
+            finish()
+        }
+    }
+
+    private fun editFriend() {
+        val newFriend = FriendEntity(name, birth, description).apply { id = idFriend }
+
+        lifecycleScope.launch {
+            friendManager.update(newFriend)
             finish()
         }
     }
@@ -69,14 +95,13 @@ class CreateActivity : AppCompatActivity() {
     private fun showConfirmation(
         title: String,
         message: String,
-        positiveText: String,
         positiveAction: () -> Unit
     ) {
         AlertDialog
             .Builder(this)
             .setTitle(title)
             .setMessage(message)
-            .setPositiveButton(positiveText) { dialog, _ ->
+            .setPositiveButton("YES") { dialog, _ ->
                 positiveAction.invoke()
                 dialog.dismiss()
             }
