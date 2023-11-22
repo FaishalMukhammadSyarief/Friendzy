@@ -69,8 +69,6 @@
                     style="@style/Et_Input"
                     android:layout_marginTop="12dp"
                     android:hint="@string/name_hint"
-                    app:boxCornerRadiusBottomEnd="25dp"
-                    app:boxCornerRadiusTopEnd="25dp"
                     app:counterEnabled="true"
                     app:counterMaxLength="30"
                     app:startIconDrawable="@drawable/ic_profile">
@@ -89,15 +87,16 @@
                     android:id="@+id/et_birth"
                     style="@style/Et_Input"
                     android:hint="@string/date_hint"
-                    app:boxCornerRadiusBottomEnd="25dp"
-                    app:boxCornerRadiusTopEnd="25dp"
                     app:startIconDrawable="@drawable/ic_calendar">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/date_picker_actions"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="date"
                         android:maxLength="30"
+                        android:cursorVisible="false"
+                        android:focusable="false"
                         android:text="@={activity.birth}"
                         tools:ignore="TextContrastCheck,VisualLintTextFieldSize" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -107,14 +106,13 @@
                     android:id="@+id/et_description"
                     style="@style/Et_Input"
                     android:hint="@string/description_hint"
-                    app:boxCornerRadiusBottomEnd="25dp"
-                    app:boxCornerRadiusTopEnd="25dp"
                     app:startIconDrawable="@drawable/ic_info">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="150dp"
                         android:text="@={activity.description}"
+                        android:gravity="top"
                         android:inputType="textMultiLine"
                         tools:ignore="TextContrastCheck,VisualLintTextFieldSize" />
                 </com.google.android.material.textfield.TextInputLayout>

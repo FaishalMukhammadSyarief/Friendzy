@@ -64,6 +64,10 @@
         <item name="android:layout_marginHorizontal">12dp</item>
         <item name="endIconMode">clear_text</item>
         <item name="errorEnabled">true</item>
+        <item name="boxCornerRadiusTopStart">15dp</item>
+        <item name="boxCornerRadiusBottomStart">15dp</item>
+        <item name="boxCornerRadiusTopEnd">15dp</item>
+        <item name="boxCornerRadiusBottomEnd">15dp</item>
     </style>
 
 </resources>
