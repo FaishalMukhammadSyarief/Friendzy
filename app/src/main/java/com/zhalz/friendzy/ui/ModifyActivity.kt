@@ -1,6 +1,5 @@
 package com.zhalz.friendzy.ui
 
-import android.app.DatePickerDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
@@ -12,7 +11,6 @@ import com.zhalz.friendzy.data.database.FriendDao
 import com.zhalz.friendzy.data.database.FriendEntity
 import com.zhalz.friendzy.databinding.ActivityModifyBinding
 import kotlinx.coroutines.launch
-import java.util.Calendar
 
 class ModifyActivity : AppCompatActivity() {
 
@@ -36,30 +34,6 @@ class ModifyActivity : AppCompatActivity() {
 
         toolbarConfiguration()
 
-        binding.datePickerActions.setOnClickListener{
-            showDatePicker()
-        }
-
-    }
-
-    private fun showDatePicker() {
-        val calendar = Calendar.getInstance()
-        val year = calendar.get(Calendar.YEAR)
-        val month = calendar.get(Calendar.MONTH)
-        val day = calendar.get(Calendar.DAY_OF_MONTH)
-
-        val datePickerDialog = DatePickerDialog(
-            this,
-            { _, selectedYear, selectedMonth, selectedDay ->
-                val selectedDate = "$selectedDay/${selectedMonth + 1}/$selectedYear"
-                binding.datePickerActions.setText(selectedDate)
-            },
-            year,
-            month,
-            day
-        )
-
-        datePickerDialog.show()
     }
 
     private fun isEdit(): Boolean{
@@ -121,10 +95,10 @@ class ModifyActivity : AppCompatActivity() {
     }
 
     private fun editFriend() {
-        val editedFriend = FriendEntity(name, birth, description).apply { id = idFriend }
+        val newFriend = FriendEntity(name, birth, description).apply { id = idFriend }
 
             lifecycleScope.launch {
-                friendManager.update(editedFriend)
+                friendManager.update(newFriend)
                 finish()
             }
 
