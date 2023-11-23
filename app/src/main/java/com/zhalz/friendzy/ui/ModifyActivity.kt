@@ -1,5 +1,7 @@
 package com.zhalz.friendzy.ui
 
+import android.app.DatePickerDialog
+import android.icu.util.Calendar
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
@@ -58,6 +60,23 @@ class ModifyActivity : AppCompatActivity() {
             }
 
         }
+    }
+
+    fun datePicker(){
+        val calendar = Calendar.getInstance()
+        val year = calendar.get(Calendar.YEAR)
+        val month = calendar.get(Calendar.MONTH)
+        val day = calendar.get(Calendar.DAY_OF_MONTH)
+
+        DatePickerDialog(
+            this,
+            { _, selectedYear, selectedMonth, selectedDay ->
+                val selectedDate = "$selectedDay/${selectedMonth + 1}/$selectedYear"
+                binding.etBirth.setText(selectedDate)
+            },
+            year, month, day
+        ).show()
+
     }
 
     fun save() {

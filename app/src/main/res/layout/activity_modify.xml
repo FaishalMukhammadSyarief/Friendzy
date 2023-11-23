@@ -65,7 +65,6 @@
 
                 <!-- Name -->
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/et_name"
                     style="@style/Et_Input"
                     android:layout_marginTop="12dp"
                     android:hint="@string/name_hint"
@@ -74,46 +73,47 @@
                     app:startIconDrawable="@drawable/ic_profile">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="textCapWords"
-                        android:text="@={activity.name}"
                         android:maxLength="30"
+                        android:text="@={activity.name}"
                         tools:ignore="TextContrastCheck,VisualLintTextFieldSize" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <!-- School -->
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/et_birth"
                     style="@style/Et_Input"
                     android:hint="@string/date_hint"
                     app:startIconDrawable="@drawable/ic_calendar">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/date_picker_actions"
+                        android:id="@+id/et_birth"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:cursorVisible="false"
+                        android:onClick="@{() -> activity.datePicker()}"
+                        android:focusable="false"
                         android:inputType="date"
                         android:maxLength="30"
-                        android:cursorVisible="false"
-                        android:focusable="false"
                         android:text="@={activity.birth}"
                         tools:ignore="TextContrastCheck,VisualLintTextFieldSize" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <!-- Description -->
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/et_description"
                     style="@style/Et_Input"
                     android:hint="@string/description_hint"
                     app:startIconDrawable="@drawable/ic_info">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_description"
                         android:layout_width="match_parent"
-                        android:layout_height="150dp"
-                        android:text="@={activity.description}"
+                        android:layout_height="wrap_content"
                         android:gravity="top"
                         android:inputType="textMultiLine"
+                        android:text="@={activity.description}"
                         tools:ignore="TextContrastCheck,VisualLintTextFieldSize" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -129,9 +129,9 @@
             android:layout_margin="12dp"
             android:backgroundTint="@color/green"
             android:contentDescription="@string/cd_add"
+            android:onClick="@{() -> activity.save()}"
             app:shapeAppearanceOverlay="@style/fab_shape"
             app:srcCompat="@drawable/ic_check"
-            android:onClick="@{() -> activity.save()}"
             app:tint="@color/white" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
