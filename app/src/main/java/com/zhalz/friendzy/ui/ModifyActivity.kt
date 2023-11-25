@@ -106,9 +106,9 @@ class ModifyActivity : AppCompatActivity() {
     }
 
     private fun createFriend() {
+        val newFriend = FriendEntity(name, birth, description)
 
-            lifecycleScope.launch {
-                val newFriend = FriendEntity(name, birth, description)
+        lifecycleScope.launch {
                 friendManager.insert(newFriend)
                 finish()
             }
