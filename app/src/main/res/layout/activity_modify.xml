@@ -49,24 +49,47 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:layout_width="200dp"
-                    android:layout_height="200dp"
-                    android:layout_gravity="center"
-                    android:layout_marginVertical="12dp"
-                    android:padding="5dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/deer"
-                    app:shapeAppearance="@style/fab_shape"
-                    app:strokeColor="@color/green"
-                    app:strokeWidth="3dp" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/iv_profile"
+                        android:layout_width="200dp"
+                        android:layout_height="200dp"
+                        android:layout_gravity="center"
+                        android:layout_marginVertical="12dp"
+                        android:padding="5dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/deer"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:shapeAppearance="@style/fab_shape"
+                        app:strokeColor="@color/green"
+                        app:strokeWidth="3dp" />
+
+                    <com.google.android.material.floatingactionbutton.FloatingActionButton
+                        android:id="@+id/fab_create"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:backgroundTint="@color/green"
+                        android:contentDescription="@string/cd_edit_picture"
+                        app:layout_constraintBottom_toBottomOf="@id/iv_profile"
+                        app:layout_constraintEnd_toEndOf="@+id/iv_profile"
+                        app:shapeAppearanceOverlay="@style/fab_shape"
+                        app:srcCompat="@drawable/ic_edit"
+                        app:tint="@color/white"
+                        tools:ignore="ImageContrastCheck" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <View style="@style/Divider" />
 
                 <!-- Name -->
                 <com.google.android.material.textfield.TextInputLayout
                     style="@style/Et_Input"
-                    android:layout_marginTop="12dp"
                     android:hint="@string/name_hint"
                     app:counterEnabled="true"
                     app:counterMaxLength="30"
@@ -93,10 +116,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:cursorVisible="false"
-                        android:onClick="@{() -> activity.datePicker()}"
                         android:focusable="false"
                         android:inputType="date"
                         android:maxLength="30"
+                        android:onClick="@{() -> activity.datePicker()}"
                         android:text="@={activity.birth}"
                         tools:ignore="TextContrastCheck,VisualLintTextFieldSize" />
                 </com.google.android.material.textfield.TextInputLayout>
