@@ -42,7 +42,7 @@ class ModifyActivity : AppCompatActivity() {
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             if (it.resultCode == RESULT_OK) {
                 val takenImage = BitmapFactory.decodeFile(photoFile.absolutePath)
-                binding.ivProfile.setImageBitmap(takenImage)
+                binding.photo = takenImage
             }
         }
 
@@ -211,7 +211,7 @@ class ModifyActivity : AppCompatActivity() {
     }
 
 
-    /* -- RUNTIME PERMISSION -- */
+    /** -- RUNTIME PERMISSION -- **/
 
     private fun checkPermissionCamera() {
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
@@ -222,7 +222,6 @@ class ModifyActivity : AppCompatActivity() {
         }
     }
 
-    //Menentukan apa yang terjadi saat Permission diberikan/tidak diberikan
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
