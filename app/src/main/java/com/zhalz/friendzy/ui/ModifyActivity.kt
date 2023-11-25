@@ -81,11 +81,9 @@ class ModifyActivity : AppCompatActivity() {
 
     fun save() {
 
-        if (name.isEmpty() || birth.isEmpty() || description.isEmpty()){
-            if (name.isEmpty()){ binding.etName.error = getString(R.string.msg_error) }
-            if (birth.isEmpty()){ binding.etBirth.error = getString(R.string.msg_error) }
-            if (description.isEmpty()){ binding.etDescription.error = getString(R.string.msg_error) }
-        }
+        if (name.isEmpty()) binding.etName.error = getString(R.string.msg_error)
+        if (birth.isEmpty()) binding.etBirth.error = getString(R.string.msg_error)
+        if (description.isEmpty()) binding.etDescription.error = getString(R.string.msg_error)
 
         else if (isEdit()) {
             showConfirmation(
