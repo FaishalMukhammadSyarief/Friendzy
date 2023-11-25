@@ -81,9 +81,11 @@ class ModifyActivity : AppCompatActivity() {
 
     fun save() {
 
-        if (name.isEmpty()) binding.etName.error = getString(R.string.msg_error)
-        if (birth.isEmpty()) binding.etBirth.error = getString(R.string.msg_error)
-        if (description.isEmpty()) binding.etDescription.error = getString(R.string.msg_error)
+        if (name.isEmpty() || birth.isEmpty() || description.isEmpty()){
+            if (name.isEmpty()){ binding.etName.error = getString(R.string.msg_error) }
+            if (birth.isEmpty()){ binding.etBirth.error = getString(R.string.msg_error) }
+            if (description.isEmpty()){ binding.etDescription.error = getString(R.string.msg_error) }
+        }
 
         else if (isEdit()) {
             showConfirmation(
@@ -104,9 +106,9 @@ class ModifyActivity : AppCompatActivity() {
     }
 
     private fun createFriend() {
-        val newFriend = FriendEntity(name, birth, description)
 
             lifecycleScope.launch {
+                val newFriend = FriendEntity(name, birth, description)
                 friendManager.insert(newFriend)
                 finish()
             }
@@ -142,11 +144,11 @@ class ModifyActivity : AppCompatActivity() {
             .Builder(this)
             .setTitle(title)
             .setMessage(message)
-            .setPositiveButton("YES") { dialog, _ ->
+            .setPositiveButton(R.string.action_positive) { dialog, _ ->
                 positiveAction.invoke()
                 dialog.dismiss()
             }
-            .setNegativeButton("CANCEL") { dialog, _ ->
+            .setNegativeButton(R.string.action_negative) { dialog, _ ->
                 dialog.dismiss()
             }
             .show()

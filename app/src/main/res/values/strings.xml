@@ -36,7 +36,7 @@
     <string name="title_create">CREATE</string>
     <string name="title_edit">EDIT</string>
     <string name="title_delete">DELETE</string>
-    <string name="action_positive">YES</string>
+    <string name="action_positive">Yes</string>
     <string name="action_negative">Cancel</string>
 
     <string name="favorite">Favorite</string>
