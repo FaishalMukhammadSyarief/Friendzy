@@ -29,7 +29,8 @@
                 android:layout_height="match_parent"
                 android:contentDescription="@string/dl"
                 android:scaleType="centerCrop"
-                android:src="@drawable/deer" />
+                imageSrc="@{friendData.photo}"
+                tools:src="@drawable/deer" />
 
             <View
                 android:layout_width="match_parent"

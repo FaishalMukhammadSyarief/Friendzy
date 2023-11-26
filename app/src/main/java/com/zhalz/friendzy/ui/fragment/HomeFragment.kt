@@ -48,6 +48,7 @@ class HomeFragment : Fragment() {
             putExtra("name", data.name)
             putExtra("birth", data.birth)
             putExtra("description", data.description)
+            putExtra("photo", data.photo)
             putExtra("id", data.id)
         }
         startActivity(toDetail)

@@ -3,6 +3,7 @@ package com.zhalz.friendzy.ui
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.icu.util.Calendar
 import androidx.appcompat.app.AppCompatActivity
@@ -23,6 +24,7 @@ import com.zhalz.friendzy.data.database.AppDatabase
 import com.zhalz.friendzy.data.database.FriendDao
 import com.zhalz.friendzy.data.database.FriendEntity
 import com.zhalz.friendzy.databinding.ActivityModifyBinding
+import com.zhalz.friendzy.helper.BitmapHelper
 import kotlinx.coroutines.launch
 import java.io.File
 
@@ -36,13 +38,14 @@ class ModifyActivity : AppCompatActivity() {
     var name = ""
     var birth = ""
     var description = ""
+    var photo = ""
     private var idFriend = 0
 
     private var cameraLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             if (it.resultCode == RESULT_OK) {
                 val takenImage = BitmapFactory.decodeFile(photoFile.absolutePath)
-                binding.photo = takenImage
+                resizeInputPhoto(takenImage)
             }
         }
 
@@ -54,6 +57,7 @@ class ModifyActivity : AppCompatActivity() {
         name = intent.getStringExtra("name") ?: ""
         birth = intent.getStringExtra("birth") ?: ""
         description = intent.getStringExtra("description") ?: ""
+        photo = intent.getStringExtra("photo") ?: ""
         idFriend = intent.getIntExtra("id", 0)
 
         toolbarConfiguration()
@@ -128,7 +132,7 @@ class ModifyActivity : AppCompatActivity() {
     }
 
     private fun createFriend() {
-        val newFriend = FriendEntity(name, birth, description)
+        val newFriend = FriendEntity(name, birth, description, photo)
 
         lifecycleScope.launch {
                 friendManager.insert(newFriend)
@@ -138,7 +142,7 @@ class ModifyActivity : AppCompatActivity() {
     }
 
     private fun editFriend() {
-        val newFriend = FriendEntity(name, birth, description).apply { id = idFriend }
+        val newFriend = FriendEntity(name, birth, description, photo).apply { id = idFriend }
 
             lifecycleScope.launch {
                 friendManager.update(newFriend)
@@ -148,7 +152,7 @@ class ModifyActivity : AppCompatActivity() {
     }
 
     private fun deleteFriend() {
-        val savedFriend = FriendEntity(name, birth, description).apply { id = idFriend }
+        val savedFriend = FriendEntity(name, birth, description, photo).apply { id = idFriend }
 
         lifecycleScope.launch {
             friendManager.delete(savedFriend)
@@ -198,6 +202,14 @@ class ModifyActivity : AppCompatActivity() {
     private fun createImageFile(): File {
         val storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
         return File.createTempFile("PHOTO_", ".jpg", storageDir)
+    }
+
+    private fun resizeInputPhoto(bitmap: Bitmap) {
+        val resizeTakenImage = BitmapHelper().resizeBitmap(bitmap, 512f)
+
+        binding.ivProfile.setImageBitmap(bitmap)
+        photo = BitmapHelper().bitmapToString(resizeTakenImage)
+        photoFile.delete()
     }
 
     private fun openCamera() {

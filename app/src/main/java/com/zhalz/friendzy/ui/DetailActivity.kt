@@ -14,6 +14,7 @@ class DetailActivity : AppCompatActivity() {
     var name = ""
     var birth = ""
     var description = ""
+    var photo = ""
     var id = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,6 +26,7 @@ class DetailActivity : AppCompatActivity() {
         name = intent.getStringExtra("name") ?: ""
         birth = intent.getStringExtra("birth") ?: ""
         description = intent.getStringExtra("description") ?: ""
+        photo = intent.getStringExtra("photo") ?: ""
         id = intent.getIntExtra("id", 0)
     }
 
@@ -33,6 +35,7 @@ class DetailActivity : AppCompatActivity() {
             putExtra("name", name)
             putExtra("birth", birth)
             putExtra("description", description)
+            putExtra("photo", photo)
             putExtra("id", id)
         }
         startActivity(toEdit)

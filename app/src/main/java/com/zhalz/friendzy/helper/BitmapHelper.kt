@@ -3,8 +3,6 @@ package com.zhalz.friendzy.helper
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.widget.ImageView
-import androidx.databinding.BindingAdapter
 import com.zhalz.friendzy.R
 import java.io.ByteArrayOutputStream
 import java.io.File
@@ -13,20 +11,8 @@ import java.io.FileOutputStream
 import java.io.IOException
 import java.util.Random
 
-/**
-TODO: get rid the warning.
-*/
 class BitmapHelper {
 
-    companion object{
-        @JvmStatic
-        @BindingAdapter("imageSrc")
-        fun ImageView.setImageSrc(imagePhoto: Bitmap?){
-            imagePhoto.let {
-                this.setImageBitmap(it)
-            }
-        }
-    }
     fun bitmapToString(image: Bitmap): String {
         var baos = ByteArrayOutputStream()
         image.compress(Bitmap.CompressFormat.JPEG, 100, baos)
@@ -81,5 +67,37 @@ class BitmapHelper {
             val iss = context.resources.openRawResource(R.raw.user)
             BitmapFactory.decodeStream(iss)
         }
+    }
+
+    fun resizeBitmap(bitmap: Bitmap, maxSize: Float): Bitmap {
+        val w = bitmap.width.toFloat()
+        val h = bitmap.height.toFloat()
+
+        if (w > h && w < maxSize) {
+            return bitmap
+        } else if (w < h && h < maxSize) {
+            return bitmap
+        }
+
+        var nW = w
+        var nH = h
+
+        if (w > maxSize || h > maxSize) {
+            if (w > h) {
+                nW = maxSize
+                nH = h / (w / maxSize)
+            } else if (w < h) {
+                nH = maxSize
+                nW = w / (h / maxSize)
+            } else {
+                nW = w
+                nH = h
+            }
+        }
+
+        val inW = nW.toInt()
+        val inH = nH.toInt()
+
+        return Bitmap.createScaledBitmap(bitmap, inW, inH, false)
     }
 }
