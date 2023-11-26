@@ -15,5 +15,5 @@
     <!--  Transparent Color  -->
     <color name="transparent">#00FFFFFF</color>
     <color name="semi_transparent_white">#BFFFFFFF</color>
-    <color name="semi_transparent_black">#BF000000</color>
+    <color name="semi_transparent_black">#80000000</color>
 </resources>

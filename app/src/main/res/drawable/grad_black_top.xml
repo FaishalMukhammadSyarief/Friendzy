@@ -5,6 +5,7 @@
         android:startColor="@color/transparent"
         android:centerColor="@color/transparent"
         android:endColor="@color/semi_transparent_black"
-        android:angle="270"/>
+        android:centerX="90%"
+        android:angle="90"/>
 
 </shape>
