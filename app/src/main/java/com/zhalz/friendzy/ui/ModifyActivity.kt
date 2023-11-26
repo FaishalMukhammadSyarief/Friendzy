@@ -1,11 +1,13 @@
 package com.zhalz.friendzy.ui
 
 import android.app.DatePickerDialog
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.icu.util.Calendar
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
@@ -27,6 +29,7 @@ import com.zhalz.friendzy.databinding.ActivityModifyBinding
 import com.zhalz.friendzy.helper.BitmapHelper
 import kotlinx.coroutines.launch
 import java.io.File
+import java.io.FileOutputStream
 
 class ModifyActivity : AppCompatActivity() {
 
@@ -46,6 +49,21 @@ class ModifyActivity : AppCompatActivity() {
             if (it.resultCode == RESULT_OK) {
                 val takenImage = BitmapFactory.decodeFile(photoFile.absolutePath)
                 resizeInputPhoto(takenImage)
+            }
+        }
+
+    private var galleryLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == RESULT_OK) {
+                result.data?.data?.let { uri ->
+                    contentResolver.openInputStream(uri)?.use { inputStream ->
+                        val outputStream = FileOutputStream(photoFile)
+                        inputStream.copyTo(outputStream)
+                    }
+
+                    val takenImage = BitmapFactory.decodeFile(photoFile.absolutePath)
+                    resizeInputPhoto(takenImage)
+                }
             }
         }
 
@@ -131,34 +149,27 @@ class ModifyActivity : AppCompatActivity() {
 
     }
 
+    /** -- CRUD OPERATION -- **/
     private fun createFriend() {
-        val newFriend = FriendEntity(name, birth, description, photo)
-
         lifecycleScope.launch {
-                friendManager.insert(newFriend)
-                finish()
-            }
-
+            val newFriend = FriendEntity(name, birth, description, photo)
+            friendManager.insert(newFriend)
+            finish()
+        }
     }
-
     private fun editFriend() {
-        val newFriend = FriendEntity(name, birth, description, photo).apply { id = idFriend }
-
-            lifecycleScope.launch {
-                friendManager.update(newFriend)
-                finish()
-            }
-
-    }
-
-    private fun deleteFriend() {
-        val savedFriend = FriendEntity(name, birth, description, photo).apply { id = idFriend }
-
         lifecycleScope.launch {
+            val newFriend = FriendEntity(name, birth, description, photo).apply { id = idFriend }
+            friendManager.update(newFriend)
+            finish()
+        }
+    }
+    private fun deleteFriend() {
+        lifecycleScope.launch {
+            val savedFriend = FriendEntity(name, birth, description, photo).apply { id = idFriend }
             friendManager.delete(savedFriend)
             finish()
         }
-
     }
 
     private fun showConfirmation(
@@ -185,15 +196,14 @@ class ModifyActivity : AppCompatActivity() {
     }
 
     fun addPhoto(){
-
-        val items = arrayOf("Camera", "Cancel")
-
+        val items = arrayOf("Camera", "Gallery", "Cancel")
         MaterialAlertDialogBuilder(this)
             .setTitle("Select From")
             .setItems(items) { _, which ->
                 when (which) {
                     0 -> checkPermissionCamera()
-                    1 -> Unit
+                    1 -> checkPermissionGallery()
+                    2 -> Unit
                 }
             }
             .show()
@@ -222,15 +232,35 @@ class ModifyActivity : AppCompatActivity() {
         cameraLauncher.launch(cameraIntent)
     }
 
+    private fun openGallery() {
+        val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+
+        try { galleryLauncher.launch(galleryIntent) }
+        catch (e: ActivityNotFoundException) {
+            Toast.makeText(this, "Cannot use Gallery", Toast.LENGTH_SHORT).show()
+            e.printStackTrace()
+        }
+    }
+
 
     /** -- RUNTIME PERMISSION -- **/
-
     private fun checkPermissionCamera() {
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             /** Request Permission **/
             ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.CAMERA), REQUEST_CODE_CAMERA)
         } else {
             openCamera()
+        }
+    }
+
+    private fun checkPermissionGallery() {
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_MEDIA_IMAGES) != PackageManager.PERMISSION_GRANTED) {
+            /** Request Permission **/
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.READ_MEDIA_IMAGES), REQUEST_CODE_GALLERY)
+            }
+        } else {
+            openGallery()
         }
     }
 
@@ -249,10 +279,20 @@ class ModifyActivity : AppCompatActivity() {
                 Toast.makeText(this, "Permission not Granted", Toast.LENGTH_SHORT).show()
             }
         }
+
+        else if (requestCode == REQUEST_CODE_GALLERY) {
+            if (grantResults.all { it == PackageManager.PERMISSION_GRANTED }) {
+                Toast.makeText(this, "Permission Granted", Toast.LENGTH_SHORT).show()
+                openGallery()
+            } else {
+                Toast.makeText(this, "Permission not Granted", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     companion object {
         const val REQUEST_CODE_CAMERA = 100
+        const val REQUEST_CODE_GALLERY = 110
     }
 
 }
