@@ -3,14 +3,15 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
+    <color name="light_white">#e9ecef</color>
+
     <!--  Brand Color  -->
     <color name="green">#447c74</color>
-
-    <color name="red">#B00020</color>
 
     <!--  Special Component  -->
     <color name="fab_color">#447c74</color>
     <color name="always_white">#FFFFFFFF</color>
+    <color name="red">#B00020</color>
 
     <!--  Transparent Color  -->
     <color name="transparent">#00FFFFFF</color>

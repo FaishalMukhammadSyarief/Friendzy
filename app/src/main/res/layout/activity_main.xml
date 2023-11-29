@@ -8,6 +8,10 @@
             name="activity"
             type="com.zhalz.friendzy.ui.MainActivity" />
 
+        <variable
+            name="friendAdapter"
+            type="com.zhalz.friendzy.adapter.FriendAdapter" />
+
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -20,16 +24,36 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/top_appbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:layout_scrollFlags="scroll|enterAlwaysCollapsed|enterAlways"
-                app:menu="@menu/toolbar_home"
-                app:title="@string/app_name"
-                app:titleTextAppearance="@style/ToolbarTitle" />
+                <com.google.android.material.appbar.MaterialToolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    app:layout_scrollFlags="scroll|enterAlwaysCollapsed|enterAlways"
+                    app:title="@string/app_name"
+                    android:paddingEnd="16dp"
+                    app:menu="@menu/toolbar_home"
+                    app:titleTextAppearance="@style/ToolbarTitle"
+                    tools:ignore="RtlSymmetry" />
 
         </com.google.android.material.appbar.AppBarLayout>
+
+        <com.google.android.material.search.SearchView
+            android:id="@+id/search_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="@string/search"
+            app:layout_anchor="@id/menu_search">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adapter="@{friendAdapter}"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:spanCount="2"
+                tools:listitem="@layout/item_friends" />
+
+        </com.google.android.material.search.SearchView>
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
@@ -51,7 +75,7 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_gravity="bottom"
-            app:backgroundTint="@color/white"
+            app:backgroundTint="#e9ecef"
             app:contentInsetStart="0dp"
             app:fabAlignmentMode="center"
             app:fabAnchorMode="cradle"
@@ -82,10 +106,10 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/green"
             android:contentDescription="@string/cd_add"
+            android:onClick="@{() -> activity.toCreate()}"
             app:layout_anchor="@id/bottom_app_bar"
             app:shapeAppearanceOverlay="@style/fab_shape"
             app:srcCompat="@drawable/ic_add"
-            android:onClick="@{() -> activity.toCreate()}"
             app:tint="@color/white" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

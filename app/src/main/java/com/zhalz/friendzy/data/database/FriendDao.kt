@@ -21,7 +21,11 @@ interface FriendDao {
     @Query("SELECT * FROM FriendEntity")
     fun getAll(): Flow<List<FriendEntity>>
 
-    @Query("DELETE FROM FriendEntity")
-    suspend fun deleteAll()
+    @Query("SELECT * FROM FriendEntity WHERE name LIKE :keyword")
+    suspend fun findFriend(keyword: String): List<FriendEntity>
+
+    suspend fun searchFriend(keyword: String?): List<FriendEntity> {
+        return findFriend("%$keyword%")
+    }
 
 }
