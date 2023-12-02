@@ -6,7 +6,7 @@
 
         <variable
             name="activity"
-            type="com.zhalz.friendzy.ui.MainActivity" />
+            type="com.zhalz.friendzy.ui.activity.MainActivity" />
 
         <variable
             name="friendAdapter"
@@ -17,7 +17,7 @@
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.MainActivity">
+        tools:context=".ui.activity.MainActivity">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appbar_layout"

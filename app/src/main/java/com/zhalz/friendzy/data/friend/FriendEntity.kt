@@ -1,4 +1,4 @@
-package com.zhalz.friendzy.data.database
+package com.zhalz.friendzy.data.friend
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

@@ -19,13 +19,13 @@
         android:theme="@style/Theme.Friendzy"
         tools:targetApi="31">
         <activity
-            android:name=".ui.ModifyActivity"
+            android:name=".ui.activity.ModifyActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.DetailActivity"
+            android:name=".ui.activity.DetailActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.MainActivity"
+            android:name=".ui.activity.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

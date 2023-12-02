@@ -8,12 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
-import com.zhalz.friendzy.ui.DetailActivity
+import com.zhalz.friendzy.ui.activity.DetailActivity
 import com.zhalz.friendzy.R
 import com.zhalz.friendzy.adapter.FriendAdapter
-import com.zhalz.friendzy.data.database.AppDatabase
-import com.zhalz.friendzy.data.database.FriendDao
-import com.zhalz.friendzy.data.database.FriendEntity
+import com.zhalz.friendzy.data.AppDatabase
+import com.zhalz.friendzy.data.friend.FriendDao
+import com.zhalz.friendzy.data.friend.FriendEntity
 import com.zhalz.friendzy.databinding.FragmentHomeBinding
 import kotlinx.coroutines.launch
 

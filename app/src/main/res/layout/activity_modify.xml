@@ -7,14 +7,14 @@
 
         <variable
             name="activity"
-            type="com.zhalz.friendzy.ui.ModifyActivity" />
+            type="com.zhalz.friendzy.ui.activity.ModifyActivity" />
 
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.ModifyActivity">
+        tools:context=".ui.activity.ModifyActivity">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appbar_layout"

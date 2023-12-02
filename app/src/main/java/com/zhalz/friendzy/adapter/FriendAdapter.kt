@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.zhalz.friendzy.R
-import com.zhalz.friendzy.data.database.FriendEntity
+import com.zhalz.friendzy.data.friend.FriendEntity
 import com.zhalz.friendzy.databinding.ItemFriendsBinding
 
 class FriendAdapter(private var items: List<FriendEntity>, val onItemClick : (FriendEntity) -> Unit): RecyclerView.Adapter<FriendAdapter.ItemViewHolder>() {

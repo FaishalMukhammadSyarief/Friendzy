@@ -1,4 +1,4 @@
-package com.zhalz.friendzy.ui
+package com.zhalz.friendzy.ui.activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity

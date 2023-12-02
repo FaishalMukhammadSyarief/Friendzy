@@ -1,4 +1,4 @@
-package com.zhalz.friendzy.data.database
+package com.zhalz.friendzy.data.friend
 
 import androidx.room.Dao
 import androidx.room.Delete

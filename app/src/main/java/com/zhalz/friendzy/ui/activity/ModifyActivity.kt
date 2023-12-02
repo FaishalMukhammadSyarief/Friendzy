@@ -1,4 +1,4 @@
-package com.zhalz.friendzy.ui
+package com.zhalz.friendzy.ui.activity
 
 import android.app.DatePickerDialog
 import android.content.ActivityNotFoundException
@@ -22,9 +22,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.zhalz.friendzy.R
-import com.zhalz.friendzy.data.database.AppDatabase
-import com.zhalz.friendzy.data.database.FriendDao
-import com.zhalz.friendzy.data.database.FriendEntity
+import com.zhalz.friendzy.data.AppDatabase
+import com.zhalz.friendzy.data.friend.FriendDao
+import com.zhalz.friendzy.data.friend.FriendEntity
 import com.zhalz.friendzy.databinding.ActivityModifyBinding
 import com.zhalz.friendzy.helper.BitmapHelper
 import kotlinx.coroutines.launch
