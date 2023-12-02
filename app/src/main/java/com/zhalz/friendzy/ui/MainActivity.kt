@@ -34,8 +34,6 @@ class MainActivity : AppCompatActivity() {
 
         binding.bottomNavigation.setupWithNavController(navController)
 
-        binding.searchView
-
         lifecycleScope.launch {
             friendManager.getAll().collect {
                 binding.friendAdapter = FriendAdapter(it) { data ->
@@ -64,4 +62,5 @@ class MainActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         return super.onSupportNavigateUp() || navController.navigateUp()
     }
+
 }

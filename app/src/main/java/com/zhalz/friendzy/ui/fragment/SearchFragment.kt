@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
 import com.zhalz.friendzy.R
@@ -33,18 +34,26 @@ class SearchFragment : Fragment() {
 
         binding.fragment = this
 
-        lifecycleScope.launch {
-            friendManager.getAll().collect{
-                 binding.friendAdapter = FriendAdapter(it) { data ->
-                    toDetail(data)
-                }
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
             }
-        }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                lifecycleScope.launch {
+                    val searchedFriend = friendManager.searchFriend(newText)
+                    binding.friendAdapter = FriendAdapter(searchedFriend) { data ->
+                        toDetail(data)
+                    }
+                }
+                return true
+            }
+        })
 
         return binding.root
     }
 
-    private fun toDetail(data: FriendEntity){
+    private fun toDetail(data: FriendEntity) {
         val toDetail = Intent(requireContext(), DetailActivity::class.java).apply {
             putExtra("name", data.name)
             putExtra("birth", data.birth)

@@ -38,14 +38,14 @@
         </com.google.android.material.appbar.AppBarLayout>
 
         <com.google.android.material.search.SearchView
-            android:id="@+id/search_view"
+            android:id="@+id/sv_friend"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="@string/search"
             app:layout_anchor="@id/menu_search">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView"
+                android:id="@+id/rv_search"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:adapter="@{friendAdapter}"
