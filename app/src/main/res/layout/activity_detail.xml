@@ -96,7 +96,7 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="32dp"
+                    android:layout_width="24sp"
                     android:layout_height="32dp"
                     android:layout_gravity="center"
                     android:contentDescription="@string/cd_question_icon"
@@ -107,6 +107,7 @@
                     style="@style/TextTitle"
                     android:text="@{activity.name}"
                     tools:text="@string/my_name"
+                    android:singleLine="false"
                     android:layout_marginTop="4dp" />
 
                 <TextView
@@ -122,6 +123,7 @@
                     tools:text="@string/my_desc"
                     android:text="@{activity.description}"
                     android:textSize="16sp"
+                    android:gravity="center"
                     tools:ignore="VisualLintLongText" />
 
             </LinearLayout>
@@ -131,7 +133,7 @@
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/fab_color"
+            android:backgroundTint="@color/white"
             android:contentDescription="@string/cd_edit"
             android:src="@drawable/ic_edit"
             app:fabCustomSize="80dp"
@@ -139,8 +141,7 @@
             app:layout_anchorGravity="center|bottom"
             android:onClick="@{() -> activity.toEdit()}"
             app:maxImageSize="40dp"
-            app:shapeAppearanceOverlay="@style/fab_shape"
-            app:tint="@color/white"
+            app:tint="@color/green"
             tools:ignore="ImageContrastCheck" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
