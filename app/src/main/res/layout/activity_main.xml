@@ -56,7 +56,7 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_gravity="bottom"
-            app:backgroundTint="#e9ecef"
+            app:backgroundTint="@color/light_white"
             app:contentInsetStart="0dp"
             app:fabAlignmentMode="center"
             app:fabAnchorMode="cradle"

@@ -62,7 +62,7 @@ class ModifyActivity : AppCompatActivity() {
                     }
 
                     val takenImage = BitmapFactory.decodeFile(photoFile.absolutePath)
-                    resizeInputPhoto(takenImage)
+                    binding.ivProfile.setImageBitmap(takenImage)
                 }
             }
         }
@@ -248,20 +248,17 @@ class ModifyActivity : AppCompatActivity() {
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             /** Request Permission **/
             ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.CAMERA), REQUEST_CODE_CAMERA)
-        } else {
-            openCamera()
         }
+        else openCamera()
     }
 
     private fun checkPermissionGallery() {
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_MEDIA_IMAGES) != PackageManager.PERMISSION_GRANTED) {
             /** Request Permission **/
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.READ_MEDIA_IMAGES), REQUEST_CODE_GALLERY)
-            }
-        } else {
-            openGallery()
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.READ_MEDIA_IMAGES), REQUEST_CODE_GALLERY)
+            else ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE), REQUEST_CODE_GALLERY)
         }
+        else openGallery()
     }
 
     override fun onRequestPermissionsResult(

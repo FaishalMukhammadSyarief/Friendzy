@@ -4,6 +4,7 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="light_white">#e9ecef</color>
+    <color name="light_green">#EDF6EE</color>
 
     <!--  Brand Color  -->
     <color name="green">#447c74</color>
