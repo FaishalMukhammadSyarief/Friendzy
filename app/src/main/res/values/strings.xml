@@ -42,5 +42,8 @@
     <string name="favorite">Favorite</string>
     <string name="menu">Menu</string>
     <string name="search">Search</string>
+    <string name="btn_welcome">NEXT</string>
+    <string name="cd_bg_welcome">Welcome Background</string>
+    <string name="txt_welcome">Know your friends better.</string>
 
 </resources>
