@@ -30,6 +30,8 @@ import com.zhalz.friendzy.helper.BitmapHelper
 import kotlinx.coroutines.launch
 import java.io.File
 import java.io.FileOutputStream
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class ModifyActivity : AppCompatActivity() {
 
@@ -117,8 +119,14 @@ class ModifyActivity : AppCompatActivity() {
         DatePickerDialog(
             this,
             { _, selectedYear, selectedMonth, selectedDay ->
-                val selectedDate = "$selectedDay/${selectedMonth + 1}/$selectedYear"
-                binding.etBirth.setText(selectedDate)
+                val selectedDate = Calendar.getInstance().apply {
+                    set(selectedYear, selectedMonth, selectedDay)
+                }
+
+                val dateFormat = SimpleDateFormat("dd MMMM yyyy", Locale.getDefault())
+                val formattedDate = dateFormat.format(selectedDate.time)
+
+                binding.etBirth.setText(formattedDate)
             },
             year, month, day
         ).show()
