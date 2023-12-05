@@ -64,7 +64,7 @@ class ModifyActivity : AppCompatActivity() {
                     }
 
                     val takenImage = BitmapFactory.decodeFile(photoFile.absolutePath)
-                    binding.ivProfile.setImageBitmap(takenImage)
+                    resizeInputPhoto(takenImage)
                 }
             }
         }
