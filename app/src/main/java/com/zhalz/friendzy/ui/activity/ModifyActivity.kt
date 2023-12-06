@@ -14,20 +14,20 @@ import android.os.Environment
 import android.provider.MediaStore
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.lifecycleScope
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.zhalz.friendzy.R
 import com.zhalz.friendzy.data.AppDatabase
-import com.zhalz.friendzy.data.friend.FriendDao
 import com.zhalz.friendzy.data.friend.FriendEntity
 import com.zhalz.friendzy.databinding.ActivityModifyBinding
 import com.zhalz.friendzy.helper.BitmapHelper
-import kotlinx.coroutines.launch
+import com.zhalz.friendzy.ui.viewmodel.Factory
+import com.zhalz.friendzy.ui.viewmodel.ModifyViewModel
 import java.io.File
 import java.io.FileOutputStream
 import java.text.SimpleDateFormat
@@ -35,8 +35,13 @@ import java.util.Locale
 
 class ModifyActivity : AppCompatActivity() {
 
+    private val viewModel: ModifyViewModel by viewModels {
+        Factory(AppDatabase.getInstance(this).friendDao())
+    }
+
     private val binding: ActivityModifyBinding by lazy { DataBindingUtil.setContentView(this, R.layout.activity_modify) }
-    private val friendManager: FriendDao by lazy { AppDatabase.getInstance(this).friendDao() }
+    private val newFriend: FriendEntity by lazy { FriendEntity(name, birth, description, photo) }
+    private val savedFriend: FriendEntity by lazy { FriendEntity(name, birth, description, photo).apply { id = idFriend } }
 
     private lateinit var photoFile: File
 
@@ -101,7 +106,7 @@ class ModifyActivity : AppCompatActivity() {
                         showConfirmation(
                             getString(R.string.title_delete),
                             getString(R.string.msg_delete),
-                            ::deleteFriend
+                            viewModel.deleteFriend(savedFriend)
                         )
                 }
                 true
@@ -143,7 +148,7 @@ class ModifyActivity : AppCompatActivity() {
             showConfirmation(
                 getString(R.string.title_edit),
                 getString(R.string.msg_edit),
-                ::editFriend
+                viewModel.editFriend(savedFriend)
             )
         }
 
@@ -151,46 +156,23 @@ class ModifyActivity : AppCompatActivity() {
             showConfirmation(
                 getString(R.string.title_create),
                 getString(R.string.msg_create),
-                ::createFriend
+                viewModel.createFriend(newFriend)
             )
         }
 
     }
 
-    /** -- CRUD OPERATION -- **/
-    private fun createFriend() {
-        lifecycleScope.launch {
-            val newFriend = FriendEntity(name, birth, description, photo)
-            friendManager.insert(newFriend)
-            finish()
-        }
-    }
-    private fun editFriend() {
-        lifecycleScope.launch {
-            val newFriend = FriendEntity(name, birth, description, photo).apply { id = idFriend }
-            friendManager.update(newFriend)
-            finish()
-        }
-    }
-    private fun deleteFriend() {
-        lifecycleScope.launch {
-            val savedFriend = FriendEntity(name, birth, description, photo).apply { id = idFriend }
-            friendManager.delete(savedFriend)
-            finish()
-        }
-    }
-
     private fun showConfirmation(
         title: String,
         message: String,
-        positiveAction: () -> Unit
+        positiveAction: Unit
     ) {
         AlertDialog
             .Builder(this)
             .setTitle(title)
             .setMessage(message)
             .setPositiveButton(R.string.action_positive) { dialog, _ ->
-                positiveAction.invoke()
+                positiveAction
                 dialog.dismiss()
             }
             .setNegativeButton(R.string.action_negative) { dialog, _ ->

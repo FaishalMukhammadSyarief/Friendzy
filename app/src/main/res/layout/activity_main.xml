@@ -8,10 +8,6 @@
             name="activity"
             type="com.zhalz.friendzy.ui.activity.MainActivity" />
 
-        <variable
-            name="friendAdapter"
-            type="com.zhalz.friendzy.adapter.FriendAdapter" />
-
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout

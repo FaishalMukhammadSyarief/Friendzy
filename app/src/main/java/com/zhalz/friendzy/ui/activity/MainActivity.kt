@@ -19,7 +19,6 @@ import kotlinx.coroutines.launch
 class MainActivity : AppCompatActivity() {
 
     private val binding: ActivityMainBinding by lazy { DataBindingUtil.setContentView(this, R.layout.activity_main) }
-    private val friendManager: FriendDao by lazy { AppDatabase.getInstance(this).friendDao() }
 
     private lateinit var navController: NavController
 
@@ -34,24 +33,6 @@ class MainActivity : AppCompatActivity() {
 
         binding.bottomNavigation.setupWithNavController(navController)
 
-        lifecycleScope.launch {
-            friendManager.getAll().collect {
-                binding.friendAdapter = FriendAdapter(it) { data ->
-                    toDetail(data)
-                }
-            }
-        }
-    }
-
-    private fun toDetail(data: FriendEntity){
-        val toDetail = Intent(this, DetailActivity::class.java).apply {
-            putExtra("name", data.name)
-            putExtra("birth", data.birth)
-            putExtra("description", data.description)
-            putExtra("photo", data.photo)
-            putExtra("id", data.id)
-        }
-        startActivity(toDetail)
     }
 
     fun toCreate() {
