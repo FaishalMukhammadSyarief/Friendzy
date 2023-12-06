@@ -4,17 +4,11 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.zhalz.friendzy.R
-import com.zhalz.friendzy.adapter.FriendAdapter
-import com.zhalz.friendzy.data.AppDatabase
-import com.zhalz.friendzy.data.friend.FriendDao
-import com.zhalz.friendzy.data.friend.FriendEntity
 import com.zhalz.friendzy.databinding.ActivityMainBinding
-import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
