@@ -8,23 +8,25 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.zhalz.friendzy.R
 import com.zhalz.friendzy.adapter.FriendAdapter
 import com.zhalz.friendzy.data.AppDatabase
-import com.zhalz.friendzy.data.friend.FriendDao
 import com.zhalz.friendzy.data.friend.FriendEntity
 import com.zhalz.friendzy.databinding.FragmentSearchBinding
 import com.zhalz.friendzy.ui.activity.DetailActivity
+import com.zhalz.friendzy.ui.viewmodel.SearchFactory
+import com.zhalz.friendzy.ui.viewmodel.SearchViewModel
 import kotlinx.coroutines.launch
 
 class SearchFragment : Fragment() {
 
-    private lateinit var binding: FragmentSearchBinding
-
-    private val friendManager: FriendDao by lazy {
-        AppDatabase.getInstance(requireContext()).friendDao()
+    private val viewModel: SearchViewModel by viewModels {
+        SearchFactory(AppDatabase.getInstance(requireContext()).friendDao())
     }
+
+    private lateinit var binding: FragmentSearchBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,16 +36,19 @@ class SearchFragment : Fragment() {
 
         binding.fragment = this
 
+
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return false
             }
 
-            override fun onQueryTextChange(newText: String?): Boolean {
+            override fun onQueryTextChange(inputText: String?): Boolean {
+                viewModel.searchFriend(inputText)
                 lifecycleScope.launch {
-                    val searchedFriend = friendManager.searchFriend(newText)
-                    binding.friendAdapter = FriendAdapter(searchedFriend) { data ->
-                        toDetail(data)
+                    viewModel.friends.collect{
+                        binding.friendAdapter = FriendAdapter(it) { data ->
+                            toDetail(data)
+                        }
                     }
                 }
                 return true
