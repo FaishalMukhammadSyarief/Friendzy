@@ -29,7 +29,7 @@ class ModifyViewModel(private val friendManager: FriendDao): ViewModel() {
 
 }
 
-class Factory(private val friendManager: FriendDao): ViewModelProvider.Factory{
+class ModifyFactory(private val friendManager: FriendDao): ViewModelProvider.Factory{
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return ModifyViewModel(friendManager) as T
     }

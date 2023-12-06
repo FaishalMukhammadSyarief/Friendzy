@@ -26,7 +26,7 @@ import com.zhalz.friendzy.data.AppDatabase
 import com.zhalz.friendzy.data.friend.FriendEntity
 import com.zhalz.friendzy.databinding.ActivityModifyBinding
 import com.zhalz.friendzy.helper.BitmapHelper
-import com.zhalz.friendzy.ui.viewmodel.Factory
+import com.zhalz.friendzy.ui.viewmodel.ModifyFactory
 import com.zhalz.friendzy.ui.viewmodel.ModifyViewModel
 import java.io.File
 import java.io.FileOutputStream
@@ -36,7 +36,7 @@ import java.util.Locale
 class ModifyActivity : AppCompatActivity() {
 
     private val viewModel: ModifyViewModel by viewModels {
-        Factory(AppDatabase.getInstance(this).friendDao())
+        ModifyFactory(AppDatabase.getInstance(this).friendDao())
     }
 
     private val binding: ActivityModifyBinding by lazy { DataBindingUtil.setContentView(this, R.layout.activity_modify) }

@@ -7,40 +7,45 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.zhalz.friendzy.ui.activity.DetailActivity
 import com.zhalz.friendzy.R
 import com.zhalz.friendzy.adapter.FriendAdapter
 import com.zhalz.friendzy.data.AppDatabase
-import com.zhalz.friendzy.data.friend.FriendDao
 import com.zhalz.friendzy.data.friend.FriendEntity
 import com.zhalz.friendzy.databinding.FragmentHomeBinding
+import com.zhalz.friendzy.ui.viewmodel.HomeFactory
+import com.zhalz.friendzy.ui.viewmodel.HomeViewModel
 import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
 
-    private lateinit var binding: FragmentHomeBinding
-
-    private val friendManager: FriendDao by lazy {
-        AppDatabase.getInstance(requireContext()).friendDao()
+    private val viewModel: HomeViewModel by viewModels {
+        HomeFactory(AppDatabase.getInstance(requireContext()).friendDao())
     }
+
+    private lateinit var binding: FragmentHomeBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
-
         binding.homeFragment = this
 
+        readFriend()
+
+        return binding.root
+    }
+
+    private fun readFriend() {
         lifecycleScope.launch {
-            friendManager.getAll().collect{
-                binding.friendAdapter = FriendAdapter(it) { data ->
+            viewModel.getFriend().collect{
+                binding.friendAdapter = FriendAdapter(it){ data ->
                     toDetail(data)
                 }
             }
         }
-
-        return binding.root
     }
 
     private fun toDetail(data: FriendEntity){
