@@ -173,6 +173,7 @@ class ModifyActivity : AppCompatActivity() {
             .setMessage(message)
             .setPositiveButton(R.string.action_positive) { dialog, _ ->
                 positiveAction
+                finish()
                 dialog.dismiss()
             }
             .setNegativeButton(R.string.action_negative) { dialog, _ ->
