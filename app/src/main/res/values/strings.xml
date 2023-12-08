@@ -1,10 +1,8 @@
 <resources>
     <string name="app_name">Friendzy</string>
 
-    <!--  Delete Later  -->
-    <string name="dl">deer</string>
-
     <!--  Content Description  -->
+    <string name="cd_image">Your friend\'s photo</string>
     <string name="cd_edit">Edit this creature</string>
     <string name="cd_favorite">Add this to favorite</string>
     <string name="cd_menu">Open menu option</string>
@@ -17,7 +15,9 @@
     <string name="cd_construction">This page is under construction\n</string>
     <string name="cd_delete">Delete this friend</string>
     <string name="cd_edit_picture">Edit the image of this friend</string>
-
+    <string name="cd_bg_welcome">Welcome Background</string>
+    <string name="cd_carousel">Carousel Friend</string>
+    
     <!--  My Data  -->
     <string name="my_name">Faishal Mukhammad Syarief</string>
     <string name="my_birthday">26 October 2006</string>
@@ -38,13 +38,22 @@
     <string name="title_delete">DELETE</string>
     <string name="action_positive">Yes</string>
     <string name="action_negative">Cancel</string>
-
+    <string name="error_camera">Cannot use Camera</string>
+    <string name="error_gallery">Cannot use Gallery</string>
+    <string name="permission_granted">Permission Granted</string>
+    <string name="permission_not_granted">Permission not Granted</string>
+    <string name="title_select">Select From</string>
+    <array name="select_image_source">
+        <item>Camera</item>
+        <item>Gallery</item>
+    </array>
+    
     <string name="favorite">Favorite</string>
     <string name="menu">Menu</string>
     <string name="search">Search</string>
     <string name="btn_welcome">NEXT</string>
-    <string name="cd_bg_welcome">Welcome Background</string>
     <string name="txt_welcome">Know your friends better.</string>
-    <string name="cd_carousel">Carousel Friedn</string>
+
+
 
 </resources>

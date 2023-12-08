@@ -33,7 +33,7 @@
                     android:id="@+id/iv"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:contentDescription="@string/dl"
+                    android:contentDescription="@string/cd_image"
                     android:fitsSystemWindows="true"
                     imageSrc="@{activity.photo}"
                     android:scaleType="centerCrop"

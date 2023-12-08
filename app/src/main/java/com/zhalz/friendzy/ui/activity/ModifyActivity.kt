@@ -186,14 +186,12 @@ class ModifyActivity : AppCompatActivity() {
     }
 
     fun addPhoto(){
-        val items = arrayOf("Camera", "Gallery", "Cancel")
         MaterialAlertDialogBuilder(this)
-            .setTitle("Select From")
-            .setItems(items) { _, which ->
+            .setTitle(getString(R.string.title_select))
+            .setItems(R.array.select_image_source) { _, which ->
                 when (which) {
                     0 -> checkPermissionCamera()
                     1 -> checkPermissionGallery()
-                    2 -> Unit
                 }
             }
             .show()
@@ -219,7 +217,12 @@ class ModifyActivity : AppCompatActivity() {
         val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE).apply {
             putExtra(MediaStore.EXTRA_OUTPUT, photoFileUri)
         }
-        cameraLauncher.launch(cameraIntent)
+
+        try { cameraLauncher.launch(cameraIntent) }
+        catch (e: ActivityNotFoundException) {
+            Toast.makeText(this, getString(R.string.error_camera), Toast.LENGTH_SHORT).show()
+            e.printStackTrace()
+        }
     }
 
     private fun openGallery() {
@@ -227,7 +230,7 @@ class ModifyActivity : AppCompatActivity() {
 
         try { galleryLauncher.launch(galleryIntent) }
         catch (e: ActivityNotFoundException) {
-            Toast.makeText(this, "Cannot use Gallery", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.error_gallery), Toast.LENGTH_SHORT).show()
             e.printStackTrace()
         }
     }
@@ -260,19 +263,19 @@ class ModifyActivity : AppCompatActivity() {
 
         if (requestCode == REQUEST_CODE_CAMERA) {
             if (grantResults.all { it == PackageManager.PERMISSION_GRANTED }) {
-                Toast.makeText(this, "Permission Granted", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.permission_granted), Toast.LENGTH_SHORT).show()
                 openCamera()
             } else {
-                Toast.makeText(this, "Permission not Granted", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.permission_not_granted), Toast.LENGTH_SHORT).show()
             }
         }
 
         else if (requestCode == REQUEST_CODE_GALLERY) {
             if (grantResults.all { it == PackageManager.PERMISSION_GRANTED }) {
-                Toast.makeText(this, "Permission Granted", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.permission_granted), Toast.LENGTH_SHORT).show()
                 openGallery()
             } else {
-                Toast.makeText(this, "Permission not Granted", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.permission_not_granted), Toast.LENGTH_SHORT).show()
             }
         }
     }

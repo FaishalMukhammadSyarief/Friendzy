@@ -15,7 +15,6 @@
         android:layout_width="match_parent"
         android:layout_height="300dp"
         app:cardUseCompatPadding="true"
-        app:rippleColor="@color/white"
         app:strokeWidth="0dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -27,7 +26,7 @@
                 android:id="@+id/imageView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:contentDescription="@string/dl"
+                android:contentDescription="@string/cd_image"
                 android:scaleType="centerCrop"
                 imageSrc="@{friendData.photo}"
                 tools:src="@drawable/deer" />
