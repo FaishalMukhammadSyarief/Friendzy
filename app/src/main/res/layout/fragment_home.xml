@@ -13,6 +13,10 @@
             name="friendAdapter"
             type="com.zhalz.friendzy.adapter.FriendAdapter" />
 
+        <variable
+            name="carouselAdapter"
+            type="com.zhalz.friendzy.adapter.CarouselAdapter" />
+
     </data>
 
     <LinearLayout
@@ -21,58 +25,14 @@
         android:orientation="vertical"
         android:padding="8dp">
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/card_item"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_carousel"
             android:layout_width="match_parent"
             android:layout_height="400dp"
-            app:cardUseCompatPadding="true"
-            app:strokeWidth="0dp">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:id="@+id/imageView"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:contentDescription="@string/dl"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/deer" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/grad_black_bottom" />
-
-                <TextView
-                    style="@style/TextTitle"
-                    android:layout_marginHorizontal="8dp"
-                    android:ellipsize="end"
-                    android:text="@string/my_name"
-                    android:textColor="@color/semi_transparent_white"
-
-                    app:layout_constraintBottom_toTopOf="@+id/tv_birth"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-                <TextView
-                    android:id="@+id/tv_birth"
-                    style="@style/TextSubtitle"
-                    android:layout_marginHorizontal="8dp"
-                    android:layout_marginBottom="12dp"
-                    android:ellipsize="end"
-                    android:text="@string/my_birthday"
-                    android:textColor="@color/semi_transparent_white"
-
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </com.google.android.material.card.MaterialCardView>
+            android:contentDescription="@string/cd_carousel"
+            android:orientation="horizontal"
+            tools:listitem="@layout/item_carousel"
+            android:adapter="@{carouselAdapter}"/>
 
         <View style="@style/Divider" />
 

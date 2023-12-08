@@ -45,5 +45,6 @@
     <string name="btn_welcome">NEXT</string>
     <string name="cd_bg_welcome">Welcome Background</string>
     <string name="txt_welcome">Know your friends better.</string>
+    <string name="cd_carousel">Carousel Friedn</string>
 
 </resources>

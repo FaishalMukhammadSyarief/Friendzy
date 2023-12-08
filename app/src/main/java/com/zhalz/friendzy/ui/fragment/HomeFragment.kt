@@ -9,8 +9,13 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.RecyclerView.LayoutManager
+import com.google.android.material.carousel.CarouselLayoutManager
+import com.google.android.material.carousel.CarouselSnapHelper
+import com.google.android.material.carousel.HeroCarouselStrategy
 import com.zhalz.friendzy.ui.activity.DetailActivity
 import com.zhalz.friendzy.R
+import com.zhalz.friendzy.adapter.CarouselAdapter
 import com.zhalz.friendzy.adapter.FriendAdapter
 import com.zhalz.friendzy.data.AppDatabase
 import com.zhalz.friendzy.data.friend.FriendEntity
@@ -34,6 +39,7 @@ class HomeFragment : Fragment() {
         binding.homeFragment = this
 
         readFriend()
+        setCarousel()
 
         return binding.root
     }
@@ -46,6 +52,20 @@ class HomeFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun setCarousel() {
+        lifecycleScope.launch {
+            viewModel.getFriend().collect{
+                binding.carouselAdapter = CarouselAdapter(it){ data ->
+                    toDetail(data)
+                }
+            }
+        }
+
+        binding.rvCarousel.layoutManager = CarouselLayoutManager()
+        CarouselLayoutManager(HeroCarouselStrategy())
+        CarouselSnapHelper().attachToRecyclerView(binding.rvCarousel)
     }
 
     private fun toDetail(data: FriendEntity){
