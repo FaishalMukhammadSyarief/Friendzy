@@ -54,7 +54,13 @@ class HomeFragment : Fragment() {
     private fun setCarousel() {
         lifecycleScope.launch {
             viewModel.getFriend().collect{
-                binding.carouselAdapter = CarouselAdapter(it){ data ->
+                var list = it
+
+                if (it.size >= 3) {
+                    list = it.subList(it.size - 3, it.size).reversed()
+                }
+
+                binding.carouselAdapter = CarouselAdapter(list){ data ->
                     toDetail(data)
                 }
             }
