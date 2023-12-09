@@ -7,6 +7,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
+import com.crocodic.core.extension.openActivity
 import com.zhalz.friendzy.R
 import com.zhalz.friendzy.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -32,8 +33,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun toCreate() {
-        val toAdd = Intent(this, ModifyActivity::class.java)
-        startActivity(toAdd)
+        openActivity<ModifyActivity>()
     }
 
     override fun onSupportNavigateUp(): Boolean {

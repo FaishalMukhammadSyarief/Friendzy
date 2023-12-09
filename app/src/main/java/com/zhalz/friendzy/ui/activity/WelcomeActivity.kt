@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.view.WindowCompat
 import androidx.databinding.DataBindingUtil
+import com.crocodic.core.extension.openActivity
 import com.zhalz.friendzy.R
 import com.zhalz.friendzy.databinding.ActivityWelcomeBinding
 
@@ -22,8 +23,7 @@ class WelcomeActivity : AppCompatActivity() {
     }
 
     fun toHome() {
-        val toHome = Intent(this, MainActivity::class.java)
-        startActivity(toHome)
+        openActivity<MainActivity>()
         finish()
     }
 }

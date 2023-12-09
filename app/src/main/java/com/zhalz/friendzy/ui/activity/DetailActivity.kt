@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
+import com.crocodic.core.extension.openActivity
 import com.zhalz.friendzy.R
 import com.zhalz.friendzy.databinding.ActivityDetailBinding
 
@@ -31,14 +32,13 @@ class DetailActivity : AppCompatActivity() {
     }
 
     fun toEdit(){
-        val toEdit = Intent(this, ModifyActivity::class.java).apply {
+        openActivity<ModifyActivity> {
             putExtra("name", name)
             putExtra("birth", birth)
             putExtra("description", description)
             putExtra("photo", photo)
             putExtra("id", id)
         }
-        startActivity(toEdit)
         finish()
     }
 
