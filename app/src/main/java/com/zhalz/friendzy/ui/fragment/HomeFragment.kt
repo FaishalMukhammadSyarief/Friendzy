@@ -16,18 +16,16 @@ import com.zhalz.friendzy.ui.activity.DetailActivity
 import com.zhalz.friendzy.R
 import com.zhalz.friendzy.adapter.CarouselAdapter
 import com.zhalz.friendzy.adapter.FriendAdapter
-import com.zhalz.friendzy.data.AppDatabase
 import com.zhalz.friendzy.data.friend.FriendEntity
 import com.zhalz.friendzy.databinding.FragmentHomeBinding
-import com.zhalz.friendzy.ui.viewmodel.HomeFactory
 import com.zhalz.friendzy.ui.viewmodel.HomeViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class HomeFragment : Fragment() {
 
-    private val viewModel: HomeViewModel by viewModels {
-        HomeFactory(AppDatabase.getInstance(requireContext()).friendDao())
-    }
+    private val viewModel: HomeViewModel by viewModels()
 
     private lateinit var binding: FragmentHomeBinding
 

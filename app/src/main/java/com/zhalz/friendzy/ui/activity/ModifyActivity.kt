@@ -22,22 +22,20 @@ import androidx.core.content.FileProvider
 import androidx.databinding.DataBindingUtil
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.zhalz.friendzy.R
-import com.zhalz.friendzy.data.AppDatabase
 import com.zhalz.friendzy.data.friend.FriendEntity
 import com.zhalz.friendzy.databinding.ActivityModifyBinding
 import com.zhalz.friendzy.helper.BitmapHelper
-import com.zhalz.friendzy.ui.viewmodel.ModifyFactory
 import com.zhalz.friendzy.ui.viewmodel.ModifyViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 import java.io.FileOutputStream
 import java.text.SimpleDateFormat
 import java.util.Locale
 
+@AndroidEntryPoint
 class ModifyActivity : AppCompatActivity() {
 
-    private val viewModel: ModifyViewModel by viewModels {
-        ModifyFactory(AppDatabase.getInstance(this).friendDao())
-    }
+    private val viewModel: ModifyViewModel by viewModels()
 
     private val binding: ActivityModifyBinding by lazy { DataBindingUtil.setContentView(this, R.layout.activity_modify) }
     private val newFriend: FriendEntity by lazy { FriendEntity(name, birth, description, photo) }

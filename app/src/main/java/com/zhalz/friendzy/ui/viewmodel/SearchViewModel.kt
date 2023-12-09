@@ -1,14 +1,16 @@
 package com.zhalz.friendzy.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.zhalz.friendzy.data.friend.FriendDao
 import com.zhalz.friendzy.data.friend.FriendEntity
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class SearchViewModel(private val friendManager: FriendDao): ViewModel() {
+@HiltViewModel
+class SearchViewModel @Inject constructor(private val friendManager: FriendDao): ViewModel() {
 
     val friends = MutableSharedFlow<List<FriendEntity>>()
 
@@ -19,10 +21,4 @@ class SearchViewModel(private val friendManager: FriendDao): ViewModel() {
         }
     }
 
-}
-
-class SearchFactory(private val friendManager: FriendDao): ViewModelProvider.Factory{
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return SearchViewModel(friendManager) as T
-    }
 }

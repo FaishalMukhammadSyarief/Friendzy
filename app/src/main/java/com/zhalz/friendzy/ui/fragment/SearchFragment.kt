@@ -12,19 +12,17 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.zhalz.friendzy.R
 import com.zhalz.friendzy.adapter.FriendAdapter
-import com.zhalz.friendzy.data.AppDatabase
 import com.zhalz.friendzy.data.friend.FriendEntity
 import com.zhalz.friendzy.databinding.FragmentSearchBinding
 import com.zhalz.friendzy.ui.activity.DetailActivity
-import com.zhalz.friendzy.ui.viewmodel.SearchFactory
 import com.zhalz.friendzy.ui.viewmodel.SearchViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class SearchFragment : Fragment() {
 
-    private val viewModel: SearchViewModel by viewModels {
-        SearchFactory(AppDatabase.getInstance(requireContext()).friendDao())
-    }
+    private val viewModel: SearchViewModel by viewModels()
 
     private lateinit var binding: FragmentSearchBinding
 
@@ -35,7 +33,6 @@ class SearchFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_search, container, false)
 
         binding.fragment = this
-
 
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {

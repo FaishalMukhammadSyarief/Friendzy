@@ -1,13 +1,15 @@
 package com.zhalz.friendzy.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.zhalz.friendzy.data.friend.FriendDao
 import com.zhalz.friendzy.data.friend.FriendEntity
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class ModifyViewModel(private val friendManager: FriendDao): ViewModel() {
+@HiltViewModel
+class ModifyViewModel @Inject constructor(private val friendManager: FriendDao): ViewModel() {
 
     fun createFriend(friend: FriendEntity){
         viewModelScope.launch {
@@ -27,10 +29,4 @@ class ModifyViewModel(private val friendManager: FriendDao): ViewModel() {
         }
     }
 
-}
-
-class ModifyFactory(private val friendManager: FriendDao): ViewModelProvider.Factory{
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return ModifyViewModel(friendManager) as T
-    }
 }
