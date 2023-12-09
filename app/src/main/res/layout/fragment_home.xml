@@ -28,7 +28,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_carousel"
             android:layout_width="match_parent"
-            android:layout_height="400dp"
+            android:layout_height="300dp"
             android:contentDescription="@string/cd_carousel"
             android:orientation="horizontal"
             tools:listitem="@layout/item_carousel"
