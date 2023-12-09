@@ -1,11 +1,10 @@
 package com.zhalz.friendzy.ui.viewmodel
 
-import androidx.lifecycle.ViewModel
-import com.zhalz.friendzy.data.friend.FriendDao
+import com.zhalz.friendzy.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(private val friendManager: FriendDao): ViewModel() {
+class HomeViewModel @Inject constructor(): BaseViewModel() {
     fun getFriend() = friendManager.getAll()
 }

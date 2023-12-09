@@ -1,20 +1,16 @@
 package com.zhalz.friendzy.ui.activity
-
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
+import com.crocodic.core.base.activity.NoViewModelActivity
 import com.crocodic.core.extension.openActivity
 import com.zhalz.friendzy.R
 import com.zhalz.friendzy.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
-
-    private val binding: ActivityMainBinding by lazy { DataBindingUtil.setContentView(this, R.layout.activity_main) }
+class MainActivity : NoViewModelActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     private lateinit var navController: NavController
 

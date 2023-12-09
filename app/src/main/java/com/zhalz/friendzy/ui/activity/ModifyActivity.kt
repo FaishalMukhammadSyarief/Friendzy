@@ -8,20 +8,18 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.icu.util.Calendar
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
-import androidx.databinding.DataBindingUtil
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.zhalz.friendzy.R
+import com.zhalz.friendzy.base.BaseActivity
 import com.zhalz.friendzy.data.friend.FriendEntity
 import com.zhalz.friendzy.databinding.ActivityModifyBinding
 import com.zhalz.friendzy.helper.BitmapHelper
@@ -33,11 +31,8 @@ import java.text.SimpleDateFormat
 import java.util.Locale
 
 @AndroidEntryPoint
-class ModifyActivity : AppCompatActivity() {
+class ModifyActivity : BaseActivity<ActivityModifyBinding, ModifyViewModel>(R.layout.activity_modify) {
 
-    private val viewModel: ModifyViewModel by viewModels()
-
-    private val binding: ActivityModifyBinding by lazy { DataBindingUtil.setContentView(this, R.layout.activity_modify) }
     private val newFriend: FriendEntity by lazy { FriendEntity(name, birth, description, photo) }
     private val savedFriend: FriendEntity by lazy { FriendEntity(name, birth, description, photo).apply { id = idFriend } }
 

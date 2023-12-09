@@ -1,20 +1,17 @@
 package com.zhalz.friendzy.ui.activity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.view.WindowCompat
-import androidx.databinding.DataBindingUtil
+import com.crocodic.core.base.activity.NoViewModelActivity
 import com.crocodic.core.extension.openActivity
 import com.zhalz.friendzy.R
 import com.zhalz.friendzy.databinding.ActivityWelcomeBinding
 
-class WelcomeActivity : AppCompatActivity() {
-
-    private val binding: ActivityWelcomeBinding by lazy { DataBindingUtil.setContentView(this, R.layout.activity_welcome) }
+class WelcomeActivity : NoViewModelActivity<ActivityWelcomeBinding>(R.layout.activity_welcome) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_welcome)
+        setContentView(binding.root)
 
         binding.activity = this
 

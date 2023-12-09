@@ -1,15 +1,12 @@
 package com.zhalz.friendzy.ui.activity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.databinding.DataBindingUtil
+import com.crocodic.core.base.activity.NoViewModelActivity
 import com.crocodic.core.extension.openActivity
 import com.zhalz.friendzy.R
 import com.zhalz.friendzy.databinding.ActivityDetailBinding
 
-class DetailActivity : AppCompatActivity() {
-
-    private val binding: ActivityDetailBinding by lazy { DataBindingUtil.setContentView(this, R.layout.activity_detail) }
+class DetailActivity : NoViewModelActivity<ActivityDetailBinding>(R.layout.activity_detail) {
 
     var name = ""
     var birth = ""
