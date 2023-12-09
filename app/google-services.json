@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "758833672049",
+    "project_id": "friendzy-aae47",
+    "storage_bucket": "friendzy-aae47.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:758833672049:android:1c2c87611268ec2ec150d0",
+        "android_client_info": {
+          "package_name": "com.zhalz.friendzy"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCKJ0w4A1p1g5JvZbpJkGfLKOWLZUWPWo8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
