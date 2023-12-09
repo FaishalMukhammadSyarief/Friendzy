@@ -1,22 +1,18 @@
 package com.zhalz.friendzy.ui.activity
 
 import android.app.DatePickerDialog
-import android.content.ActivityNotFoundException
-import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.icu.util.Calendar
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
-import android.provider.MediaStore
 import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.content.FileProvider
+import com.crocodic.core.extension.openCamera
+import com.crocodic.core.extension.openGallery
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.zhalz.friendzy.R
 import com.zhalz.friendzy.base.BaseActivity
@@ -26,7 +22,6 @@ import com.zhalz.friendzy.helper.BitmapHelper
 import com.zhalz.friendzy.ui.viewmodel.ModifyViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
-import java.io.FileOutputStream
 import java.text.SimpleDateFormat
 import java.util.Locale
 
@@ -43,29 +38,6 @@ class ModifyActivity : BaseActivity<ActivityModifyBinding, ModifyViewModel>(R.la
     var description = ""
     var photo = ""
     private var idFriend = 0
-
-    private var cameraLauncher =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-            if (it.resultCode == RESULT_OK) {
-                val takenImage = BitmapFactory.decodeFile(photoFile.absolutePath)
-                resizeInputPhoto(takenImage)
-            }
-        }
-
-    private var galleryLauncher =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode == RESULT_OK) {
-                result.data?.data?.let { uri ->
-                    contentResolver.openInputStream(uri)?.use { inputStream ->
-                        val outputStream = FileOutputStream(photoFile)
-                        inputStream.copyTo(outputStream)
-                    }
-
-                    val takenImage = BitmapFactory.decodeFile(photoFile.absolutePath)
-                    resizeInputPhoto(takenImage)
-                }
-            }
-        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -186,6 +158,7 @@ class ModifyActivity : BaseActivity<ActivityModifyBinding, ModifyViewModel>(R.la
                 when (which) {
                     0 -> checkPermissionCamera()
                     1 -> checkPermissionGallery()
+
                 }
             }
             .show()
@@ -196,7 +169,8 @@ class ModifyActivity : BaseActivity<ActivityModifyBinding, ModifyViewModel>(R.la
         return File.createTempFile("PHOTO_", ".jpg", storageDir)
     }
 
-    private fun resizeInputPhoto(bitmap: Bitmap) {
+    private fun resizeInputPhoto(file: File) {
+        val bitmap = BitmapFactory.decodeFile(file.absolutePath)
         val resizeTakenImage = BitmapHelper().resizeBitmap(bitmap, 512f)
 
         binding.ivProfile.setImageBitmap(bitmap)
@@ -205,27 +179,14 @@ class ModifyActivity : BaseActivity<ActivityModifyBinding, ModifyViewModel>(R.la
     }
 
     private fun openCamera() {
-        val photoFileUri =
-            FileProvider.getUriForFile(this, "com.zhalz.friendzy.file-provider", photoFile)
-
-        val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE).apply {
-            putExtra(MediaStore.EXTRA_OUTPUT, photoFileUri)
-        }
-
-        try { cameraLauncher.launch(cameraIntent) }
-        catch (e: ActivityNotFoundException) {
-            Toast.makeText(this, getString(R.string.error_camera), Toast.LENGTH_SHORT).show()
-            e.printStackTrace()
+        activityLauncher.openCamera(this, "com.zhalz.friendzy.file-provider") { file, _ ->
+            if (file != null) resizeInputPhoto(file)
         }
     }
 
     private fun openGallery() {
-        val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-
-        try { galleryLauncher.launch(galleryIntent) }
-        catch (e: ActivityNotFoundException) {
-            Toast.makeText(this, getString(R.string.error_gallery), Toast.LENGTH_SHORT).show()
-            e.printStackTrace()
+        activityLauncher.openGallery(this) { file, _ ->
+            if (file != null) resizeInputPhoto(file)
         }
     }
 
