@@ -6,5 +6,5 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(): BaseViewModel() {
-    fun getFriend() = friendManager.getAll()
+    fun getFriend() = friendRepository.getAll()
 }

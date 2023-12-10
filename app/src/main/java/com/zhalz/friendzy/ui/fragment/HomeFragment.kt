@@ -43,7 +43,7 @@ class HomeFragment : Fragment() {
 
     private fun readFriend() {
         lifecycleScope.launch {
-            viewModel.getFriend().collect{
+            viewModel.getFriend().collect {
                 binding.friendAdapter = FriendAdapter(it){ data ->
                     toDetail(data)
                 }
@@ -53,7 +53,7 @@ class HomeFragment : Fragment() {
 
     private fun setCarousel() {
         lifecycleScope.launch {
-            viewModel.getFriend().collect{
+            viewModel.getFriend().collect {
                 var list = it
 
                 if (it.size >= 3) {
