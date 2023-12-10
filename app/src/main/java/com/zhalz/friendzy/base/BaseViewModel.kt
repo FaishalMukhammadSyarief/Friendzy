@@ -1,13 +1,13 @@
 package com.zhalz.friendzy.base
 
 import com.crocodic.core.base.viewmodel.CoreViewModel
-import com.zhalz.friendzy.data.repository.FriendRepository
+import com.zhalz.friendzy.data.repository.FriendRepositoryImpl
 import javax.inject.Inject
 
 open class BaseViewModel: CoreViewModel() {
 
     @Inject
-    lateinit var friendRepository: FriendRepository
+    lateinit var friendRepositoryImpl: FriendRepositoryImpl
 
     override fun apiLogout() {}
 

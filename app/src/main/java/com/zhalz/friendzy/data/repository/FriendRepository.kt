@@ -1,19 +1,16 @@
 package com.zhalz.friendzy.data.repository
 
-import com.zhalz.friendzy.data.friend.FriendDao
 import com.zhalz.friendzy.data.friend.FriendEntity
-import javax.inject.Inject
+import kotlinx.coroutines.flow.Flow
 
-class FriendRepository @Inject constructor(private val friendDao: FriendDao) {
+interface FriendRepository {
 
-    suspend fun insert(friend: FriendEntity) = friendDao.insert(friend)
+    suspend fun insert(friend: FriendEntity)
+    suspend fun update(friend: FriendEntity)
+    suspend fun delete(friend: FriendEntity)
 
-    suspend fun update(friend: FriendEntity) = friendDao.update(friend)
+    suspend fun search(query: String?) : List<FriendEntity>
 
-    suspend fun delete(friend: FriendEntity) = friendDao.delete(friend)
-
-    fun getAll() = friendDao.getAll()
-
-    suspend fun search(query: String?) = friendDao.searchFriend(query)
+    fun getAll() : Flow<List<FriendEntity>>
 
 }

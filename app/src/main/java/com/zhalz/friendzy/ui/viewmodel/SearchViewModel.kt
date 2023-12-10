@@ -15,7 +15,7 @@ class SearchViewModel @Inject constructor(): BaseViewModel() {
 
     fun searchFriend(inputText: String? = null) {
         viewModelScope.launch {
-            val searchedFriend = friendRepository.search(inputText)
+            val searchedFriend = friendRepositoryImpl.search(inputText)
             friends.emit(searchedFriend)
         }
     }

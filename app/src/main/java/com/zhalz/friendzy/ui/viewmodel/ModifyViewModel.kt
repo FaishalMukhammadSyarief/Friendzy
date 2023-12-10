@@ -12,19 +12,19 @@ class ModifyViewModel @Inject constructor(): BaseViewModel() {
 
     fun createFriend(friend: FriendEntity){
         viewModelScope.launch {
-            friendRepository.insert(friend)
+            friendRepositoryImpl.insert(friend)
         }
     }
 
    fun editFriend(friend: FriendEntity){
         viewModelScope.launch {
-            friendRepository.update(friend)
+            friendRepositoryImpl.update(friend)
         }
     }
 
    fun deleteFriend(friend: FriendEntity){
         viewModelScope.launch {
-            friendRepository.delete(friend)
+            friendRepositoryImpl.delete(friend)
         }
     }
 
