@@ -14,5 +14,5 @@ import javax.inject.Singleton
 class AppModule {
     @Singleton
     @Provides
-    fun provideFriendManager(@ApplicationContext context: Context) = AppDatabase.getInstance(context)
+    fun provideFriendManager(@ApplicationContext context: Context) = AppDatabase.getInstance(context).friendDao()
 }

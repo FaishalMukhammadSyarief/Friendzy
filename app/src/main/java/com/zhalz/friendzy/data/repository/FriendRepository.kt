@@ -1,19 +1,19 @@
 package com.zhalz.friendzy.data.repository
 
-import com.zhalz.friendzy.data.AppDatabase
+import com.zhalz.friendzy.data.friend.FriendDao
 import com.zhalz.friendzy.data.friend.FriendEntity
 import javax.inject.Inject
 
-class FriendRepository @Inject constructor(private val database: AppDatabase) {
+class FriendRepository @Inject constructor(private val friendDao: FriendDao) {
 
-    suspend fun insert(friend: FriendEntity) = database.friendDao().insert(friend)
+    suspend fun insert(friend: FriendEntity) = friendDao.insert(friend)
 
-    suspend fun update(friend: FriendEntity) = database.friendDao().update(friend)
+    suspend fun update(friend: FriendEntity) = friendDao.update(friend)
 
-    suspend fun delete(friend: FriendEntity) = database.friendDao().delete(friend)
+    suspend fun delete(friend: FriendEntity) = friendDao.delete(friend)
 
-    fun getAll() = database.friendDao().getAll()
+    fun getAll() = friendDao.getAll()
 
-    suspend fun search(query: String?) = database.friendDao().searchFriend(query)
+    suspend fun search(query: String?) = friendDao.searchFriend(query)
 
 }
