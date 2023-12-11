@@ -10,8 +10,6 @@ data class FriendEntity(
     val birth: String,
     val description: String,
     val photo: String,
-    @ColumnInfo(defaultValue = "")
-    val gender: String = "gwa laki"
 ){
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0

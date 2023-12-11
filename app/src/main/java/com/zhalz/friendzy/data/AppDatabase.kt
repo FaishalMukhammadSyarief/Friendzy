@@ -3,6 +3,7 @@ package com.zhalz.friendzy.data
 import android.content.Context
 import androidx.room.AutoMigration
 import androidx.room.Database
+import androidx.room.DeleteColumn
 import androidx.room.RenameColumn
 import androidx.room.Room
 import androidx.room.RoomDatabase
@@ -12,11 +13,12 @@ import com.zhalz.friendzy.data.friend.FriendEntity
 
 @Database(
     entities = [FriendEntity::class],
-    version = 3,
+    version = 4,
     exportSchema = true,
     autoMigrations = [
         AutoMigration(1,2),
-        AutoMigration(2,3, AppDatabase.Migrate23::class)
+        AutoMigration(2,3, AppDatabase.Migrate23::class),
+        AutoMigration(3,4, AppDatabase.Migrate34::class)
     ]
 )
 abstract class AppDatabase : RoomDatabase() {
@@ -47,5 +49,8 @@ abstract class AppDatabase : RoomDatabase() {
 
     @RenameColumn("FriendEntity", "school", "gender")
     class Migrate23: AutoMigrationSpec
+
+    @DeleteColumn("FriendEntity", "gender")
+    class Migrate34: AutoMigrationSpec
 
 }
