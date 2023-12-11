@@ -44,6 +44,8 @@ class HomeFragment : Fragment() {
     private fun readFriend() {
         lifecycleScope.launch {
             viewModel.getFriend().collect {
+                println(it)
+                println("FAISHAAAAAAAAAAAAAL")
                 binding.friendAdapter = FriendAdapter(it){ data ->
                     toDetail(data)
                 }
