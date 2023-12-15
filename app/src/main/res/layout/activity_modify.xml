@@ -99,7 +99,7 @@
                         tools:ignore="TextContrastCheck,VisualLintTextFieldSize" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <!-- School -->
+                <!-- Birth -->
                 <com.google.android.material.textfield.TextInputLayout
                     style="@style/Et_Input"
                     android:hint="@string/date_hint"

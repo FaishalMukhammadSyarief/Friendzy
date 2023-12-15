@@ -16,14 +16,13 @@
         android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/imageView3"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:contentDescription="@string/cd_bg_welcome"
             android:fitsSystemWindows="false"
             android:scaleType="centerCrop"
             android:src="@drawable/many_goblin"
-            app:layout_constraintBottom_toTopOf="@id/constraintLayout"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <View
@@ -32,7 +31,6 @@
             android:background="@color/blurry" />
 
         <LinearLayout
-            android:id="@+id/constraintLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_shape"
@@ -75,8 +73,6 @@
 
         </LinearLayout>
 
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 </layout>
