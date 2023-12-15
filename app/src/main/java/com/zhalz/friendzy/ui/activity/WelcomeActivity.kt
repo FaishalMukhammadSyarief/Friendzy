@@ -18,8 +18,7 @@ class WelcomeActivity : NoViewModelActivity<ActivityWelcomeBinding>(R.layout.act
         WindowCompat.setDecorFitsSystemWindows(window, false)
     }
 
-    fun toHome() {
-        openActivity<MainActivity>()
-        finish()
+    fun toLogin() {
+        openActivity<LoginActivity>()
     }
 }
