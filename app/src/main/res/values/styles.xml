@@ -70,4 +70,22 @@
         <item name="boxCornerRadiusBottomEnd">15dp</item>
     </style>
 
+    <style name="ThemeOverlay.Material3.Button.TextButton.CustomButton">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginHorizontal">36dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="cornerRadius">10dp</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="CustomButton">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginHorizontal">36dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="cornerRadius">10dp</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
 </resources>
