@@ -1,6 +1,5 @@
-package com.zhalz.friendzy.data.repository
+package com.zhalz.friendzy.data.friend
 
-import com.zhalz.friendzy.data.friend.FriendEntity
 import kotlinx.coroutines.flow.Flow
 
 interface FriendRepository {

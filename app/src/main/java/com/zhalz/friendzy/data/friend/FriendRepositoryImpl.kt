@@ -1,7 +1,5 @@
-package com.zhalz.friendzy.data.repository
+package com.zhalz.friendzy.data.friend
 
-import com.zhalz.friendzy.data.friend.FriendDao
-import com.zhalz.friendzy.data.friend.FriendEntity
 import javax.inject.Inject
 
 class FriendRepositoryImpl @Inject constructor(private val friendDao: FriendDao): FriendRepository {

@@ -10,10 +10,12 @@ import androidx.room.RoomDatabase
 import androidx.room.migration.AutoMigrationSpec
 import com.zhalz.friendzy.data.friend.FriendDao
 import com.zhalz.friendzy.data.friend.FriendEntity
+import com.zhalz.friendzy.data.user.UserDao
+import com.zhalz.friendzy.data.user.UserEntity
 
 @Database(
-    entities = [FriendEntity::class],
-    version = 4,
+    entities = [FriendEntity::class, UserEntity::class],
+    version = 5,
     exportSchema = true,
     autoMigrations = [
         AutoMigration(1,2),
@@ -24,6 +26,7 @@ import com.zhalz.friendzy.data.friend.FriendEntity
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun friendDao(): FriendDao
+    abstract fun userDao(): UserDao
 
     companion object {
 
