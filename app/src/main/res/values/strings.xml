@@ -102,6 +102,7 @@
     <string name="cd_back">Back to previous page</string>
     <string name="username_hint">Username</string>
     <string name="password_hint">Password</string>
+    <string name="number_hint">Phone Number</string>
 
 
 </resources>
