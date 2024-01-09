@@ -67,17 +67,18 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/etl_username"
                 style="@style/Et_Input"
-                android:hint="@string/number_hint"
+                android:hint="@string/phone_hint"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/container_title"
                 app:startIconDrawable="@drawable/ic_phone">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/et_username"
+                    android:id="@+id/et_phone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="phone"
+                    android:text="@={activity.phone}"
                     tools:ignore="TextContrastCheck,VisualLintTextFieldSize" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -97,6 +98,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"
+                    android:text="@={activity.password}"
                     tools:ignore="TextContrastCheck,VisualLintTextFieldSize" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -105,7 +107,7 @@
                 style="@style/CustomButton"
                 android:layout_marginHorizontal="12dp"
                 android:layout_marginTop="24dp"
-                android:onClick="@{() -> activity.toHome()}"
+                android:onClick="@{() -> activity.validateLogin()}"
                 android:text="@string/btn_sign_in" />
 
         </LinearLayout>
