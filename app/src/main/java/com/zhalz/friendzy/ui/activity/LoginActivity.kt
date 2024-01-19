@@ -1,10 +1,9 @@
 package com.zhalz.friendzy.ui.activity
 
 import android.os.Bundle
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import com.crocodic.core.api.ApiStatus
+import com.crocodic.core.extension.colorRes
 import com.crocodic.core.extension.openActivity
 import com.zhalz.friendzy.R
 import com.zhalz.friendzy.base.BaseActivity
@@ -23,7 +22,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(R.layou
         super.onCreate(savedInstanceState)
 
         binding.activity = this
-        binding.title = "Welcome \nBack!"
+        initUI()
 
         observe()
 
@@ -31,13 +30,40 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(R.layou
 
     private fun observe() {
         lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                launch {
-                    viewModel.loginResponse.collect {
-                        if (it.status == ApiStatus.LOADING) {
-                            loadingDialog.show("Logging in...")
-                        } else if (it.status == ApiStatus.SUCCESS) {
-                            loadingDialog.dismiss()
+
+            viewModel.loginResponse.collect {
+                if (it.status == ApiStatus.LOADING) {
+                    loadingDialog.show("Logging in...")
+                } else if (it.status == ApiStatus.SUCCESS) {
+                    loadingDialog.dismiss()
+                }
+
+            }
+        }
+    }
+
+    private fun initUI() {
+
+        binding.title = "Welcome \nBack!"
+
+        window.apply {
+            statusBarColor = colorRes(R.color.green)
+        }
+
+    }
+
+    fun validateLogin() {
+
+        if (phone.isEmpty()) binding.etPhone.error = getString(R.string.msg_error)
+        if (password.isEmpty()) binding.etPassword.error = getString(R.string.msg_error)
+
+        if (phone.isNotEmpty() && password.isNotEmpty()) {
+            viewModel.login(phone, password)
+
+            lifecycleScope.launch {
+                viewModel.loginResponse.collect {
+                    it.let {
+                        if (it.status == ApiStatus.SUCCESS) {
                             openActivity<MainActivity>()
                             finish()
                         }
@@ -45,17 +71,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(R.layou
                 }
             }
         }
-    }
 
-
-    fun validateLogin() {
-        if (phone.isEmpty()) binding.etPhone.error = getString(R.string.msg_error)
-        if (password.isEmpty()) binding.etPassword.error = getString(R.string.msg_error)
-
-        else {
-            viewModel.login(phone, password)
-            openActivity<MainActivity>()
-        }
     }
 
     fun back() {

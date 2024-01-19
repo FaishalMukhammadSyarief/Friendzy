@@ -32,7 +32,7 @@
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:layout_marginStart="32dp"
+                android:layout_marginStart="28dp"
                 android:layout_marginTop="32dp"
                 android:contentDescription="@string/cd_back"
                 android:onClick="@{() -> activity.back()}"
