@@ -1,10 +1,10 @@
 package com.zhalz.friendzy.ui.activity
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.lifecycle.lifecycleScope
 import com.crocodic.core.api.ApiStatus
 import com.crocodic.core.extension.colorRes
-import com.crocodic.core.extension.openActivity
 import com.zhalz.friendzy.R
 import com.zhalz.friendzy.base.BaseActivity
 import com.zhalz.friendzy.databinding.ActivityLoginBinding
@@ -64,14 +64,19 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(R.layou
                 viewModel.loginResponse.collect {
                     it.let {
                         if (it.status == ApiStatus.SUCCESS) {
-                            openActivity<MainActivity>()
-                            finish()
+                            toHome()
                         }
                     }
                 }
             }
         }
 
+    }
+
+    private fun toHome() {
+        val toHome = Intent(this, MainActivity::class.java)
+        toHome.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(toHome)
     }
 
     fun back() {
