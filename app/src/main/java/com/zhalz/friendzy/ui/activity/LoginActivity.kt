@@ -24,22 +24,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(R.layou
         binding.activity = this
         initUI()
 
-        observe()
-
-    }
-
-    private fun observe() {
-        lifecycleScope.launch {
-
-            viewModel.loginResponse.collect {
-                if (it.status == ApiStatus.LOADING) {
-                    loadingDialog.show("Logging in...")
-                } else if (it.status == ApiStatus.SUCCESS) {
-                    loadingDialog.dismiss()
-                }
-
-            }
-        }
     }
 
     private fun initUI() {
@@ -63,7 +47,10 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(R.layou
             lifecycleScope.launch {
                 viewModel.loginResponse.collect {
                     it.let {
-                        if (it.status == ApiStatus.SUCCESS) {
+                        if (it.status == ApiStatus.LOADING) {
+                            loadingDialog.show("Logging in...")
+                        } else if (it.status == ApiStatus.SUCCESS) {
+                            loadingDialog.dismiss()
                             toHome()
                         }
                     }
