@@ -44,8 +44,6 @@ class HomeFragment : Fragment() {
     private fun readFriend() {
         lifecycleScope.launch {
             viewModel.getFriend().collect {
-                println(it)
-                println("FAISHAAAAAAAAAAAAAL")
                 binding.friendAdapter = FriendAdapter(it){ data ->
                     toDetail(data)
                 }
@@ -68,7 +66,6 @@ class HomeFragment : Fragment() {
             }
         }
 
-        binding.rvCarousel.layoutManager = CarouselLayoutManager()
         CarouselLayoutManager(HeroCarouselStrategy())
         CarouselSnapHelper().attachToRecyclerView(binding.rvCarousel)
     }
