@@ -20,5 +20,12 @@ class WelcomeActivity : NoViewModelActivity<ActivityWelcomeBinding>(R.layout.act
 
     fun toLogin() {
         openActivity<LoginActivity>()
+        finish()
     }
+
+    fun toRegister() {
+        openActivity<RegisterActivity>()
+        finish()
+    }
+
 }

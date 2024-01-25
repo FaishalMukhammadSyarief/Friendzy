@@ -65,9 +65,9 @@
                 android:backgroundTint="@color/transparent"
                 android:drawableEnd="@drawable/ic_next"
                 android:drawableTint="@color/always_white"
-                android:onClick="@{() -> activity.toLogin()}"
+                android:onClick="@{() -> activity.toRegister()}"
                 android:padding="0dp"
-                android:text="@string/btn_sign_up"
+                android:text="@string/btn_create_account"
                 android:textColor="@color/always_white"
                 tools:ignore="VisualLintButtonSize" />
 

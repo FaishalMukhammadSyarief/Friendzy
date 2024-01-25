@@ -55,7 +55,8 @@
     <string name="txt_welcome">Organize your friends to know them better.</string>
     <string name="txt_title_welcome">Know your friends better.</string>
     <string name="btn_sign_in">Sign In</string>
-    <string name="btn_sign_up">Or Create Account</string>
+    <string name="btn_sign_up">Sign Up</string>
+    <string name="btn_create_account">Or Create Account</string>
     <string name="title_activity_login">LoginActivity</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
@@ -103,6 +104,10 @@
     <string name="username_hint">Username</string>
     <string name="password_hint">Password</string>
     <string name="phone_hint">Phone Number</string>
-
+    <string name="txt_doesnt_have_account">Doesn\'t have an account?</string>
+    <string name="txt_login_title">Welcome \nBack!</string>
+    <string name="txt_register_title">Create \nAccount</string>
+    <string name="txt_already_have_account">Already have an account?</string>
+    <string name="confirm_password_hint">Confirm Password</string>
 
 </resources>
