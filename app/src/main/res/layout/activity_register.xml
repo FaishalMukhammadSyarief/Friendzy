@@ -71,6 +71,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/et_name"
                     android:layout_width="match_parent"
+                    android:text="@={activity.name}"
                     android:layout_height="wrap_content"
                     android:inputType="text"
                     tools:ignore="TextContrastCheck,VisualLintTextFieldSize" />
@@ -91,6 +92,7 @@
                     android:id="@+id/et_phone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:text="@={activity.phone}"
                     android:inputType="phone"
                     tools:ignore="TextContrastCheck,VisualLintTextFieldSize" />
 
@@ -110,6 +112,7 @@
                     android:id="@+id/et_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:text="@={activity.password}"
                     android:inputType="textPassword"
                     tools:ignore="TextContrastCheck,VisualLintTextFieldSize" />
 
@@ -129,6 +132,7 @@
                     android:id="@+id/et_confirm_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:text="@={activity.confirmPassword}"
                     android:inputType="textPassword"
                     tools:ignore="TextContrastCheck,VisualLintTextFieldSize" />
 
@@ -136,7 +140,7 @@
 
             <com.google.android.material.button.MaterialButton
                 style="@style/CustomButton"
-                android:onClick="@{() -> activity.toHome()}"
+                android:onClick="@{() -> activity.validateRegister()}"
                 android:layout_marginHorizontal="12dp"
                 android:layout_marginTop="24dp"
                 android:text="@string/btn_sign_up" />

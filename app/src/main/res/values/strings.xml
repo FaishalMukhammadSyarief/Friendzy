@@ -43,6 +43,7 @@
     <string name="permission_granted">Permission Granted</string>
     <string name="permission_not_granted">Permission not Granted</string>
     <string name="title_select">Select From</string>
+    <string name="msg_error_password">Password not Match</string>
     <array name="select_image_source">
         <item>Camera</item>
         <item>Gallery</item>
