@@ -42,7 +42,7 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding, RegisterViewModel
         lifecycleScope.launch {
             viewModel.registerResponse.collect {
                 it.let {
-                    if (it.status == ApiStatus.LOADING) loadingDialog.show()
+                    if (it.status == ApiStatus.LOADING) loadingDialog.show("Signing Up...")
                     else if (it.status == ApiStatus.SUCCESS) {
                         loadingDialog.dismiss()
                         toHome()
@@ -62,7 +62,7 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding, RegisterViewModel
             binding.etPassword.error = getString(R.string.msg_error_password)
             binding.etConfirmPassword.error = getString(R.string.msg_error_password)
         }
-        else {
+        else if (name.isNotEmpty() && phone.isNotEmpty() && password.isNotEmpty() && confirmPassword.isNotEmpty()) {
             register()
         }
     }

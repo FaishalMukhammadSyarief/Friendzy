@@ -100,6 +100,7 @@
 
             <!-- Password -->
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/etl_password"
                 style="@style/Et_Input"
                 android:hint="@string/password_hint"
                 app:endIconMode="password_toggle"
@@ -120,6 +121,7 @@
 
             <!-- Password -->
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/etl_con_pass"
                 style="@style/Et_Input"
                 android:hint="@string/confirm_password_hint"
                 app:endIconMode="password_toggle"
