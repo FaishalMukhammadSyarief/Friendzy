@@ -110,5 +110,6 @@
     <string name="txt_register_title">Create \nAccount</string>
     <string name="txt_already_have_account">Already have an account?</string>
     <string name="confirm_password_hint">Confirm Password</string>
+    <string name="school_hint">School</string>
 
 </resources>

@@ -58,7 +58,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/container_title">
 
-            <!-- Phone Number -->
+            <!-- Name -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/etl_name"
                 style="@style/Et_Input"
