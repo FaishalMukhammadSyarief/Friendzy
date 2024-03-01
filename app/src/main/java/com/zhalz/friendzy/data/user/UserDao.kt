@@ -10,4 +10,7 @@ interface UserDao: CoreDao<UserEntity> {
     @Query("SELECT * FROM UserEntity WHERE databaseId = 1")
     fun getUser(): UserEntity?
 
+    @Query("DELETE FROM UserEntity WHERE databaseId = 1")
+    suspend fun deleteUser()
+
 }

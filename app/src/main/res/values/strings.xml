@@ -33,9 +33,11 @@
     <string name="msg_create">Do you want to Create this Friend?</string>
     <string name="msg_edit">Do you want to Edit this Friend?</string>
     <string name="msg_delete">Do you want to Delete this Friend?</string>
+    <string name="msg_logout">Are you sure you want to Log Out?</string>
     <string name="title_create">CREATE</string>
     <string name="title_edit">EDIT</string>
     <string name="title_delete">DELETE</string>
+    <string name="title_logout">LOGOUT</string>
     <string name="action_positive">Yes</string>
     <string name="action_negative">Cancel</string>
     <string name="error_camera">Cannot use Camera</string>
@@ -111,5 +113,6 @@
     <string name="txt_already_have_account">Already have an account?</string>
     <string name="confirm_password_hint">Confirm Password</string>
     <string name="school_hint">School</string>
+    <string name="logout">Logout</string>
 
 </resources>

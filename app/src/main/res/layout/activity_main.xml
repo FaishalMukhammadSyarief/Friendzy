@@ -20,15 +20,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-                <com.google.android.material.appbar.MaterialToolbar
-                    android:id="@+id/toolbar"
-                    android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    app:layout_scrollFlags="scroll|enterAlwaysCollapsed|enterAlways"
-                    app:title="@string/app_name"
-                    android:paddingEnd="16dp"
-                    app:titleTextAppearance="@style/ToolbarTitle"
-                    tools:ignore="RtlSymmetry" />
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:paddingEnd="16dp"
+                app:layout_scrollFlags="scroll|enterAlwaysCollapsed|enterAlways"
+                app:menu="@menu/toolbar_home"
+                app:title="@string/app_name"
+                app:titleTextAppearance="@style/ToolbarTitle"
+                tools:ignore="RtlSymmetry" />
 
         </com.google.android.material.appbar.AppBarLayout>
 
