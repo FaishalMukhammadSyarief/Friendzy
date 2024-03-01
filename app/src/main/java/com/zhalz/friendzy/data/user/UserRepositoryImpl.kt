@@ -6,5 +6,9 @@ class UserRepositoryImpl @Inject constructor(private val userDao: UserDao): User
 
     override suspend fun insert(user: UserEntity) = userDao.insert(user.copy(databaseId = 1))
     override fun getUser() = userDao.getUser()
+    override suspend fun checkLogin(): Boolean {
+        val isLogin = userDao.getUser()
+        return isLogin != null
+    }
 
 }

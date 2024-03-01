@@ -52,7 +52,7 @@
             <com.google.android.material.button.MaterialButton
                 style="@style/CustomButton"
                 android:backgroundTint="@color/white"
-                android:onClick="@{() -> activity.toLogin()}"
+                android:onClick="@{() -> activity.setDestination()}"
                 android:text="@string/btn_sign_in"
                 android:textColor="@color/black"
                 tools:ignore="VisualLintButtonSize" />

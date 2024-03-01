@@ -5,4 +5,6 @@ interface UserRepository {
     suspend fun insert(user: UserEntity)
 
     fun getUser(): UserEntity?
+
+    suspend fun checkLogin(): Boolean
 }
