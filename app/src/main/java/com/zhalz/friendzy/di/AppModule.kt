@@ -4,6 +4,11 @@ import android.content.Context
 import com.crocodic.core.helper.NetworkHelper
 import com.zhalz.friendzy.api.ApiService
 import com.zhalz.friendzy.data.AppDatabase
+import com.zhalz.friendzy.data.friend.FriendRepository
+import com.zhalz.friendzy.data.friend.FriendRepositoryImpl
+import com.zhalz.friendzy.data.user.UserRepository
+import com.zhalz.friendzy.data.user.UserRepositoryImpl
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -31,6 +36,18 @@ class AppModule {
             okHttpClient = NetworkHelper.provideOkHttpClient(),
             converterFactory = listOf(GsonConverterFactory.create())
         )
+    }
+
+    @InstallIn(SingletonComponent::class)
+    @Module
+    abstract class RepositoryModule {
+        @Singleton
+        @Binds
+        abstract fun bindFriendRepository(friendRepositoryImpl: FriendRepositoryImpl): FriendRepository
+
+        @Singleton
+        @Binds
+        abstract fun bindUserRepository(userRepositoryImpl: UserRepositoryImpl): UserRepository
     }
 
 }

@@ -15,7 +15,7 @@ import com.zhalz.friendzy.data.user.UserEntity
 
 @Database(
     entities = [FriendEntity::class, UserEntity::class],
-    version = 5,
+    version = 6,
     exportSchema = true,
     autoMigrations = [
         AutoMigration(1,2),
