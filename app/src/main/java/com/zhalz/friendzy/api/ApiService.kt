@@ -1,7 +1,7 @@
 package com.zhalz.friendzy.api
 
-import com.zhalz.friendzy.data.remote.LoginResponse
-import com.zhalz.friendzy.data.remote.RegisterResponse
+import com.zhalz.friendzy.data.response.LoginResponse
+import com.zhalz.friendzy.data.response.RegisterResponse
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST

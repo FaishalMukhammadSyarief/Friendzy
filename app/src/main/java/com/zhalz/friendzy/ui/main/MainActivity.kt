@@ -1,4 +1,4 @@
-package com.zhalz.friendzy.ui.activity
+package com.zhalz.friendzy.ui.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
@@ -9,7 +9,8 @@ import com.crocodic.core.extension.openActivity
 import com.zhalz.friendzy.R
 import com.zhalz.friendzy.base.BaseActivity
 import com.zhalz.friendzy.databinding.ActivityMainBinding
-import com.zhalz.friendzy.ui.viewmodel.MainViewModel
+import com.zhalz.friendzy.ui.login.LoginActivity
+import com.zhalz.friendzy.ui.modify.ModifyActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

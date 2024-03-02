@@ -1,10 +1,10 @@
-package com.zhalz.friendzy.ui.viewmodel
+package com.zhalz.friendzy.ui.register
 
 import androidx.lifecycle.viewModelScope
 import com.crocodic.core.api.ApiObserver
 import com.zhalz.friendzy.api.ApiService
 import com.zhalz.friendzy.base.BaseViewModel
-import com.zhalz.friendzy.data.remote.RegisterResponse
+import com.zhalz.friendzy.data.response.RegisterResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow

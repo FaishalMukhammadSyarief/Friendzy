@@ -1,4 +1,4 @@
-package com.zhalz.friendzy.ui.activity
+package com.zhalz.friendzy.ui.modify
 
 import android.app.DatePickerDialog
 import android.content.pm.PackageManager
@@ -18,8 +18,7 @@ import com.zhalz.friendzy.R
 import com.zhalz.friendzy.base.BaseActivity
 import com.zhalz.friendzy.data.friend.FriendEntity
 import com.zhalz.friendzy.databinding.ActivityModifyBinding
-import com.zhalz.friendzy.helper.BitmapHelper
-import com.zhalz.friendzy.ui.viewmodel.ModifyViewModel
+import com.zhalz.friendzy.utils.BitmapHelper
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 import java.text.SimpleDateFormat

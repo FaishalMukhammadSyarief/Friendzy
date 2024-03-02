@@ -1,4 +1,4 @@
-package com.zhalz.friendzy.ui.viewmodel
+package com.zhalz.friendzy.ui.home
 
 import com.zhalz.friendzy.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel

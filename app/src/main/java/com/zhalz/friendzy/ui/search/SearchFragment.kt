@@ -1,4 +1,4 @@
-package com.zhalz.friendzy.ui.fragment
+package com.zhalz.friendzy.ui.search
 
 import android.content.Intent
 import android.os.Bundle
@@ -14,8 +14,7 @@ import com.zhalz.friendzy.R
 import com.zhalz.friendzy.adapter.FriendAdapter
 import com.zhalz.friendzy.data.friend.FriendEntity
 import com.zhalz.friendzy.databinding.FragmentSearchBinding
-import com.zhalz.friendzy.ui.activity.DetailActivity
-import com.zhalz.friendzy.ui.viewmodel.SearchViewModel
+import com.zhalz.friendzy.ui.detail.DetailActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 

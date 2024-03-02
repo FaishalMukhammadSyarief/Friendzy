@@ -1,4 +1,4 @@
-package com.zhalz.friendzy.ui.activity
+package com.zhalz.friendzy.ui.register
 
 import android.os.Bundle
 import androidx.lifecycle.lifecycleScope
@@ -8,7 +8,8 @@ import com.crocodic.core.extension.openActivity
 import com.zhalz.friendzy.R
 import com.zhalz.friendzy.base.BaseActivity
 import com.zhalz.friendzy.databinding.ActivityRegisterBinding
-import com.zhalz.friendzy.ui.viewmodel.RegisterViewModel
+import com.zhalz.friendzy.ui.login.LoginActivity
+import com.zhalz.friendzy.ui.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 

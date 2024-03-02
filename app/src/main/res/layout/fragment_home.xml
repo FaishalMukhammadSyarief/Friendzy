@@ -7,7 +7,7 @@
 
         <variable
             name="homeFragment"
-            type="com.zhalz.friendzy.ui.fragment.HomeFragment" />
+            type="com.zhalz.friendzy.ui.home.HomeFragment" />
 
         <variable
             name="friendAdapter"

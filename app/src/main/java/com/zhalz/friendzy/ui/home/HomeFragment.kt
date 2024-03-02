@@ -1,4 +1,4 @@
-package com.zhalz.friendzy.ui.fragment
+package com.zhalz.friendzy.ui.home
 
 import android.content.Intent
 import android.os.Bundle
@@ -12,13 +12,12 @@ import androidx.lifecycle.lifecycleScope
 import com.google.android.material.carousel.CarouselLayoutManager
 import com.google.android.material.carousel.CarouselSnapHelper
 import com.google.android.material.carousel.HeroCarouselStrategy
-import com.zhalz.friendzy.ui.activity.DetailActivity
+import com.zhalz.friendzy.ui.detail.DetailActivity
 import com.zhalz.friendzy.R
 import com.zhalz.friendzy.adapter.CarouselAdapter
 import com.zhalz.friendzy.adapter.FriendAdapter
 import com.zhalz.friendzy.data.friend.FriendEntity
 import com.zhalz.friendzy.databinding.FragmentHomeBinding
-import com.zhalz.friendzy.ui.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 

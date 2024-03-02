@@ -1,4 +1,4 @@
-package com.zhalz.friendzy.ui.viewmodel
+package com.zhalz.friendzy.ui.search
 
 import androidx.lifecycle.viewModelScope
 import com.zhalz.friendzy.base.BaseViewModel

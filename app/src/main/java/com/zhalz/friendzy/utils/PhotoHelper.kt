@@ -1,4 +1,4 @@
-package com.zhalz.friendzy.helper
+package com.zhalz.friendzy.utils
 
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter

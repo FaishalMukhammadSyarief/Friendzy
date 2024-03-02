@@ -1,4 +1,4 @@
-package com.zhalz.friendzy.ui.fragment
+package com.zhalz.friendzy.ui.favorite
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

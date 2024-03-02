@@ -1,8 +1,8 @@
-package com.zhalz.friendzy.ui.viewmodel
+package com.zhalz.friendzy.ui.login
 
 import androidx.lifecycle.viewModelScope
 import com.crocodic.core.api.ApiObserver
-import com.zhalz.friendzy.data.remote.LoginResponse
+import com.zhalz.friendzy.data.response.LoginResponse
 import com.zhalz.friendzy.api.ApiService
 import com.zhalz.friendzy.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel

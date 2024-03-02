@@ -1,8 +1,8 @@
-package com.zhalz.friendzy.data.remote
+package com.zhalz.friendzy.data.response
 
 import com.crocodic.core.api.ModelResponse
 import com.zhalz.friendzy.data.user.UserEntity
 
-data class LoginResponse(
+data class RegisterResponse (
     val data: UserEntity?
 ) : ModelResponse()

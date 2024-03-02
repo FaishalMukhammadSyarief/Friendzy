@@ -6,7 +6,7 @@
 
         <variable
             name="activity"
-            type="com.zhalz.friendzy.ui.activity.DetailActivity" />
+            type="com.zhalz.friendzy.ui.detail.DetailActivity" />
 
     </data>
 
@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
-        tools:context=".ui.activity.DetailActivity">
+        tools:context=".ui.detail.DetailActivity">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/app_bar_layout"

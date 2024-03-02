@@ -1,4 +1,4 @@
-package com.zhalz.friendzy.ui.fragment
+package com.zhalz.friendzy.ui.profile
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,7 +10,6 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.zhalz.friendzy.R
 import com.zhalz.friendzy.databinding.FragmentProfileBinding
-import com.zhalz.friendzy.ui.viewmodel.ProfileViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

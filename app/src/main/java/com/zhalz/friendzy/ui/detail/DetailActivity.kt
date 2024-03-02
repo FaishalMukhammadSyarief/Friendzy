@@ -1,10 +1,11 @@
-package com.zhalz.friendzy.ui.activity
+package com.zhalz.friendzy.ui.detail
 
 import android.os.Bundle
 import com.crocodic.core.base.activity.NoViewModelActivity
 import com.crocodic.core.extension.openActivity
 import com.zhalz.friendzy.R
 import com.zhalz.friendzy.databinding.ActivityDetailBinding
+import com.zhalz.friendzy.ui.modify.ModifyActivity
 
 class DetailActivity : NoViewModelActivity<ActivityDetailBinding>(R.layout.activity_detail) {
 
