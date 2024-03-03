@@ -19,7 +19,7 @@ class FriendAdapter(private var items: List<FriendEntity>, val onItemClick : (Fr
     override fun getItemCount(): Int = items.size
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        holder.binding.friendData = items[position]
+        holder.binding.data = items[position]
         holder.itemView.setOnClickListener { onItemClick(items[position]) }
         holder.binding.executePendingBindings()
     }

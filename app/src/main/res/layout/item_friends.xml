@@ -6,7 +6,7 @@
     <data>
 
         <variable
-            name="friendData"
+            name="data"
             type="com.zhalz.friendzy.data.friend.FriendEntity" />
 
     </data>
@@ -28,7 +28,7 @@
                 android:layout_height="match_parent"
                 android:contentDescription="@string/cd_image"
                 android:scaleType="centerCrop"
-                imageSrc="@{friendData.photo}"
+                imageSrc="@{data.photo}"
                 tools:src="@drawable/deer" />
 
             <TextView
@@ -36,7 +36,7 @@
                 style="@style/TextTitle"
                 android:layout_marginHorizontal="8dp"
                 android:ellipsize="end"
-                android:text="@{friendData.name}"
+                android:text="@{data.name}"
                 tools:text="@string/my_name"
                 android:textColor="@color/semi_transparent_white"
                 android:textSize="16sp"
@@ -51,7 +51,7 @@
                 android:layout_marginHorizontal="8dp"
                 android:layout_marginBottom="12dp"
                 android:ellipsize="end"
-                android:text="@{friendData.birth}"
+                android:text="@{data.birth}"
                 tools:text="@string/my_birthday"
                 android:textColor="@color/semi_transparent_white"
 

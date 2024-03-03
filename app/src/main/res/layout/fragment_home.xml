@@ -9,14 +9,6 @@
             name="homeFragment"
             type="com.zhalz.friendzy.ui.home.HomeFragment" />
 
-        <variable
-            name="friendAdapter"
-            type="com.zhalz.friendzy.adapter.FriendAdapter" />
-
-        <variable
-            name="carouselAdapter"
-            type="com.zhalz.friendzy.adapter.CarouselAdapter" />
-
     </data>
 
     <LinearLayout
@@ -29,7 +21,6 @@
             android:id="@+id/rv_carousel"
             android:layout_width="match_parent"
             android:layout_height="400dp"
-            android:adapter="@{carouselAdapter}"
             android:contentDescription="@string/cd_carousel"
             android:orientation="horizontal"
             app:layoutManager="com.google.android.material.carousel.CarouselLayoutManager"
@@ -41,7 +32,6 @@
             android:id="@+id/rv_friend"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:adapter="@{friendAdapter}"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:spanCount="2"
             tools:listitem="@layout/item_friends" />
