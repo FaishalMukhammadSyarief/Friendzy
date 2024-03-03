@@ -8,8 +8,7 @@ interface FriendRepository {
     suspend fun update(friend: FriendEntity)
     suspend fun delete(friend: FriendEntity)
 
-    suspend fun search(query: String?) : List<FriendEntity>
-
+    fun searchFriend(query: String?) : Flow<List<FriendEntity>>
     fun getAll() : Flow<List<FriendEntity>>
 
 }

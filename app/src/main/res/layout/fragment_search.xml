@@ -9,10 +9,6 @@
             name="fragment"
             type="com.zhalz.friendzy.ui.search.SearchFragment" />
 
-        <variable
-            name="friendAdapter"
-            type="com.zhalz.friendzy.adapter.FriendAdapter" />
-
     </data>
 
     <LinearLayout
@@ -34,10 +30,9 @@
             android:queryHint="Search"/>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
+            android:id="@+id/rvQueryFriend"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:adapter="@{friendAdapter}"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:spanCount="2"
             tools:listitem="@layout/item_friends" />

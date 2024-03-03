@@ -8,7 +8,7 @@ class FriendRepositoryImpl @Inject constructor(private val friendDao: FriendDao)
     override suspend fun update(friend: FriendEntity) = friendDao.update(friend)
     override suspend fun delete(friend: FriendEntity) = friendDao.delete(friend)
 
-    override suspend fun search(query: String?) = friendDao.searchFriend(query)
+    override fun searchFriend(query: String?) = friendDao.searchFriend(query)
 
     override fun getAll() = friendDao.getAll()
 

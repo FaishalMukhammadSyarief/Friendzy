@@ -11,11 +11,7 @@ interface FriendDao: CoreDao<FriendEntity> {
     @Query("SELECT * FROM FriendEntity")
     fun getAll(): Flow<List<FriendEntity>>
 
-    @Query("SELECT * FROM FriendEntity WHERE name LIKE :keyword")
-    suspend fun findFriend(keyword: String): List<FriendEntity>
-
-    suspend fun searchFriend(keyword: String?): List<FriendEntity> {
-        return findFriend("%$keyword%")
-    }
+    @Query("SELECT * FROM FriendEntity WHERE name LIKE :query")
+    fun searchFriend(query: String?): Flow<List<FriendEntity>>
 
 }

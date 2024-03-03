@@ -10,10 +10,11 @@ import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.crocodic.core.base.adapter.ReactiveListAdapter
 import com.zhalz.friendzy.R
-import com.zhalz.friendzy.adapter.FriendAdapter
 import com.zhalz.friendzy.data.friend.FriendEntity
 import com.zhalz.friendzy.databinding.FragmentSearchBinding
+import com.zhalz.friendzy.databinding.ItemFriendsBinding
 import com.zhalz.friendzy.ui.detail.DetailActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -38,20 +39,28 @@ class SearchFragment : Fragment() {
                 return false
             }
 
-            override fun onQueryTextChange(inputText: String?): Boolean {
-                viewModel.searchFriend(inputText)
-                lifecycleScope.launch {
-                    viewModel.friends.collect{
-                        binding.friendAdapter = FriendAdapter(it) { data ->
-                            toDetail(data)
-                        }
-                    }
-                }
+            override fun onQueryTextChange(query: String?): Boolean {
+                searchFriend(query)
                 return true
             }
         })
 
         return binding.root
+    }
+
+    private fun searchFriend(query: String?) {
+        val adapter =
+            ReactiveListAdapter<ItemFriendsBinding, FriendEntity>(R.layout.item_friends).initItem { _, data ->
+                toDetail(data)
+            }
+
+        lifecycleScope.launch {
+            viewModel.searchFriend(query).collect {
+                adapter.submitList(it)
+            }
+        }
+
+        binding.rvQueryFriend.adapter = adapter
     }
 
     private fun toDetail(data: FriendEntity) {
