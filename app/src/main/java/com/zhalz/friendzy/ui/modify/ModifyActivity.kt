@@ -61,7 +61,7 @@ class ModifyActivity : BaseActivity<ActivityModifyBinding, ModifyViewModel>(R.la
 
     private fun toolbarConfiguration(){
         if (isEdit()){
-            binding.toolbar.title = "EDIT"
+            binding.toolbar.title = getString(R.string.title_edit)
             binding.toolbar.inflateMenu(R.menu.toolbar_edit)
 
             binding.toolbar.setOnMenuItemClickListener {
@@ -92,7 +92,7 @@ class ModifyActivity : BaseActivity<ActivityModifyBinding, ModifyViewModel>(R.la
                     set(selectedYear, selectedMonth, selectedDay)
                 }
 
-                val dateFormat = SimpleDateFormat("dd MMMM yyyy", Locale.getDefault())
+                val dateFormat = SimpleDateFormat(getString(R.string.date_pattern), Locale.getDefault())
                 val formattedDate = dateFormat.format(selectedDate.time)
 
                 binding.etBirth.setText(formattedDate)
@@ -126,6 +126,7 @@ class ModifyActivity : BaseActivity<ActivityModifyBinding, ModifyViewModel>(R.la
 
     }
 
+    @Suppress("UNUSED_EXPRESSION")
     private fun showConfirmation(
         title: String,
         message: String,
@@ -178,7 +179,7 @@ class ModifyActivity : BaseActivity<ActivityModifyBinding, ModifyViewModel>(R.la
     }
 
     private fun openCamera() {
-        activityLauncher.openCamera(this, "com.zhalz.friendzy.file-provider") { file, _ ->
+        activityLauncher.openCamera(this, AUTHORITY) { file, _ ->
             if (file != null) resizeInputPhoto(file)
         }
     }
@@ -237,6 +238,7 @@ class ModifyActivity : BaseActivity<ActivityModifyBinding, ModifyViewModel>(R.la
     companion object {
         const val REQUEST_CODE_CAMERA = 100
         const val REQUEST_CODE_GALLERY = 110
+        const val AUTHORITY = "com.zhalz.friendzy.file-provider"
     }
 
 }

@@ -114,5 +114,6 @@
     <string name="confirm_password_hint">Confirm Password</string>
     <string name="school_hint">School</string>
     <string name="logout">Logout</string>
+    <string name="date_pattern">dd MMMM yyyy</string>
 
 </resources>
