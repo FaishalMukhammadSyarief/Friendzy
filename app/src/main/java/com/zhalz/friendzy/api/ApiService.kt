@@ -26,7 +26,7 @@ interface ApiService {
     @FormUrlEncoded
     @POST("update-profile")
     suspend fun update(
-        @Field ("id") id: Int?,
+        @Field ("id_user") id: Int?,
         @Field ("name") name: String?,
         @Field ("school") school: String?,
         @Field ("description") description: String?

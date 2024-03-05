@@ -14,14 +14,14 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ProfileViewModel @Inject constructor(private val apiService: ApiService) : BaseViewModel() {
+class ProfileViewModel @Inject constructor() : BaseViewModel() {
 
-/*    private val _updateResponse = MutableSharedFlow<LoginResponse>()
-    val updateResponse = _updateResponse.asSharedFlow()*/
+    private val _updateResponse = MutableSharedFlow<LoginResponse>()
+    val updateResponse = _updateResponse.asSharedFlow()
 
     fun getUser() = userRepositoryImpl.getUser()
 
-/*    fun update(id: Int?, name: String?, school: String, desc: String?) {
+    fun update(id: Int?, name: String?, school: String, desc: String?) {
         viewModelScope.launch {
             ApiObserver.run(
                 { apiService.update(id, name, school, desc) },
@@ -35,5 +35,5 @@ class ProfileViewModel @Inject constructor(private val apiService: ApiService) :
                 }
             )
         }
-    }*/
+    }
 }

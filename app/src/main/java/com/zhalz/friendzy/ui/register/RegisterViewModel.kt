@@ -2,7 +2,6 @@ package com.zhalz.friendzy.ui.register
 
 import androidx.lifecycle.viewModelScope
 import com.crocodic.core.api.ApiObserver
-import com.zhalz.friendzy.api.ApiService
 import com.zhalz.friendzy.base.BaseViewModel
 import com.zhalz.friendzy.data.response.RegisterResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -12,7 +11,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class RegisterViewModel @Inject constructor(private val apiService: ApiService) : BaseViewModel() {
+class RegisterViewModel @Inject constructor() : BaseViewModel() {
 
     private val _registerResponse = MutableSharedFlow<RegisterResponse>()
     val registerResponse = _registerResponse.asSharedFlow()
