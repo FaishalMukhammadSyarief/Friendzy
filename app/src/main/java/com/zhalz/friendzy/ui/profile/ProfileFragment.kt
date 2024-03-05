@@ -21,6 +21,8 @@ class ProfileFragment : Fragment() {
     private lateinit var binding: FragmentProfileBinding
 
     var name = ""
+    var school = ""
+    var desc = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -37,6 +39,8 @@ class ProfileFragment : Fragment() {
         lifecycleScope.launch(Dispatchers.IO) {
             viewModel.getUser().let {
                 name = it?.name ?: "NULL"
+                school = it?.school ?: "NULL"
+                desc = it?.description ?: "NULL"
             }
         }
     }
