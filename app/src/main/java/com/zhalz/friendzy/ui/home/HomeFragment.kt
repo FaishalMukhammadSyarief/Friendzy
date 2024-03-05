@@ -15,7 +15,6 @@ import com.google.android.material.carousel.CarouselSnapHelper
 import com.google.android.material.carousel.HeroCarouselStrategy
 import com.zhalz.friendzy.ui.detail.DetailActivity
 import com.zhalz.friendzy.R
-import com.zhalz.friendzy.data.friend.FriendEntity
 import com.zhalz.friendzy.data.user.UserEntity
 import com.zhalz.friendzy.databinding.FragmentHomeBinding
 import com.zhalz.friendzy.databinding.ItemCarouselBinding
@@ -44,7 +43,9 @@ class HomeFragment : Fragment() {
 
     private fun getFriend() {
         val adapter =
-            ReactiveListAdapter<ItemFriendsBinding, UserEntity>(R.layout.item_friends).initItem { _, _ -> }
+            ReactiveListAdapter<ItemFriendsBinding, UserEntity>(R.layout.item_friends).initItem { _, data ->
+                toDetail(data)
+            }
         lifecycleScope.launch {
             viewModel.listFriend.collect { adapter.submitList(it.data) }
         }
@@ -53,7 +54,9 @@ class HomeFragment : Fragment() {
 
     private fun setCarousel() {
         val adapter =
-            ReactiveListAdapter<ItemCarouselBinding, UserEntity>(R.layout.item_carousel).initItem { _, _ -> }
+            ReactiveListAdapter<ItemCarouselBinding, UserEntity>(R.layout.item_carousel).initItem { _, data ->
+                toDetail(data)
+            }
         lifecycleScope.launch {
             viewModel.listFriend.collect {
                 val listFriend = it.data
@@ -74,13 +77,12 @@ class HomeFragment : Fragment() {
         viewModel.getListFriend()
     }
 
-    private fun toDetail(data: FriendEntity) {
+    private fun toDetail(data: UserEntity) {
         val toDetail = Intent(requireContext(), DetailActivity::class.java).apply {
-            putExtra("name", data.name)
-            putExtra("birth", data.birth)
-            putExtra("description", data.description)
-            putExtra("photo", data.photo)
             putExtra("id", data.id)
+            putExtra("name", data.name)
+            putExtra("school", data.school)
+            putExtra("description", data.description)
         }
         startActivity(toDetail)
     }

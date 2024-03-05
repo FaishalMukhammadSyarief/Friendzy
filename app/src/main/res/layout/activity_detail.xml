@@ -37,7 +37,7 @@
                     android:fitsSystemWindows="true"
                     imageSrc="@{activity.photo}"
                     android:scaleType="centerCrop"
-                    tools:src="@drawable/deer"
+                    android:src="@drawable/deer"
                     app:layout_collapseMode="parallax" />
 
                 <com.google.android.material.appbar.MaterialToolbar
@@ -113,7 +113,7 @@
                 <TextView
                     style="@style/TextSubtitle"
                     tools:text="@string/my_birthday"
-                    android:text="@{activity.birth}"
+                    android:text="@{activity.school}"
                     android:textSize="16sp" />
 
                 <View style="@style/Divider" />

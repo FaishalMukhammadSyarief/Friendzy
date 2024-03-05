@@ -9,11 +9,11 @@ import com.zhalz.friendzy.ui.modify.ModifyActivity
 
 class DetailActivity : NoViewModelActivity<ActivityDetailBinding>(R.layout.activity_detail) {
 
+    var id = 0
     var name = ""
-    var birth = ""
+    var school = ""
     var description = ""
     var photo = ""
-    var id = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,19 +22,18 @@ class DetailActivity : NoViewModelActivity<ActivityDetailBinding>(R.layout.activ
         binding.title.isSelected = true
 
         name = intent.getStringExtra("name") ?: ""
-        birth = intent.getStringExtra("birth") ?: ""
+        school = intent.getStringExtra("school") ?: ""
         description = intent.getStringExtra("description") ?: ""
-        photo = intent.getStringExtra("photo") ?: ""
+//        photo = intent.getStringExtra("photo") ?: ""
         id = intent.getIntExtra("id", 0)
     }
 
     fun toEdit(){
         openActivity<ModifyActivity> {
-            putExtra("name", name)
-            putExtra("birth", birth)
-            putExtra("description", description)
-            putExtra("photo", photo)
             putExtra("id", id)
+            putExtra("name", name)
+            putExtra("school", school)
+            putExtra("description", description)
         }
         finish()
     }

@@ -28,7 +28,6 @@
 
         <View
             android:id="@+id/divider"
-            android:visibility="invisible"
             style="@style/Divider" />
 
         <androidx.recyclerview.widget.RecyclerView
