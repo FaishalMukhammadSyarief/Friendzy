@@ -5,9 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.crocodic.core.api.ApiStatus
 import com.zhalz.friendzy.R
 import com.zhalz.friendzy.databinding.FragmentProfileBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -32,6 +34,10 @@ class ProfileFragment : Fragment() {
         binding.activity = this
 
         getUser()
+        binding.fabUpdate.setOnClickListener {
+            if (binding.etName.isEnabled) updateProfile()
+            else editProfile()
+        }
 
         return binding.root
     }
@@ -40,15 +46,47 @@ class ProfileFragment : Fragment() {
         lifecycleScope.launch(Dispatchers.IO) {
             viewModel.getUser().let {
                 id = it?.id ?: 0
-                name = it?.name ?: "NULL"
-                school = it?.school ?: "NULL"
-                desc = it?.description ?: "NULL"
+                name = it?.name ?: ""
+                school = it?.school ?: ""
+                desc = it?.description ?: ""
             }
         }
     }
 
-    fun updateProfile() {
-        viewModel.update(id, name, school, desc)
+    private fun updateProfile() {
+        if (name.isEmpty()) binding.etName.error = getString(R.string.msg_error)
+        if (school.isEmpty()) binding.etSchool.error = getString(R.string.msg_error)
+        if (desc.isEmpty()) binding.etDesc.error = getString(R.string.msg_error)
+
+        if (name.isNotEmpty() && school.isNotEmpty() && desc.isNotEmpty()) {
+            viewModel.update(id, name, school, desc)
+
+            lifecycleScope.launch {
+                viewModel.updateResponse.collect {
+                    it.let {
+                        if (it.status == ApiStatus.LOADING) {
+                            //TODO
+                        } else if (it.status == ApiStatus.SUCCESS) {
+                            binding.apply {
+                                etName.isEnabled = false
+                                etSchool.isEnabled = false
+                                etDesc.isEnabled = false
+                                fabUpdate.setImageDrawable(ResourcesCompat.getDrawable(resources, R.drawable.ic_edit, null))
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private fun editProfile() {
+        binding.apply {
+            etName.isEnabled = true
+            etSchool.isEnabled = true
+            etDesc.isEnabled = true
+            fabUpdate.setImageDrawable(ResourcesCompat.getDrawable(resources, R.drawable.ic_check, null))
+        }
     }
 
 }

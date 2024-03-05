@@ -42,6 +42,7 @@
                 android:id="@+id/et_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:enabled="false"
                 android:inputType="text"
                 android:text="@={activity.name}"
                 android:textColor="@color/black"
@@ -59,8 +60,10 @@
                 android:id="@+id/et_school"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:enabled="false"
                 android:inputType="text"
                 android:text="@={activity.school}"
+                android:textColor="@color/black"
                 tools:ignore="TextContrastCheck,VisualLintTextFieldSize" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -75,16 +78,24 @@
                 android:id="@+id/et_desc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:enabled="false"
                 android:inputType="textMultiLine"
                 android:text="@={activity.desc}"
+                android:textColor="@color/black"
                 tools:ignore="TextContrastCheck,VisualLintTextFieldSize" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.button.MaterialButton
-            style="@style/CustomButton"
-            android:layout_margin="12dp"
-            android:onClick="@{() -> activity.updateProfile()}"
-            android:text="@string/title_edit" />
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_update"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:contentDescription="@string/cd_edit"
+            android:layout_marginHorizontal="12dp"
+            android:backgroundTint="@color/green"
+            android:src="@drawable/ic_edit"
+            app:elevation="0dp"
+            app:tint="@color/white" />
 
     </LinearLayout>
 </layout>
