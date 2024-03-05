@@ -45,4 +45,8 @@ class ProfileFragment : Fragment() {
         }
     }
 
+    fun updateProfile() {
+
+    }
+
 }

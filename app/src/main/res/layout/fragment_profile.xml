@@ -46,7 +46,6 @@
                 android:text="@={activity.name}"
                 android:textColor="@color/black"
                 tools:ignore="TextContrastCheck,VisualLintTextFieldSize" />
-
         </com.google.android.material.textfield.TextInputLayout>
 
         <!-- School -->
@@ -79,8 +78,13 @@
                 android:inputType="textMultiLine"
                 android:text="@={activity.desc}"
                 tools:ignore="TextContrastCheck,VisualLintTextFieldSize" />
-
         </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            style="@style/CustomButton"
+            android:layout_margin="12dp"
+            android:onClick="@{() -> activity.updateProfile()}"
+            android:text="@string/title_edit" />
 
     </LinearLayout>
 </layout>
