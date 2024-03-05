@@ -20,6 +20,7 @@ class ProfileFragment : Fragment() {
     private val viewModel: ProfileViewModel by viewModels()
     private lateinit var binding: FragmentProfileBinding
 
+//    private var id = 0
     var name = ""
     var school = ""
     var desc = ""
@@ -38,6 +39,7 @@ class ProfileFragment : Fragment() {
     private fun getUser() {
         lifecycleScope.launch(Dispatchers.IO) {
             viewModel.getUser().let {
+//                id = it?.id ?: 0
                 name = it?.name ?: "NULL"
                 school = it?.school ?: "NULL"
                 desc = it?.description ?: "NULL"
@@ -46,7 +48,7 @@ class ProfileFragment : Fragment() {
     }
 
     fun updateProfile() {
-
+//        viewModel.update(id, name, school, desc)
     }
 
 }

@@ -23,4 +23,13 @@ interface ApiService {
         @Field ("password") password: String?
     ) : RegisterResponse
 
+    @FormUrlEncoded
+    @POST("update-profile")
+    suspend fun update(
+        @Field ("id") id: Int?,
+        @Field ("name") name: String?,
+        @Field ("school") school: String?,
+        @Field ("description") description: String?
+    ) : LoginResponse
+
 }
