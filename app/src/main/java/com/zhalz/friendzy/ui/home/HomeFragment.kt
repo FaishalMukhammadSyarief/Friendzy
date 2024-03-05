@@ -16,6 +16,7 @@ import com.google.android.material.carousel.HeroCarouselStrategy
 import com.zhalz.friendzy.ui.detail.DetailActivity
 import com.zhalz.friendzy.R
 import com.zhalz.friendzy.data.friend.FriendEntity
+import com.zhalz.friendzy.data.user.UserEntity
 import com.zhalz.friendzy.databinding.FragmentHomeBinding
 import com.zhalz.friendzy.databinding.ItemCarouselBinding
 import com.zhalz.friendzy.databinding.ItemFriendsBinding
@@ -35,38 +36,29 @@ class HomeFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
         binding.homeFragment = this
 
-        readFriend()
+        getFriend()
         setCarousel()
 
         return binding.root
     }
 
-    private fun readFriend() {
+    private fun getFriend() {
         val adapter =
-            ReactiveListAdapter<ItemFriendsBinding, FriendEntity>(R.layout.item_friends).initItem { _, data ->
-                toDetail(data)
-            }
-
+            ReactiveListAdapter<ItemFriendsBinding, UserEntity>(R.layout.item_friends).initItem { _, _ -> }
         lifecycleScope.launch {
-            viewModel.getFriend().collect {
-                adapter.submitList(it)
-            }
+            viewModel.listFriend.collect { adapter.submitList(it.data) }
         }
-
         binding.rvFriend.adapter = adapter
     }
 
     private fun setCarousel() {
         val adapter =
-            ReactiveListAdapter<ItemCarouselBinding, FriendEntity>(R.layout.item_carousel).initItem { _, data ->
-                toDetail(data)
-            }
-
+            ReactiveListAdapter<ItemCarouselBinding, UserEntity>(R.layout.item_carousel).initItem { _, _ -> }
         lifecycleScope.launch {
-            viewModel.getFriend().collect {
+            viewModel.listFriend.collect {
+                val listFriend = it.data
                 adapter.submitList(
-                    if (it.size > 3) it.subList(it.size - 3, it.size).reversed()
-                    else it.reversed()
+                    listFriend?.subList(listFriend.size - 3, listFriend.size)?.reversed()
                 )
             }
         }
@@ -75,6 +67,11 @@ class HomeFragment : Fragment() {
         CarouselLayoutManager(HeroCarouselStrategy())
         CarouselSnapHelper().attachToRecyclerView(binding.rvCarousel)
 
+    }
+
+    override fun onStart() {
+        super.onStart()
+        viewModel.getListFriend()
     }
 
     private fun toDetail(data: FriendEntity) {

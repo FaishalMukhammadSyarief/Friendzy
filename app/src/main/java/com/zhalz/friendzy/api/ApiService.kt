@@ -1,9 +1,11 @@
 package com.zhalz.friendzy.api
 
+import com.zhalz.friendzy.data.response.ListFriendResponse
 import com.zhalz.friendzy.data.response.LoginResponse
 import com.zhalz.friendzy.data.response.RegisterResponse
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
+import retrofit2.http.GET
 import retrofit2.http.POST
 
 interface ApiService {
@@ -31,5 +33,8 @@ interface ApiService {
         @Field ("school") school: String?,
         @Field ("description") description: String?
     ) : LoginResponse
+
+    @GET("get-list-friends")
+    suspend fun getListFriend(): ListFriendResponse
 
 }

@@ -7,7 +7,7 @@
 
         <variable
             name="data"
-            type="com.zhalz.friendzy.data.friend.FriendEntity" />
+            type="com.zhalz.friendzy.data.user.UserEntity" />
 
     </data>
 
@@ -26,13 +26,12 @@
 
             <ImageView
                 android:id="@+id/image_carousel"
-                imageSrc="@{data.photo}"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:contentDescription="@string/cd_image"
                 android:scaleType="centerCrop"
                 android:transitionName="image"
-                tools:src="@drawable/deer" />
+                android:src="@drawable/deer" />
 
             <TextView
                 android:id="@+id/tv_name"
@@ -54,7 +53,7 @@
                 android:layout_marginHorizontal="8dp"
                 android:layout_marginBottom="12dp"
                 android:ellipsize="end"
-                android:text="@{data.birth}"
+                android:text="@{data.school}"
                 tools:text="@string/my_birthday"
                 android:textColor="@color/semi_transparent_white"
 
