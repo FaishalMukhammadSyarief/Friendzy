@@ -15,7 +15,6 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.zhalz.friendzy.R
 import com.zhalz.friendzy.base.BaseActivity
 import com.zhalz.friendzy.data.friend.FriendEntity
-import com.zhalz.friendzy.data.user.UserEntity
 import com.zhalz.friendzy.databinding.ActivityModifyBinding
 import com.zhalz.friendzy.utils.BitmapHelper
 import dagger.hilt.android.AndroidEntryPoint

@@ -6,11 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import com.crocodic.core.api.ApiStatus
 import com.zhalz.friendzy.R
 import com.zhalz.friendzy.databinding.FragmentProfileBinding
 import com.zhalz.friendzy.ui.modify.ModifyActivity
