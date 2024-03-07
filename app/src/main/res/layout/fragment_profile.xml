@@ -6,7 +6,7 @@
     <data>
 
         <variable
-            name="activity"
+            name="fragment"
             type="com.zhalz.friendzy.ui.profile.ProfileFragment" />
 
     </data>
@@ -44,7 +44,7 @@
                 android:layout_height="wrap_content"
                 android:enabled="false"
                 android:inputType="text"
-                android:text="@={activity.name}"
+                android:text="@={fragment.name}"
                 android:textColor="@color/black"
                 tools:ignore="TextContrastCheck,VisualLintTextFieldSize" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -62,7 +62,7 @@
                 android:layout_height="wrap_content"
                 android:enabled="false"
                 android:inputType="text"
-                android:text="@={activity.school}"
+                android:text="@={fragment.school}"
                 android:textColor="@color/black"
                 tools:ignore="TextContrastCheck,VisualLintTextFieldSize" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -80,7 +80,7 @@
                 android:layout_height="wrap_content"
                 android:enabled="false"
                 android:inputType="textMultiLine"
-                android:text="@={activity.desc}"
+                android:text="@={fragment.desc}"
                 android:textColor="@color/black"
                 tools:ignore="TextContrastCheck,VisualLintTextFieldSize" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -89,8 +89,8 @@
             android:id="@+id/fab_update"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:onClick="@{() -> activity.toEdit()}"
+            android:layout_gravity="end"
+            android:onClick="@{() -> fragment.toEdit()}"
             android:contentDescription="@string/cd_edit"
             android:layout_marginHorizontal="12dp"
             android:backgroundTint="@color/green"

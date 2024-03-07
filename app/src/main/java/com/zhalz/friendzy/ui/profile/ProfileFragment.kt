@@ -31,21 +31,19 @@ class ProfileFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_profile, container, false)
-        binding.activity = this
+        binding.fragment = this
 
-        getUser()
+        getUserData()
 
         return binding.root
     }
 
-    private fun getUser() {
-        lifecycleScope.launch(Dispatchers.IO) {
-            viewModel.getUser().let {
-                id = it?.id ?: 0
-                name = it?.name ?: ""
-                school = it?.school ?: ""
-                desc = it?.description ?: ""
-            }
+    private fun getUserData() = lifecycleScope.launch(Dispatchers.IO) {
+        viewModel.getUser()?.let {
+            id = it.id ?: 0
+            name = it.name ?: ""
+            school = it.school ?: ""
+            desc = it.description ?: ""
         }
     }
 
@@ -56,7 +54,6 @@ class ProfileFragment : Fragment() {
             putExtra("school", school)
             putExtra("description", desc)
         }
-
         startActivity(toEdit)
     }
 
