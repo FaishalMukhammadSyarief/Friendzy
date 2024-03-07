@@ -1,5 +1,6 @@
 package com.zhalz.friendzy.ui.profile
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,6 +13,7 @@ import androidx.lifecycle.lifecycleScope
 import com.crocodic.core.api.ApiStatus
 import com.zhalz.friendzy.R
 import com.zhalz.friendzy.databinding.FragmentProfileBinding
+import com.zhalz.friendzy.ui.modify.ModifyActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -34,10 +36,6 @@ class ProfileFragment : Fragment() {
         binding.activity = this
 
         getUser()
-        binding.fabUpdate.setOnClickListener {
-            if (binding.etName.isEnabled) updateProfile()
-            else editProfile()
-        }
 
         return binding.root
     }
@@ -53,40 +51,15 @@ class ProfileFragment : Fragment() {
         }
     }
 
-    private fun updateProfile() {
-        if (name.isEmpty()) binding.etName.error = getString(R.string.msg_error)
-        if (school.isEmpty()) binding.etSchool.error = getString(R.string.msg_error)
-        if (desc.isEmpty()) binding.etDesc.error = getString(R.string.msg_error)
-
-        if (name.isNotEmpty() && school.isNotEmpty() && desc.isNotEmpty()) {
-            viewModel.update(id, name, school, desc)
-
-            lifecycleScope.launch {
-                viewModel.updateResponse.collect {
-                    it.let {
-                        if (it.status == ApiStatus.LOADING) {
-                            //TODO
-                        } else if (it.status == ApiStatus.SUCCESS) {
-                            binding.apply {
-                                etName.isEnabled = false
-                                etSchool.isEnabled = false
-                                etDesc.isEnabled = false
-                                fabUpdate.setImageDrawable(ResourcesCompat.getDrawable(resources, R.drawable.ic_edit, null))
-                            }
-                        }
-                    }
-                }
-            }
+    fun toEdit() {
+        val toEdit = Intent(requireContext(), ModifyActivity::class.java).apply {
+            putExtra("id", id)
+            putExtra("name", name)
+            putExtra("school", school)
+            putExtra("description", desc)
         }
-    }
 
-    private fun editProfile() {
-        binding.apply {
-            etName.isEnabled = true
-            etSchool.isEnabled = true
-            etDesc.isEnabled = true
-            fabUpdate.setImageDrawable(ResourcesCompat.getDrawable(resources, R.drawable.ic_check, null))
-        }
+        startActivity(toEdit)
     }
 
 }

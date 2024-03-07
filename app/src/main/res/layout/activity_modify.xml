@@ -98,22 +98,20 @@
                         tools:ignore="TextContrastCheck,VisualLintTextFieldSize" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <!-- Birth -->
+                <!-- School -->
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/etl_school"
                     style="@style/Et_Input"
-                    android:hint="@string/date_hint"
-                    app:startIconDrawable="@drawable/ic_calendar">
+                    android:hint="@string/school_hint"
+                    app:startIconDrawable="@drawable/ic_school">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/et_birth"
+                        android:id="@+id/et_school"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:cursorVisible="false"
-                        android:focusable="false"
-                        android:inputType="date"
-                        android:maxLength="30"
-                        android:onClick="@{() -> activity.datePicker()}"
-                        android:text="@={activity.birth}"
+                        android:inputType="text"
+                        android:text="@={activity.school}"
+                        android:textColor="@color/black"
                         tools:ignore="TextContrastCheck,VisualLintTextFieldSize" />
                 </com.google.android.material.textfield.TextInputLayout>
 

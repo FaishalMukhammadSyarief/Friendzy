@@ -1,9 +1,7 @@
 package com.zhalz.friendzy.ui.modify
 
-import android.app.DatePickerDialog
 import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
-import android.icu.util.Calendar
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
@@ -17,26 +15,24 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.zhalz.friendzy.R
 import com.zhalz.friendzy.base.BaseActivity
 import com.zhalz.friendzy.data.friend.FriendEntity
+import com.zhalz.friendzy.data.user.UserEntity
 import com.zhalz.friendzy.databinding.ActivityModifyBinding
 import com.zhalz.friendzy.utils.BitmapHelper
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
-import java.text.SimpleDateFormat
-import java.util.Locale
 
 @AndroidEntryPoint
 class ModifyActivity : BaseActivity<ActivityModifyBinding, ModifyViewModel>(R.layout.activity_modify) {
 
-    private val newFriend: FriendEntity by lazy { FriendEntity(name, birth, description, photo) }
-    private val savedFriend: FriendEntity by lazy { FriendEntity(name, birth, description, photo).apply { id = idFriend } }
+    private val newFriend: FriendEntity by lazy { FriendEntity(name, school, description, photo) }
 
     private lateinit var photoFile: File
 
     var name = ""
-    var birth = ""
+    var school = ""
     var description = ""
     var photo = ""
-    private var idFriend = 0
+    private var id = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,10 +40,10 @@ class ModifyActivity : BaseActivity<ActivityModifyBinding, ModifyViewModel>(R.la
         binding.activity = this
 
         name = intent.getStringExtra("name") ?: ""
-        birth = intent.getStringExtra("birth") ?: ""
+        school = intent.getStringExtra("school") ?: ""
         description = intent.getStringExtra("description") ?: ""
         photo = intent.getStringExtra("photo") ?: ""
-        idFriend = intent.getIntExtra("id", 0)
+        id = intent.getIntExtra("id", 0)
 
         toolbarConfiguration()
 
@@ -55,64 +51,24 @@ class ModifyActivity : BaseActivity<ActivityModifyBinding, ModifyViewModel>(R.la
 
     }
 
-    private fun isEdit(): Boolean{
-        return idFriend != 0
+    private fun isEdit(): Boolean {
+        return id != 0
     }
 
     private fun toolbarConfiguration(){
-        if (isEdit()){
-            binding.toolbar.title = getString(R.string.title_edit)
-            binding.toolbar.inflateMenu(R.menu.toolbar_edit)
-
-            binding.toolbar.setOnMenuItemClickListener {
-                when (it.itemId) {
-                    R.id.menu_delete ->
-                        showConfirmation(
-                            getString(R.string.title_delete),
-                            getString(R.string.msg_delete),
-                            viewModel.deleteFriend(savedFriend)
-                        )
-                }
-                true
-            }
-
-        }
-    }
-
-    fun datePicker(){
-        val calendar = Calendar.getInstance()
-        val year = calendar.get(Calendar.YEAR)
-        val month = calendar.get(Calendar.MONTH)
-        val day = calendar.get(Calendar.DAY_OF_MONTH)
-
-        DatePickerDialog(
-            this,
-            { _, selectedYear, selectedMonth, selectedDay ->
-                val selectedDate = Calendar.getInstance().apply {
-                    set(selectedYear, selectedMonth, selectedDay)
-                }
-
-                val dateFormat = SimpleDateFormat(getString(R.string.date_pattern), Locale.getDefault())
-                val formattedDate = dateFormat.format(selectedDate.time)
-
-                binding.etBirth.setText(formattedDate)
-            },
-            year, month, day
-        ).show()
-
+        if (isEdit()) binding.toolbar.title = getString(R.string.title_edit)
     }
 
     fun save() {
-
         if (name.isEmpty()) binding.etName.error = getString(R.string.msg_error)
-        if (birth.isEmpty()) binding.etBirth.error = getString(R.string.msg_error)
+        if (school.isEmpty()) binding.etSchool.error = getString(R.string.msg_error)
         if (description.isEmpty()) binding.etDescription.error = getString(R.string.msg_error)
 
         else if (isEdit()) {
             showConfirmation(
                 getString(R.string.title_edit),
                 getString(R.string.msg_edit),
-                viewModel.editFriend(savedFriend)
+                viewModel.update(id, name, school, description)
             )
         }
 
