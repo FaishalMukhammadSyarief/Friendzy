@@ -26,12 +26,18 @@ class WelcomeActivity : BaseActivity<ActivityWelcomeBinding, WelcomeViewModel>(R
         WindowCompat.setDecorFitsSystemWindows(window, false)
     }
 
-    fun setDestination() {
+    fun loginClick() {
         lifecycleScope.launch(Dispatchers.IO) {
             if (viewModel.checkLogin()) toHome()
             else toLogin()
         }
+    }
 
+    fun registerClick() {
+        lifecycleScope.launch(Dispatchers.IO) {
+            if (viewModel.checkLogin()) toHome()
+            else toRegister()
+        }
     }
 
     private fun toHome() {
@@ -44,7 +50,7 @@ class WelcomeActivity : BaseActivity<ActivityWelcomeBinding, WelcomeViewModel>(R
         finish()
     }
 
-    fun toRegister() {
+    private fun toRegister() {
         openActivity<RegisterActivity>()
         finish()
     }
