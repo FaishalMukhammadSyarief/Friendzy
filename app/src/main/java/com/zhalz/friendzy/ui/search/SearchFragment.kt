@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.crocodic.core.base.adapter.ReactiveListAdapter
 import com.zhalz.friendzy.R
 import com.zhalz.friendzy.data.user.UserEntity
@@ -16,12 +17,20 @@ import com.zhalz.friendzy.databinding.FragmentSearchBinding
 import com.zhalz.friendzy.databinding.ItemFriendsBinding
 import com.zhalz.friendzy.ui.detail.DetailActivity
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class SearchFragment : Fragment() {
 
     private val viewModel: SearchViewModel by viewModels()
     private lateinit var binding: FragmentSearchBinding
+
+    private val adapter by lazy {
+        ReactiveListAdapter<ItemFriendsBinding, UserEntity>(R.layout.item_friends).initItem { _, data ->
+            toDetail(data)
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,12 +53,11 @@ class SearchFragment : Fragment() {
     }
 
     private fun searchFriend(query: String?) {
-        val adapter =
-            ReactiveListAdapter<ItemFriendsBinding, UserEntity>(R.layout.item_friends).initItem { _, data ->
-                toDetail(data)
+        lifecycleScope.launch(Dispatchers.IO) {
+            viewModel.getUserID().let {
+                viewModel.getListFriend(it, query)
             }
-
-        viewModel.getListFriend(query)
+        }
         viewModel.listFiltered.observe(viewLifecycleOwner) { adapter.submitList(it) }
         binding.rvQueryFriend.adapter = adapter
     }

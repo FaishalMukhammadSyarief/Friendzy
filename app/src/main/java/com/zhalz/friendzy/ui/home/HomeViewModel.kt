@@ -16,8 +16,11 @@ class HomeViewModel @Inject constructor(): BaseViewModel() {
     private val _listFriend = MutableSharedFlow<ListFriendResponse>()
     val listFriend = _listFriend.asSharedFlow()
 
-    fun getListFriend() = viewModelScope.launch {
-        ApiObserver.run({ apiService.getListFriend() }, false,
+    fun getListFriend(id: Int?) = viewModelScope.launch {
+        ApiObserver.run({ apiService.getListFriend(id) }, false,
             object : ApiObserver.ResponseListenerFlow<ListFriendResponse>(_listFriend) {} )
     }
+
+    fun getUserID() = userRepositoryImpl.getUser()?.id
+
 }

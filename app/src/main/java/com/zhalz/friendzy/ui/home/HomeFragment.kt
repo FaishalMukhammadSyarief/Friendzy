@@ -20,6 +20,7 @@ import com.zhalz.friendzy.databinding.FragmentHomeBinding
 import com.zhalz.friendzy.databinding.ItemCarouselBinding
 import com.zhalz.friendzy.databinding.ItemFriendsBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -36,12 +37,20 @@ class HomeFragment : Fragment() {
         binding.homeFragment = this
 
         getFriend()
+        setFriendList()
         setCarousel()
 
         return binding.root
     }
 
-    private fun getFriend() {
+    private fun getFriend() = lifecycleScope.launch(Dispatchers.IO) {
+        viewModel.getUserID().let {
+            viewModel.getListFriend(it)
+        }
+    }
+
+
+    private fun setFriendList() {
         val adapter =
             ReactiveListAdapter<ItemFriendsBinding, UserEntity>(R.layout.item_friends).initItem { _, data ->
                 toDetail(data)
@@ -70,11 +79,6 @@ class HomeFragment : Fragment() {
         CarouselLayoutManager(HeroCarouselStrategy())
         CarouselSnapHelper().attachToRecyclerView(binding.rvCarousel)
 
-    }
-
-    override fun onStart() {
-        super.onStart()
-        viewModel.getListFriend()
     }
 
     private fun toDetail(data: UserEntity) {

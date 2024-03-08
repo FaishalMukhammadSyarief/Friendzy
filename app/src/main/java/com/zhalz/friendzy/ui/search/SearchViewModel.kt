@@ -20,8 +20,8 @@ class SearchViewModel @Inject constructor() : BaseViewModel() {
 
     val listFiltered = MutableLiveData<List<UserEntity>?>()
 
-    fun getListFriend(query: String?) = viewModelScope.launch {
-        ApiObserver.run({ apiService.getListFriend() }, false,
+    fun getListFriend(id: Int?, query: String?) = viewModelScope.launch {
+        ApiObserver.run({ apiService.getListFriend(id) }, false,
             object : ApiObserver.ResponseListenerFlow<ListFriendResponse>(_loginResponse) {
                 override suspend fun onSuccess(response: ListFriendResponse) {
                     super.onSuccess(response)
@@ -31,4 +31,6 @@ class SearchViewModel @Inject constructor() : BaseViewModel() {
                 }
             } )
     }
+
+    fun getUserID() = userRepositoryImpl.getUser()?.id
 }
