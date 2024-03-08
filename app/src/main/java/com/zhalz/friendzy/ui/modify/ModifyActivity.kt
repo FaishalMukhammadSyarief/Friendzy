@@ -11,10 +11,10 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.crocodic.core.extension.openCamera
 import com.crocodic.core.extension.openGallery
+import com.crocodic.core.extension.tos
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.zhalz.friendzy.R
 import com.zhalz.friendzy.base.BaseActivity
-import com.zhalz.friendzy.data.friend.FriendEntity
 import com.zhalz.friendzy.databinding.ActivityModifyBinding
 import com.zhalz.friendzy.utils.BitmapHelper
 import dagger.hilt.android.AndroidEntryPoint
@@ -22,8 +22,6 @@ import java.io.File
 
 @AndroidEntryPoint
 class ModifyActivity : BaseActivity<ActivityModifyBinding, ModifyViewModel>(R.layout.activity_modify) {
-
-    private val newFriend: FriendEntity by lazy { FriendEntity(name, school, description, photo) }
 
     private lateinit var photoFile: File
 
@@ -75,7 +73,8 @@ class ModifyActivity : BaseActivity<ActivityModifyBinding, ModifyViewModel>(R.la
             showConfirmation(
                 getString(R.string.title_create),
                 getString(R.string.msg_create),
-                viewModel.createFriend(newFriend)
+                //TODO
+                tos("Work on Progress")
             )
         }
 
@@ -102,9 +101,7 @@ class ModifyActivity : BaseActivity<ActivityModifyBinding, ModifyViewModel>(R.la
             .show()
     }
 
-    fun finishActivity() {
-        finish()
-    }
+    fun finishActivity() = finish()
 
     fun addPhoto(){
         MaterialAlertDialogBuilder(this)
