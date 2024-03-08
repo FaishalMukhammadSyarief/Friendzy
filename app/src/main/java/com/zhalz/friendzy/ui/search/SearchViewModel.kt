@@ -15,14 +15,14 @@ import javax.inject.Inject
 @HiltViewModel
 class SearchViewModel @Inject constructor() : BaseViewModel() {
 
-    private val _loginResponse = MutableSharedFlow<ListFriendResponse>()
-    val loginResponse = _loginResponse.asSharedFlow()
+    private val _friendResponse = MutableSharedFlow<ListFriendResponse>()
+    val friendResponse = _friendResponse.asSharedFlow()
 
     val listFiltered = MutableLiveData<List<UserEntity>?>()
 
     fun getListFriend(id: Int?, query: String?) = viewModelScope.launch {
         ApiObserver.run({ apiService.getListFriend(id) }, false,
-            object : ApiObserver.ResponseListenerFlow<ListFriendResponse>(_loginResponse) {
+            object : ApiObserver.ResponseListenerFlow<ListFriendResponse>(_friendResponse) {
                 override suspend fun onSuccess(response: ListFriendResponse) {
                     super.onSuccess(response)
                     listFiltered.postValue(response.data?.filter {

@@ -56,7 +56,7 @@ class HomeFragment : Fragment() {
                 toDetail(data)
             }
         lifecycleScope.launch {
-            viewModel.listFriend.collect { adapter.submitList(it.data) }
+            viewModel.friendResponse.collect { adapter.submitList(it.data) }
         }
         binding.rvFriend.adapter = adapter
     }
@@ -67,7 +67,7 @@ class HomeFragment : Fragment() {
                 toDetail(data)
             }
         lifecycleScope.launch {
-            viewModel.listFriend.collect {
+            viewModel.friendResponse.collect {
                 val listFriend = it.data
                 adapter.submitList(
                     listFriend?.subList(listFriend.size - 3, listFriend.size)?.reversed()

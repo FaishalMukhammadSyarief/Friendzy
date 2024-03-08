@@ -13,12 +13,12 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(): BaseViewModel() {
 
-    private val _listFriend = MutableSharedFlow<ListFriendResponse>()
-    val listFriend = _listFriend.asSharedFlow()
+    private val _friendResponse = MutableSharedFlow<ListFriendResponse>()
+    val friendResponse = _friendResponse.asSharedFlow()
 
     fun getListFriend(id: Int?) = viewModelScope.launch {
         ApiObserver.run({ apiService.getListFriend(id) }, false,
-            object : ApiObserver.ResponseListenerFlow<ListFriendResponse>(_listFriend) {} )
+            object : ApiObserver.ResponseListenerFlow<ListFriendResponse>(_friendResponse) {} )
     }
 
     fun getUserID() = userRepositoryImpl.getUser()?.id
