@@ -6,8 +6,12 @@
     <data>
 
         <variable
-            name="homeFragment"
-            type="com.zhalz.friendzy.ui.home.HomeFragment" />
+            name="carouselAdapter"
+            type="com.crocodic.core.base.adapter.ReactiveListAdapter" />
+
+        <variable
+            name="listAdapter"
+            type="com.crocodic.core.base.adapter.ReactiveListAdapter" />
 
     </data>
 
@@ -21,6 +25,7 @@
             android:id="@+id/rv_carousel"
             android:layout_width="match_parent"
             android:layout_height="400dp"
+            android:adapter="@{carouselAdapter}"
             android:contentDescription="@string/cd_carousel"
             android:orientation="horizontal"
             app:layoutManager="com.google.android.material.carousel.CarouselLayoutManager"
@@ -34,6 +39,7 @@
             android:id="@+id/rv_friend"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:adapter="@{listAdapter}"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:spanCount="2"
             tools:listitem="@layout/item_friends" />

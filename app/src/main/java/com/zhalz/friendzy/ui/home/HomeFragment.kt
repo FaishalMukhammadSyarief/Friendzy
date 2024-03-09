@@ -25,10 +25,18 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
     private val viewModel: HomeViewModel by viewModels()
 
+    private val listAdapter by lazy {
+        ReactiveListAdapter<ItemFriendsBinding, UserEntity>(R.layout.item_friends).initItem { _, data -> toDetail(data) }
+    }
+    private val carouselAdapter by lazy {
+        ReactiveListAdapter<ItemCarouselBinding, UserEntity>(R.layout.item_carousel).initItem { _, data -> toDetail(data) }
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding?.homeFragment = this
+        binding?.listAdapter = listAdapter
+        binding?.carouselAdapter = carouselAdapter
 
         setFriendList()
         setCarousel()
@@ -40,34 +48,22 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         }
     }
 
-    private fun setFriendList() {
-        val adapter =
-            ReactiveListAdapter<ItemFriendsBinding, UserEntity>(R.layout.item_friends).initItem { _, data ->
-                toDetail(data)
-            }
-        lifecycleScope.launch {
-            viewModel.friendResponse.collect { adapter.submitList(it.data) }
-        }
-        binding?.rvFriend?.adapter = adapter
+    private fun setFriendList() = lifecycleScope.launch {
+        viewModel.friendResponse.collect { listAdapter.submitList(it.data) }
     }
 
+
     private fun setCarousel() {
-        val adapter =
-            ReactiveListAdapter<ItemCarouselBinding, UserEntity>(R.layout.item_carousel).initItem { _, data ->
-                toDetail(data)
-            }
         lifecycleScope.launch {
             viewModel.friendResponse.collect {
                 val listFriend = it.data
-                adapter.submitList(
+                carouselAdapter.submitList(
                     listFriend?.subList(listFriend.size - 3, listFriend.size)?.reversed()
                 )
             }
         }
-        binding?.rvCarousel?.adapter = adapter
         CarouselLayoutManager(HeroCarouselStrategy())
         CarouselSnapHelper().attachToRecyclerView(binding?.rvCarousel)
-
     }
 
     private fun toDetail(data: UserEntity) {
