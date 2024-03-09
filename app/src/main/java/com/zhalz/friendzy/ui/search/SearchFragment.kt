@@ -41,11 +41,11 @@ class SearchFragment : Fragment() {
 
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                return false
-            }
-            override fun onQueryTextChange(query: String?): Boolean {
                 searchFriend(query)
                 return true
+            }
+            override fun onQueryTextChange(query: String?): Boolean {
+                return false
             }
         })
 

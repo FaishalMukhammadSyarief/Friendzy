@@ -35,7 +35,6 @@ class HomeFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
         binding.homeFragment = this
 
-        getFriend()
         setFriendList()
         setCarousel()
 
@@ -88,6 +87,11 @@ class HomeFragment : Fragment() {
             putExtra("liked", data.liked)
         }
         startActivity(toDetail)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        getFriend()
     }
 
 }
