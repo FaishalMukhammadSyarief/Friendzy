@@ -27,7 +27,6 @@ import kotlinx.coroutines.launch
 class HomeFragment : Fragment() {
 
     private val viewModel: HomeViewModel by viewModels()
-
     private lateinit var binding: FragmentHomeBinding
 
     override fun onCreateView(
@@ -48,7 +47,6 @@ class HomeFragment : Fragment() {
             viewModel.getListFriend(it)
         }
     }
-
 
     private fun setFriendList() {
         val adapter =
@@ -87,6 +85,7 @@ class HomeFragment : Fragment() {
             putExtra("name", data.name)
             putExtra("school", data.school)
             putExtra("description", data.description)
+            putExtra("liked", data.liked)
         }
         startActivity(toDetail)
     }

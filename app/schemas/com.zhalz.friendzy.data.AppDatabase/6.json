@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 6,
-    "identityHash": "5ceacbe6d42627773b71fd74b6d5cad2",
+    "identityHash": "befb685cfda9529b72265ae591fc3be7",
     "entities": [
       {
         "tableName": "FriendEntity",
@@ -50,7 +50,7 @@
       },
       {
         "tableName": "UserEntity",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`databaseId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `id` INTEGER, `name` TEXT, `school` TEXT, `description` TEXT)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`databaseId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `id` INTEGER, `name` TEXT, `school` TEXT, `description` TEXT, `liked` INTEGER)",
         "fields": [
           {
             "fieldPath": "databaseId",
@@ -81,6 +81,12 @@
             "columnName": "description",
             "affinity": "TEXT",
             "notNull": false
+          },
+          {
+            "fieldPath": "liked",
+            "columnName": "liked",
+            "affinity": "INTEGER",
+            "notNull": false
           }
         ],
         "primaryKey": {
@@ -96,7 +102,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '5ceacbe6d42627773b71fd74b6d5cad2')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'befb685cfda9529b72265ae591fc3be7')"
     ]
   }
 }

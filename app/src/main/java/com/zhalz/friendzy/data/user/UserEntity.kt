@@ -2,6 +2,7 @@ package com.zhalz.friendzy.data.user
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.google.gson.annotations.SerializedName
 
 @Entity
 data class UserEntity(
@@ -10,5 +11,7 @@ data class UserEntity(
     val id: Int?,
     val name: String?,
     val school: String?,
-    val description: String?
+    val description: String?,
+    @field:SerializedName("like_by_you")
+    val liked: Boolean?
 )

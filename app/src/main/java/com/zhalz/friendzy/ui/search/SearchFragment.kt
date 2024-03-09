@@ -41,11 +41,11 @@ class SearchFragment : Fragment() {
 
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                searchFriend(query)
-                return true
+                return false
             }
             override fun onQueryTextChange(query: String?): Boolean {
-                return false
+                searchFriend(query)
+                return true
             }
         })
 
@@ -68,6 +68,7 @@ class SearchFragment : Fragment() {
             putExtra("name", data.name)
             putExtra("school", data.school)
             putExtra("description", data.description)
+            putExtra("liked", data.liked)
         }
         startActivity(toDetail)
     }

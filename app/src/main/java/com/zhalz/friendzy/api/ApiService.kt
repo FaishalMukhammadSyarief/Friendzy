@@ -40,4 +40,11 @@ interface ApiService {
         @Query ("users_id") id: Int?
     ): ListFriendResponse
 
+    @FormUrlEncoded
+    @POST("like-profile")
+    suspend fun like(
+        @Field ("users_id") id: Int?,
+        @Field ("user_id_i_like") idFavorite: Int?,
+    ) : LoginResponse
+
 }

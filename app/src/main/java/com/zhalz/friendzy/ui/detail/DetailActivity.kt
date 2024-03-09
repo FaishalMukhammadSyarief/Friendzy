@@ -14,6 +14,7 @@ class DetailActivity : NoViewModelActivity<ActivityDetailBinding>(R.layout.activ
     var school = ""
     var description = ""
     var photo = ""
+    private var liked = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,11 +22,22 @@ class DetailActivity : NoViewModelActivity<ActivityDetailBinding>(R.layout.activ
         binding.activity = this
         binding.title.isSelected = true
 
+        id = intent.getIntExtra("id", 0)
         name = intent.getStringExtra("name") ?: ""
         school = intent.getStringExtra("school") ?: ""
         description = intent.getStringExtra("description") ?: ""
-//        photo = intent.getStringExtra("photo") ?: ""
-        id = intent.getIntExtra("id", 0)
+        photo = intent.getStringExtra("photo") ?: ""
+        liked = intent.getBooleanExtra("liked", false)
+
+        toolbarConfig()
+    }
+
+    private fun toolbarConfig() {
+        if (liked) {
+            binding.toolbar.menu
+                .findItem(R.id.edit)
+                .setIcon(R.drawable.ic_star_filled)
+        }
     }
 
     fun toEdit(){
@@ -38,8 +50,6 @@ class DetailActivity : NoViewModelActivity<ActivityDetailBinding>(R.layout.activ
         finish()
     }
 
-    fun finishActivity() {
-        finish()
-    }
+    fun finishActivity() = finish()
 
 }
