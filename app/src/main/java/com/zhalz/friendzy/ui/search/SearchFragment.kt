@@ -39,6 +39,8 @@ class SearchFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_search, container, false)
         binding.fragment = this
 
+        binding.adapter = adapter
+
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 searchFriend(query)
@@ -59,7 +61,6 @@ class SearchFragment : Fragment() {
             }
         }
         viewModel.listFiltered.observe(viewLifecycleOwner) { adapter.submitList(it) }
-        binding.rvQueryFriend.adapter = adapter
     }
 
     private fun toDetail(data: UserEntity) {

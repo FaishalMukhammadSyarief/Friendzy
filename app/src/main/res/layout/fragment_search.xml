@@ -9,6 +9,10 @@
             name="fragment"
             type="com.zhalz.friendzy.ui.search.SearchFragment" />
 
+        <variable
+            name="adapter"
+            type="com.crocodic.core.base.adapter.ReactiveListAdapter" />
+
     </data>
 
     <LinearLayout
@@ -35,6 +39,7 @@
             android:layout_height="wrap_content"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:spanCount="2"
+            android:adapter="@{adapter}"
             tools:listitem="@layout/item_friends" />
 
     </LinearLayout>
