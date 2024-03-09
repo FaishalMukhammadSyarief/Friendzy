@@ -1,20 +1,17 @@
 package com.zhalz.friendzy.ui.home
 
-import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.crocodic.core.base.adapter.ReactiveListAdapter
+import com.crocodic.core.extension.openActivity
 import com.google.android.material.carousel.CarouselLayoutManager
 import com.google.android.material.carousel.CarouselSnapHelper
 import com.google.android.material.carousel.HeroCarouselStrategy
 import com.zhalz.friendzy.ui.detail.DetailActivity
 import com.zhalz.friendzy.R
+import com.zhalz.friendzy.base.BaseFragment
 import com.zhalz.friendzy.data.user.UserEntity
 import com.zhalz.friendzy.databinding.FragmentHomeBinding
 import com.zhalz.friendzy.databinding.ItemCarouselBinding
@@ -24,21 +21,17 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class HomeFragment : Fragment() {
+class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
     private val viewModel: HomeViewModel by viewModels()
-    private lateinit var binding: FragmentHomeBinding
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
-        binding.homeFragment = this
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding?.homeFragment = this
 
         setFriendList()
         setCarousel()
-
-        return binding.root
     }
 
     private fun getFriend() = lifecycleScope.launch(Dispatchers.IO) {
@@ -55,7 +48,7 @@ class HomeFragment : Fragment() {
         lifecycleScope.launch {
             viewModel.friendResponse.collect { adapter.submitList(it.data) }
         }
-        binding.rvFriend.adapter = adapter
+        binding?.rvFriend?.adapter = adapter
     }
 
     private fun setCarousel() {
@@ -71,27 +64,30 @@ class HomeFragment : Fragment() {
                 )
             }
         }
-
-        binding.rvCarousel.adapter = adapter
+        binding?.rvCarousel?.adapter = adapter
         CarouselLayoutManager(HeroCarouselStrategy())
-        CarouselSnapHelper().attachToRecyclerView(binding.rvCarousel)
+        CarouselSnapHelper().attachToRecyclerView(binding?.rvCarousel)
 
     }
 
     private fun toDetail(data: UserEntity) {
-        val toDetail = Intent(requireContext(), DetailActivity::class.java).apply {
+        context?.openActivity<DetailActivity> {
             putExtra("id", data.id)
             putExtra("name", data.name)
             putExtra("school", data.school)
             putExtra("description", data.description)
             putExtra("liked", data.liked)
         }
-        startActivity(toDetail)
     }
 
     override fun onStart() {
         super.onStart()
         getFriend()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
     }
 
 }
