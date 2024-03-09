@@ -28,6 +28,8 @@ class ProfileFragment : Fragment() {
     var school = ""
     var desc = ""
 
+    var edt = false
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
@@ -62,12 +64,7 @@ class ProfileFragment : Fragment() {
                         if (it.status == ApiStatus.LOADING) {
                             //TODO
                         } else if (it.status == ApiStatus.SUCCESS) {
-                            binding.apply {
-                                etName.isEnabled = false
-                                etSchool.isEnabled = false
-                                etDesc.isEnabled = false
-                                fabUpdate.setImageDrawable(ResourcesCompat.getDrawable(resources, R.drawable.ic_edit, null))
-                            }
+                            binding.isEdit = false
                             Toast.makeText(requireContext(), "Profile Updated Successfully", Toast.LENGTH_SHORT).show()
                         }
                     }
@@ -77,12 +74,7 @@ class ProfileFragment : Fragment() {
     }
 
     private fun editProfile() {
-        binding.apply {
-            etName.isEnabled = true
-            etSchool.isEnabled = true
-            etDesc.isEnabled = true
-            fabUpdate.setImageDrawable(ResourcesCompat.getDrawable(resources, R.drawable.ic_check, null))
-        }
+        binding.isEdit = true
     }
 
     fun btnClick() {
