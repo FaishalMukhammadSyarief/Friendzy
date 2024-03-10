@@ -1,41 +1,34 @@
 package com.zhalz.friendzy.ui.profile
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.Toast
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.crocodic.core.api.ApiStatus
+import com.crocodic.core.extension.tos
 import com.zhalz.friendzy.R
+import com.zhalz.friendzy.base.BaseFragment
 import com.zhalz.friendzy.databinding.FragmentProfileBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class ProfileFragment : Fragment() {
+class ProfileFragment : BaseFragment<FragmentProfileBinding>(R.layout.fragment_profile) {
 
     private val viewModel: ProfileViewModel by viewModels()
-    private lateinit var binding: FragmentProfileBinding
 
     private var id = 0
     var name = ""
     var school = ""
     var desc = ""
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_profile, container, false)
-        binding.fragment = this
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding?.fragment = this
 
         getUserData()
 
-        return binding.root
     }
 
     private fun getUserData() = lifecycleScope.launch(Dispatchers.IO) {
@@ -48,9 +41,9 @@ class ProfileFragment : Fragment() {
     }
 
     private fun updateProfile() {
-        if (name.isEmpty()) binding.etName.error = getString(R.string.msg_error)
-        if (school.isEmpty()) binding.etSchool.error = getString(R.string.msg_error)
-        if (desc.isEmpty()) binding.etDesc.error = getString(R.string.msg_error)
+        if (name.isEmpty()) binding?.etName?.error = getString(R.string.msg_error)
+        if (school.isEmpty()) binding?.etSchool?.error = getString(R.string.msg_error)
+        if (desc.isEmpty()) binding?.etDesc?.error = getString(R.string.msg_error)
 
         if (name.isNotEmpty() && school.isNotEmpty() && desc.isNotEmpty()) {
             viewModel.update(id, name, school, desc)
@@ -58,11 +51,11 @@ class ProfileFragment : Fragment() {
             lifecycleScope.launch {
                 viewModel.updateResponse.collect {
                     it.let {
-                        if (it.status == ApiStatus.LOADING) {
-                            //TODO
-                        } else if (it.status == ApiStatus.SUCCESS) {
-                            binding.isEdit = false
-                            Toast.makeText(requireContext(), "Profile Updated Successfully", Toast.LENGTH_SHORT).show()
+                        if (it.status == ApiStatus.LOADING) loadingDialog?.show("Updating...")
+                        else if (it.status == ApiStatus.SUCCESS) {
+                            loadingDialog?.dismiss()
+                            binding?.isEdit = false
+                            context?.tos("Profile Updated Successfully")
                         }
                     }
                 }
@@ -71,12 +64,17 @@ class ProfileFragment : Fragment() {
     }
 
     private fun editProfile() {
-        binding.isEdit = true
+        binding?.isEdit = true
     }
 
     fun btnClick() {
-        if (binding.etName.isEnabled) updateProfile()
+        if (binding?.isEdit == true) updateProfile()
         else editProfile()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        binding = null
     }
 
 }
