@@ -1,17 +1,14 @@
 package com.zhalz.friendzy.ui.search
 
-import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.crocodic.core.base.adapter.ReactiveListAdapter
+import com.crocodic.core.extension.openActivity
 import com.zhalz.friendzy.R
+import com.zhalz.friendzy.base.BaseFragment
 import com.zhalz.friendzy.data.user.UserEntity
 import com.zhalz.friendzy.databinding.FragmentSearchBinding
 import com.zhalz.friendzy.databinding.ItemFriendsBinding
@@ -21,27 +18,20 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class SearchFragment : Fragment() {
+class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_search) {
 
     private val viewModel: SearchViewModel by viewModels()
-    private lateinit var binding: FragmentSearchBinding
-
     private val adapter by lazy {
-        ReactiveListAdapter<ItemFriendsBinding, UserEntity>(R.layout.item_friends).initItem { _, data ->
-            toDetail(data)
-        }
+        ReactiveListAdapter<ItemFriendsBinding, UserEntity>(R.layout.item_friends).initItem { _, data -> toDetail(data) }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_search, container, false)
-        binding.fragment = this
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding?.fragment = this
 
-        binding.adapter = adapter
+        binding?.adapter = adapter
 
-        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        binding?.searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 searchFriend(query)
                 return true
@@ -50,8 +40,6 @@ class SearchFragment : Fragment() {
                 return false
             }
         })
-
-        return binding.root
     }
 
     private fun searchFriend(query: String?) {
@@ -64,14 +52,13 @@ class SearchFragment : Fragment() {
     }
 
     private fun toDetail(data: UserEntity) {
-        val toDetail = Intent(requireContext(), DetailActivity::class.java).apply {
+        context?.openActivity<DetailActivity> {
             putExtra("id", data.id)
             putExtra("name", data.name)
             putExtra("school", data.school)
             putExtra("description", data.description)
             putExtra("liked", data.liked)
         }
-        startActivity(toDetail)
     }
 
 }
