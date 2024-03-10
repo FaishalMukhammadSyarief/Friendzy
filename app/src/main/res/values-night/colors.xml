@@ -5,7 +5,6 @@
 
     <!--  Special Component  -->
     <color name="fab_color">#252525</color>
-<!--    <color name="fab_color">#252525</color>-->
 
     <!--  Transparent Color  -->
     <color name="semi_transparent_white">#BF000000</color>
