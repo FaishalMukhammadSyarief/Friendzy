@@ -8,7 +8,6 @@ import com.zhalz.friendzy.data.response.ListFriendResponse
 import com.zhalz.friendzy.data.user.UserEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -16,7 +15,6 @@ import javax.inject.Inject
 class SearchViewModel @Inject constructor() : BaseViewModel() {
 
     private val _friendResponse = MutableSharedFlow<ListFriendResponse>()
-    val friendResponse = _friendResponse.asSharedFlow()
 
     val listFiltered = MutableLiveData<List<UserEntity>?>()
 
