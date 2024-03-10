@@ -5,21 +5,20 @@
 
     <data>
 
+        <variable
+            name="adapter"
+            type="com.crocodic.core.base.adapter.ReactiveListAdapter" />
+
     </data>
 
-    <FrameLayout
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.favorite.FavoriteFragment">
+        android:adapter="@{adapter}"
+        android:padding="8dp"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:spanCount="2"
+        tools:context=".ui.favorite.FavoriteFragment"
+        tools:listitem="@layout/item_friends" />
 
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:contentDescription="@string/cd_construction"
-            android:src="@drawable/under_construction"
-            app:tint="@color/black" />
-
-    </FrameLayout>
 </layout>
