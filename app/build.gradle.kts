@@ -63,8 +63,8 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
     /*  NAVIGATION  */
-    implementation("androidx.navigation:navigation-fragment-ktx:2.7.6")
-    implementation("androidx.navigation:navigation-ui-ktx:2.7.6")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.7.7")
+    implementation("androidx.navigation:navigation-ui-ktx:2.7.7")
 
     /*  ROOM DATABASE  */
     implementation("androidx.room:room-ktx:2.6.1")
@@ -75,7 +75,7 @@ dependencies {
     kapt ("com.google.dagger:hilt-compiler:2.48")
 
     /*  FIREBASE  */
-    implementation(platform("com.google.firebase:firebase-bom:32.7.0"))
+    implementation(platform("com.google.firebase:firebase-bom:32.7.3"))
     implementation("com.google.firebase:firebase-analytics")
 
     implementation ("com.squareup.retrofit2:retrofit:2.9.0")
