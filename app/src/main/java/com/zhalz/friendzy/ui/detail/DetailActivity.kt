@@ -1,13 +1,18 @@
 package com.zhalz.friendzy.ui.detail
 
 import android.os.Bundle
-import com.crocodic.core.base.activity.NoViewModelActivity
+import androidx.lifecycle.lifecycleScope
 import com.crocodic.core.extension.openActivity
 import com.zhalz.friendzy.R
+import com.zhalz.friendzy.base.BaseActivity
 import com.zhalz.friendzy.databinding.ActivityDetailBinding
 import com.zhalz.friendzy.ui.modify.ModifyActivity
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
-class DetailActivity : NoViewModelActivity<ActivityDetailBinding>(R.layout.activity_detail) {
+@AndroidEntryPoint
+class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>(R.layout.activity_detail) {
 
     var id = 0
     var name = ""
@@ -37,6 +42,31 @@ class DetailActivity : NoViewModelActivity<ActivityDetailBinding>(R.layout.activ
             binding.toolbar.menu
                 .findItem(R.id.edit)
                 .setIcon(R.drawable.ic_star_filled)
+        }
+
+        binding.toolbar.setOnMenuItemClickListener {
+            when(it.itemId) {
+                R.id.edit -> {
+                    likeFriend()
+                    if (liked) {
+                        binding.toolbar.menu
+                            .findItem(R.id.edit)
+                            .setIcon(R.drawable.ic_star_empty)
+                    }
+                    else if (!liked) {
+                        binding.toolbar.menu
+                            .findItem(R.id.edit)
+                            .setIcon(R.drawable.ic_star_filled)
+                    }
+                }
+            }
+            true
+        }
+    }
+
+    private fun likeFriend() = lifecycleScope.launch(Dispatchers.IO) {
+        viewModel.getUserID().let {
+            viewModel.likeFriend(it, id)
         }
     }
 

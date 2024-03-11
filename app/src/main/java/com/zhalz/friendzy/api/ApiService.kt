@@ -1,5 +1,6 @@
 package com.zhalz.friendzy.api
 
+import com.zhalz.friendzy.data.response.LikeResponse
 import com.zhalz.friendzy.data.response.ListFriendResponse
 import com.zhalz.friendzy.data.response.LoginResponse
 import com.zhalz.friendzy.data.response.RegisterResponse
@@ -45,6 +46,6 @@ interface ApiService {
     suspend fun like(
         @Field ("users_id") id: Int?,
         @Field ("user_id_i_like") idFavorite: Int?,
-    ) : LoginResponse
+    ) : LikeResponse
 
 }
