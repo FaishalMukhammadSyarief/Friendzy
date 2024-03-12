@@ -1,15 +1,13 @@
 package com.zhalz.friendzy.ui.detail
 
 import android.os.Bundle
-import androidx.lifecycle.lifecycleScope
 import com.crocodic.core.extension.openActivity
+import com.crocodic.core.extension.tos
 import com.zhalz.friendzy.R
 import com.zhalz.friendzy.base.BaseActivity
 import com.zhalz.friendzy.databinding.ActivityDetailBinding
 import com.zhalz.friendzy.ui.modify.ModifyActivity
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>(R.layout.activity_detail) {
@@ -48,7 +46,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>(R.la
             when(it.itemId) {
                 R.id.edit -> {
                     likeFriend()
-                    if (liked) {
+                    /*if (liked) {
                         binding.toolbar.menu
                             .findItem(R.id.edit)
                             .setIcon(R.drawable.ic_star_empty)
@@ -57,18 +55,20 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>(R.la
                         binding.toolbar.menu
                             .findItem(R.id.edit)
                             .setIcon(R.drawable.ic_star_filled)
-                    }
+                    }*/
                 }
             }
             true
         }
     }
 
-    private fun likeFriend() = lifecycleScope.launch(Dispatchers.IO) {
-        viewModel.getUserID().let {
-            viewModel.likeFriend(it, id)
+    private fun likeFriend() {
+        viewModel.likeFriend(64, id)
+        viewModel.message.observe(this) {
+            tos(it)
         }
     }
+
 
     fun toEdit(){
         openActivity<ModifyActivity> {

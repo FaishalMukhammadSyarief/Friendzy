@@ -4,6 +4,8 @@ import com.zhalz.friendzy.data.response.LikeResponse
 import com.zhalz.friendzy.data.response.ListFriendResponse
 import com.zhalz.friendzy.data.response.LoginResponse
 import com.zhalz.friendzy.data.response.RegisterResponse
+import com.zhalz.friendzy.data.response.RetrofitResponse
+import retrofit2.Call
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
@@ -41,11 +43,18 @@ interface ApiService {
         @Query ("users_id") id: Int?
     ): ListFriendResponse
 
+/*    @FormUrlEncoded
+    @POST("like")
+    fun like(
+        @Field ("users_id") userID: Int?,
+        @Field ("user_id_i_like") targetID: Int?,
+    ) : LikeResponse*/
+
     @FormUrlEncoded
-    @POST("like-profile")
-    suspend fun like(
-        @Field ("users_id") id: Int?,
-        @Field ("user_id_i_like") idFavorite: Int?,
-    ) : LikeResponse
+    @POST("like")
+    fun likeRetrofit(
+        @Field ("users_id") userID: Int?,
+        @Field ("user_id_i_like") targetID: Int?,
+    ) : Call<RetrofitResponse>
 
 }
