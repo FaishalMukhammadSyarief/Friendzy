@@ -22,6 +22,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(R.layout.fragment_p
     var name = ""
     var school = ""
     var desc = ""
+    var photo = ""
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -37,6 +38,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(R.layout.fragment_p
             name = it.name ?: ""
             school = it.school ?: ""
             desc = it.description ?: ""
+            photo = it.photo ?: ""
         }
     }
 

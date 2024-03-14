@@ -18,7 +18,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>(R.la
     var name = ""
     var school = ""
     var description = ""
-    private var photo = ""
+    var photo = ""
     private var liked = false
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -12,6 +12,7 @@ data class UserEntity(
     val name: String?,
     val school: String?,
     val description: String?,
+    val photo: String?,
     @field:SerializedName("like_by_you")
     val liked: Boolean?
 )

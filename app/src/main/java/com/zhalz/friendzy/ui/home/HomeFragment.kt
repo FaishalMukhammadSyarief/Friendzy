@@ -72,6 +72,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
             putExtra("name", data.name)
             putExtra("school", data.school)
             putExtra("description", data.description)
+            putExtra("photo", data.photo)
             putExtra("liked", data.liked)
         }
     }

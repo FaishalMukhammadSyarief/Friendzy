@@ -26,6 +26,7 @@
 
             <ImageView
                 android:id="@+id/image_carousel"
+                imageUrl="@{data.photo}"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:contentDescription="@string/cd_image"
@@ -39,13 +40,13 @@
                 android:layout_marginHorizontal="8dp"
                 android:ellipsize="end"
                 android:text="@{data.name}"
-                tools:text="@string/my_name"
                 android:textColor="@color/semi_transparent_white"
                 android:textSize="16sp"
-
                 app:layout_constraintBottom_toTopOf="@+id/tv_birth"
+
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                tools:text="@string/my_name" />
 
             <TextView
                 android:id="@+id/tv_birth"
@@ -54,12 +55,12 @@
                 android:layout_marginBottom="12dp"
                 android:ellipsize="end"
                 android:text="@{data.school}"
-                tools:text="@string/my_birthday"
                 android:textColor="@color/semi_transparent_white"
-
                 app:layout_constraintBottom_toBottomOf="@+id/image_carousel"
+
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                tools:text="@string/my_birthday" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
