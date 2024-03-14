@@ -5,6 +5,7 @@ import androidx.lifecycle.lifecycleScope
 import com.crocodic.core.api.ApiStatus
 import com.crocodic.core.extension.colorRes
 import com.crocodic.core.extension.openActivity
+import com.crocodic.core.extension.tos
 import com.zhalz.friendzy.R
 import com.zhalz.friendzy.base.BaseActivity
 import com.zhalz.friendzy.databinding.ActivityRegisterBinding
@@ -26,6 +27,7 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding, RegisterViewModel
 
         binding.activity = this
         initUI()
+        observe()
 
     }
 
@@ -37,21 +39,26 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding, RegisterViewModel
 
     }
 
-    private fun register() {
-        viewModel.register(name, phone, password)
-
+    private fun observe() {
         lifecycleScope.launch {
             viewModel.registerResponse.collect {
                 it.let {
-                    if (it.status == ApiStatus.LOADING) loadingDialog.show("Signing Up...")
-                    else if (it.status == ApiStatus.SUCCESS) {
-                        loadingDialog.dismiss()
-                        toHome()
+                    when (it.status) {
+                        ApiStatus.LOADING -> loadingDialog.show("Signing Up...")
+                        ApiStatus.SUCCESS -> {
+                            loadingDialog.dismiss()
+                            toHome()
+                        }
+                        else -> return@collect
+
                     }
                 }
             }
         }
-
+        viewModel.message.observe(this@RegisterActivity) {
+            tos(it)
+            loadingDialog.dismiss()
+        }
     }
 
     fun validateRegister() {
@@ -64,7 +71,7 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding, RegisterViewModel
             binding.etConfirmPassword.error = getString(R.string.msg_error_password)
         }
         else if (name.isNotEmpty() && phone.isNotEmpty() && password.isNotEmpty() && confirmPassword.isNotEmpty()) {
-            register()
+            viewModel.register(name, phone, password)
         }
     }
 
