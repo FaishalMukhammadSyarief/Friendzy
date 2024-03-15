@@ -33,12 +33,21 @@ interface ApiService {
     @Multipart
     @POST("update-profile")
     suspend fun update(
-        @Query ("id_user") id: Int?,
-        @Query ("name") name: String?,
-        @Query ("school") school: String?,
-        @Query ("description") description: String?,
-        @Part photo: MultipartBody.Part? = null,
-        ) : LoginResponse
+        @Query("id_user") id: Int?,
+        @Query("name") name: String?,
+        @Query("school") school: String?,
+        @Query("description") description: String?,
+        @Part photo: MultipartBody.Part?
+    ): LoginResponse
+
+    @FormUrlEncoded
+    @POST("update-profile")
+    suspend fun updateNoPhoto(
+        @Field("id_user") id: Int?,
+        @Field("name") name: String?,
+        @Field("school") school: String?,
+        @Field("description") description: String?
+    ): LoginResponse
 
     @GET("get-list-friends")
     suspend fun getListFriend(

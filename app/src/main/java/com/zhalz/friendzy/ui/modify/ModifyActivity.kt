@@ -21,7 +21,7 @@ import java.io.File
 @AndroidEntryPoint
 class ModifyActivity : BaseActivity<ActivityModifyBinding, ModifyViewModel>(R.layout.activity_modify) {
 
-    private lateinit var photoFile: File
+    private var photoFile: File? = null
 
     var name = ""
     var school = ""
@@ -57,7 +57,15 @@ class ModifyActivity : BaseActivity<ActivityModifyBinding, ModifyViewModel>(R.la
         if (school.isEmpty()) binding.etSchool.error = getString(R.string.msg_error)
         if (description.isEmpty()) binding.etDescription.error = getString(R.string.msg_error)
 
-        else if (isEdit()) {
+        else if (isEdit() && photoFile == null) {
+            showConfirmation(
+                getString(R.string.title_edit),
+                getString(R.string.msg_edit),
+                viewModel.updateNoPhoto(id, name, school, description)
+            )
+        }
+
+        else if (isEdit() && photoFile != null) {
             showConfirmation(
                 getString(R.string.title_edit),
                 getString(R.string.msg_edit),

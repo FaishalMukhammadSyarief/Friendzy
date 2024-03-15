@@ -15,13 +15,24 @@ import javax.inject.Inject
 @HiltViewModel
 class ModifyViewModel @Inject constructor(): BaseViewModel() {
 
-    fun update(id: Int?, name: String?, school: String, desc: String?, photo: File? = null  ) {
+    fun update(id: Int?, name: String?, school: String, desc: String?, photo: File? ) {
         viewModelScope.launch {
             val fileBody = photo?.asRequestBody("multipart/form-data".toMediaTypeOrNull())
             val filePart =
                 fileBody?.let { MultipartBody.Part.createFormData("photo", photo.name, it) }
 
             ApiObserver.run({ apiService.update(id, name, school, desc, filePart) }, false,
+                object : ApiObserver.ModelResponseListener<LoginResponse> {
+                    override suspend fun onSuccess(response: LoginResponse) {
+                        super.onSuccess(response)
+                    }
+                })
+        }
+    }
+
+    fun updateNoPhoto(id: Int?, name: String?, school: String, desc: String?) {
+        viewModelScope.launch {
+            ApiObserver.run({ apiService.updateNoPhoto(id, name, school, desc) }, false,
                 object : ApiObserver.ModelResponseListener<LoginResponse> {
                     override suspend fun onSuccess(response: LoginResponse) {
                         super.onSuccess(response)
