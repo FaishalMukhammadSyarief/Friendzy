@@ -1,6 +1,8 @@
 package com.zhalz.friendzy.ui.search
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.View
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.viewModels
@@ -33,21 +35,27 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
 
         binding?.searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                searchFriend(query)
-                return true
+                return false
             }
             override fun onQueryTextChange(query: String?): Boolean {
-                return false
+                searchFriend(query)
+                return true
             }
         })
     }
 
     private fun searchFriend(query: String?) {
-        lifecycleScope.launch(Dispatchers.IO) {
-            viewModel.getUserID().let {
-                viewModel.getListFriend(it, query)
+        val handler = Handler(Looper.getMainLooper())
+        val searchFriend = Runnable {
+            lifecycleScope.launch(Dispatchers.IO) {
+                viewModel.getUserID().let {
+                    viewModel.getListFriend(it, query)
+                }
             }
         }
+        handler.removeCallbacks(searchFriend)
+        handler.postDelayed(searchFriend, 1_000)
+
         viewModel.listFiltered.observe(viewLifecycleOwner) { adapter.submitList(it) }
     }
 
