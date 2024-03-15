@@ -24,39 +24,35 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(R.layou
 
         binding.activity = this
         initUI()
+        observe()
 
     }
 
     private fun initUI() {
-
         window.apply {
             statusBarColor = colorRes(R.color.green)
         }
-
     }
 
-    fun validateLogin() {
-
-        if (phone.isEmpty()) binding.etPhone.error = getString(R.string.msg_error)
-        if (password.isEmpty()) binding.etPassword.error = getString(R.string.msg_error)
-
-        if (phone.isNotEmpty() && password.isNotEmpty()) {
-            viewModel.login(phone, password)
-
-            lifecycleScope.launch {
-                viewModel.loginResponse.collect {
-                    it.let {
-                        if (it.status == ApiStatus.LOADING) {
-                            loadingDialog.show("Logging in...")
-                        } else if (it.status == ApiStatus.SUCCESS) {
-                            loadingDialog.dismiss()
-                            toHome()
-                        }
-                    }
+    private fun observe() = lifecycleScope.launch {
+        viewModel.loginResponse.collect {
+            it.let {
+                if (it.status == ApiStatus.LOADING) {
+                    loadingDialog.show("Logging in...")
+                } else if (it.status == ApiStatus.SUCCESS) {
+                    loadingDialog.dismiss()
+                    toHome()
                 }
             }
         }
+    }
 
+    fun validateLogin() {
+        if (phone.isEmpty()) binding.etPhone.error = getString(R.string.msg_error)
+        if (password.isEmpty()) binding.etPassword.error = getString(R.string.msg_error)
+        if (phone.isNotEmpty() && password.isNotEmpty()) {
+            viewModel.login(phone, password)
+        }
     }
 
     private fun toHome() {

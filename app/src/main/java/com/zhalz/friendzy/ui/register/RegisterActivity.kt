@@ -32,11 +32,9 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding, RegisterViewModel
     }
 
     private fun initUI() {
-
         window.apply {
             statusBarColor = colorRes(R.color.green)
         }
-
     }
 
     private fun observe() {
