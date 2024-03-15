@@ -72,6 +72,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>(R.la
             putExtra("name", name)
             putExtra("school", school)
             putExtra("description", description)
+            putExtra("photo", photo)
         }
         finish()
     }

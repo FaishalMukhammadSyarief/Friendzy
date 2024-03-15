@@ -4,7 +4,6 @@ import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
 import android.os.Build
 import android.os.Bundle
-import android.os.Environment
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
@@ -16,7 +15,6 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.zhalz.friendzy.R
 import com.zhalz.friendzy.base.BaseActivity
 import com.zhalz.friendzy.databinding.ActivityModifyBinding
-import com.zhalz.friendzy.utils.BitmapHelper
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 
@@ -44,8 +42,6 @@ class ModifyActivity : BaseActivity<ActivityModifyBinding, ModifyViewModel>(R.la
 
         toolbarConfiguration()
 
-        photoFile = createImageFile()
-
     }
 
     private fun isEdit(): Boolean {
@@ -65,7 +61,7 @@ class ModifyActivity : BaseActivity<ActivityModifyBinding, ModifyViewModel>(R.la
             showConfirmation(
                 getString(R.string.title_edit),
                 getString(R.string.msg_edit),
-                viewModel.update(id, name, school, description)
+                viewModel.update(id, name, school, description, photoFile)
             )
         }
 
@@ -116,32 +112,23 @@ class ModifyActivity : BaseActivity<ActivityModifyBinding, ModifyViewModel>(R.la
             .show()
     }
 
-    private fun createImageFile(): File {
-        val storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-        return File.createTempFile("PHOTO_", ".jpg", storageDir)
-    }
-
-    private fun resizeInputPhoto(file: File) {
+    private fun setImage(file: File) {
+        photoFile = file
         val bitmap = BitmapFactory.decodeFile(file.absolutePath)
-        val resizeTakenImage = BitmapHelper().resizeBitmap(bitmap, 512f)
-
         binding.ivProfile.setImageBitmap(bitmap)
-        photo = BitmapHelper().bitmapToString(resizeTakenImage)
-        photoFile.delete()
     }
 
     private fun openCamera() {
         activityLauncher.openCamera(this, AUTHORITY) { file, _ ->
-            if (file != null) resizeInputPhoto(file)
+            if (file != null) setImage(file)
         }
     }
 
     private fun openGallery() {
         activityLauncher.openGallery(this) { file, _ ->
-            if (file != null) resizeInputPhoto(file)
+            if (file != null) setImage(file)
         }
     }
-
 
     /** -- RUNTIME PERMISSION -- **/
     private fun checkPermissionCamera() {

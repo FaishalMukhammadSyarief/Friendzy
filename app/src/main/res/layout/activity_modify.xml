@@ -50,12 +50,13 @@
 
                     <com.google.android.material.imageview.ShapeableImageView
                         android:id="@+id/iv_profile"
-                        imageSrc="@{activity.photo}"
+                        imageUrl="@{activity.photo}"
                         android:layout_width="200dp"
                         android:layout_height="200dp"
                         android:layout_gravity="center"
                         android:layout_marginVertical="12dp"
                         android:padding="5dp"
+                        android:src="@drawable/deer"
                         android:scaleType="centerCrop"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"

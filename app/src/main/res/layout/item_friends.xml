@@ -29,7 +29,7 @@
                 android:layout_height="match_parent"
                 android:contentDescription="@string/cd_image"
                 android:scaleType="centerCrop"
-                tools:src="@drawable/deer" />
+                android:src="@drawable/deer" />
 
             <TextView
                 android:id="@+id/tv_name"

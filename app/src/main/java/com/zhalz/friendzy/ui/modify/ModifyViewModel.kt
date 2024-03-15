@@ -8,18 +8,23 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import java.io.File
 import javax.inject.Inject
 
 @HiltViewModel
 class ModifyViewModel @Inject constructor(): BaseViewModel() {
 
-    private val _updateResponse = MutableSharedFlow<LoginResponse>()
-    val updateResponse = _updateResponse.asSharedFlow()
-
-    fun update(id: Int?, name: String?, school: String, desc: String?) {
+    fun update(id: Int?, name: String?, school: String, desc: String?, photo: File? = null  ) {
         viewModelScope.launch {
-            ApiObserver.run({ apiService.update(id, name, school, desc) }, false,
-                object : ApiObserver.ResponseListenerFlow<LoginResponse>(_updateResponse) {
+            val fileBody = photo?.asRequestBody("multipart/form-data".toMediaTypeOrNull())
+            val filePart =
+                fileBody?.let { MultipartBody.Part.createFormData("photo", photo.name, it) }
+
+            ApiObserver.run({ apiService.update(id, name, school, desc, filePart) }, false,
+                object : ApiObserver.ModelResponseListener<LoginResponse> {
                     override suspend fun onSuccess(response: LoginResponse) {
                         super.onSuccess(response)
                     }

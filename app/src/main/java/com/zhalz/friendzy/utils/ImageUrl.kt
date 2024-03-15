@@ -11,6 +11,7 @@ object ImageUrl {
     fun ImageView.loadUrlString(imageUrl: String?) {
         Glide.with(context)
             .load(imageUrl)
+            .placeholder(R.drawable.goblin)
             .error(R.drawable.deer)
             .into(this)
     }
