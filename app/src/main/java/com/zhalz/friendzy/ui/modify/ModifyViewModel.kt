@@ -5,8 +5,6 @@ import com.crocodic.core.api.ApiObserver
 import com.zhalz.friendzy.base.BaseViewModel
 import com.zhalz.friendzy.data.response.LoginResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
