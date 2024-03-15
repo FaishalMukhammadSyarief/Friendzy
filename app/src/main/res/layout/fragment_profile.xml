@@ -9,10 +9,6 @@
             name="fragment"
             type="com.zhalz.friendzy.ui.profile.ProfileFragment" />
 
-        <variable
-            name="isEdit"
-            type="Boolean" />
-
     </data>
 
     <LinearLayout
@@ -47,7 +43,7 @@
                 android:id="@+id/et_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:enabled="@{isEdit}"
+                android:enabled="false"
                 android:inputType="text"
                 android:text="@={fragment.name}"
                 android:textColor="@color/black"
@@ -65,7 +61,7 @@
                 android:id="@+id/et_school"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:enabled="@{isEdit}"
+                android:enabled="false"
                 android:inputType="text"
                 android:text="@={fragment.school}"
                 android:textColor="@color/black"
@@ -83,7 +79,7 @@
                 android:id="@+id/et_desc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:enabled="@{isEdit}"
+                android:enabled="false"
                 android:inputType="textMultiLine"
                 android:text="@={fragment.desc}"
                 android:textColor="@color/black"
@@ -98,8 +94,8 @@
             android:layout_marginHorizontal="12dp"
             android:backgroundTint="@color/green"
             android:contentDescription="@string/cd_edit"
-            android:onClick="@{() -> fragment.btnClick()}"
-            android:src="@{isEdit ? @drawable/ic_check : @drawable/ic_edit}"
+            android:onClick="@{() -> fragment.toModify()}"
+            android:src="@drawable/ic_edit"
             app:elevation="0dp"
             app:tint="@color/white" />
 

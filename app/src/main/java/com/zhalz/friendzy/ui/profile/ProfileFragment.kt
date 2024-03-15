@@ -4,11 +4,11 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import com.crocodic.core.api.ApiStatus
-import com.crocodic.core.extension.tos
+import com.crocodic.core.extension.openActivity
 import com.zhalz.friendzy.R
 import com.zhalz.friendzy.base.BaseFragment
 import com.zhalz.friendzy.databinding.FragmentProfileBinding
+import com.zhalz.friendzy.ui.modify.ModifyActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -38,40 +38,19 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(R.layout.fragment_p
             name = it.name ?: ""
             school = it.school ?: ""
             desc = it.description ?: ""
-            photo = it.photo ?: ""
+            photo = it.photo ?: "https://neptune74.crocodic.net/myfriend-kelasindustri/public/VqoPjXLwGHYs4TviRtT7qU0ADQtiyAr8.jpg"
         }
     }
 
-    private fun updateProfile() {
-        if (name.isEmpty()) binding?.etName?.error = getString(R.string.msg_error)
-        if (school.isEmpty()) binding?.etSchool?.error = getString(R.string.msg_error)
-        if (desc.isEmpty()) binding?.etDesc?.error = getString(R.string.msg_error)
-
-        if (name.isNotEmpty() && school.isNotEmpty() && desc.isNotEmpty()) {
-            viewModel.update(id, name, school, desc)
-
-            lifecycleScope.launch {
-                viewModel.updateResponse.collect {
-                    it.let {
-                        if (it.status == ApiStatus.LOADING) loadingDialog?.show("Updating...")
-                        else if (it.status == ApiStatus.SUCCESS) {
-                            loadingDialog?.dismiss()
-                            binding?.isEdit = false
-                            context?.tos("Profile Updated Successfully")
-                        }
-                    }
-                }
-            }
+    fun toModify() {
+        context?.openActivity<ModifyActivity> {
+            putExtra("id", id)
+            putExtra("name", name)
+            putExtra("school", school)
+            putExtra("description", desc)
+            putExtra("photo", photo)
+            putExtra("isUser", true)
         }
-    }
-
-    private fun editProfile() {
-        binding?.isEdit = true
-    }
-
-    fun btnClick() {
-        if (binding?.isEdit == true) updateProfile()
-        else editProfile()
     }
 
     override fun onDestroy() {

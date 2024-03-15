@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.crocodic.core.extension.openActivity
 import com.crocodic.core.extension.openCamera
 import com.crocodic.core.extension.openGallery
 import com.crocodic.core.extension.tos
@@ -15,6 +16,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.zhalz.friendzy.R
 import com.zhalz.friendzy.base.BaseActivity
 import com.zhalz.friendzy.databinding.ActivityModifyBinding
+import com.zhalz.friendzy.ui.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 
@@ -28,6 +30,7 @@ class ModifyActivity : BaseActivity<ActivityModifyBinding, ModifyViewModel>(R.la
     var description = ""
     var photo = ""
     private var id = 0
+    private var isUser = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +42,7 @@ class ModifyActivity : BaseActivity<ActivityModifyBinding, ModifyViewModel>(R.la
         description = intent.getStringExtra("description") ?: ""
         photo = intent.getStringExtra("photo") ?: ""
         id = intent.getIntExtra("id", 0)
+        isUser = intent.getBooleanExtra("isUser", false)
 
         toolbarConfiguration()
 
@@ -61,7 +65,7 @@ class ModifyActivity : BaseActivity<ActivityModifyBinding, ModifyViewModel>(R.la
             showConfirmation(
                 getString(R.string.title_edit),
                 getString(R.string.msg_edit),
-                viewModel.updateNoPhoto(id, name, school, description)
+                viewModel.updateNoPhoto(id, name, school, description, isUser)
             )
         }
 
@@ -69,7 +73,7 @@ class ModifyActivity : BaseActivity<ActivityModifyBinding, ModifyViewModel>(R.la
             showConfirmation(
                 getString(R.string.title_edit),
                 getString(R.string.msg_edit),
-                viewModel.update(id, name, school, description, photoFile)
+                viewModel.update(id, name, school, description, photoFile, isUser)
             )
         }
 
@@ -96,6 +100,7 @@ class ModifyActivity : BaseActivity<ActivityModifyBinding, ModifyViewModel>(R.la
             .setMessage(message)
             .setPositiveButton(R.string.action_positive) { dialog, _ ->
                 positiveAction
+                openActivity<MainActivity>()
                 finish()
                 dialog.dismiss()
             }

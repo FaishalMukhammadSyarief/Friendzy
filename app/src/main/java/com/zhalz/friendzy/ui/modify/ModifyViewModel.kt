@@ -15,7 +15,7 @@ import javax.inject.Inject
 @HiltViewModel
 class ModifyViewModel @Inject constructor(): BaseViewModel() {
 
-    fun update(id: Int?, name: String?, school: String, desc: String?, photo: File? ) {
+    fun update(id: Int?, name: String?, school: String, desc: String?, photo: File?, isUser: Boolean ) {
         viewModelScope.launch {
             val fileBody = photo?.asRequestBody("multipart/form-data".toMediaTypeOrNull())
             val filePart =
@@ -25,17 +25,19 @@ class ModifyViewModel @Inject constructor(): BaseViewModel() {
                 object : ApiObserver.ModelResponseListener<LoginResponse> {
                     override suspend fun onSuccess(response: LoginResponse) {
                         super.onSuccess(response)
+                        if (isUser) response.data?.let { userRepositoryImpl.insert(it) }
                     }
                 })
         }
     }
 
-    fun updateNoPhoto(id: Int?, name: String?, school: String, desc: String?) {
+    fun updateNoPhoto(id: Int?, name: String?, school: String, desc: String?, isUser: Boolean) {
         viewModelScope.launch {
             ApiObserver.run({ apiService.updateNoPhoto(id, name, school, desc) }, false,
                 object : ApiObserver.ModelResponseListener<LoginResponse> {
                     override suspend fun onSuccess(response: LoginResponse) {
                         super.onSuccess(response)
+                        if (isUser) response.data?.let { userRepositoryImpl.insert(it) }
                     }
                 })
         }
