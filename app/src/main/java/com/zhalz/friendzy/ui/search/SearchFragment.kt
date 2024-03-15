@@ -57,6 +57,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
             putExtra("name", data.name)
             putExtra("school", data.school)
             putExtra("description", data.description)
+            putExtra("photo", data.photo ?: "https://neptune74.crocodic.net/myfriend-kelasindustri/public/VqoPjXLwGHYs4TviRtT7qU0ADQtiyAr8.jpg")
             putExtra("liked", data.liked)
         }
     }
