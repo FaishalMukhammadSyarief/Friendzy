@@ -44,6 +44,7 @@ class ModifyActivity : BaseActivity<ActivityModifyBinding, ModifyViewModel>(R.la
         id = intent.getIntExtra("id", 0)
         isUser = intent.getBooleanExtra("isUser", false)
 
+        binding.edit = isEdit()
         toolbarConfiguration()
 
     }
@@ -81,8 +82,7 @@ class ModifyActivity : BaseActivity<ActivityModifyBinding, ModifyViewModel>(R.la
             showConfirmation(
                 getString(R.string.title_create),
                 getString(R.string.msg_create),
-                //TODO
-                tos("Work on Progress")
+                viewModel.register(name, school, description)
             )
         }
 
@@ -100,6 +100,7 @@ class ModifyActivity : BaseActivity<ActivityModifyBinding, ModifyViewModel>(R.la
             .setMessage(message)
             .setPositiveButton(R.string.action_positive) { dialog, _ ->
                 positiveAction
+                viewModel.message.observe(this) { tos(it) }
                 openActivity<MainActivity>()
                 finish()
                 dialog.dismiss()
