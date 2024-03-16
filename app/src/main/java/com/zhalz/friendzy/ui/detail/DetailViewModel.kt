@@ -16,7 +16,7 @@ class DetailViewModel @Inject constructor() : BaseViewModel() {
     private val _isFav = MutableLiveData<Boolean?>()
     val isFav = _isFav as LiveData<Boolean?>
 
-    fun likeFriend(userID: Int? ,targetID: Int?) = viewModelScope.launch {
+    fun likeFriend(userID: Int ,targetID: Int) = viewModelScope.launch {
         ApiObserver.run( {apiService.like(userID, targetID)}, false,
             object : ApiObserver.ModelResponseListener<LikeResponse> {
                 override suspend fun onSuccess(response: LikeResponse) {

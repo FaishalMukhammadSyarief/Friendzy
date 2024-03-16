@@ -8,7 +8,6 @@ import com.zhalz.friendzy.base.BaseActivity
 import com.zhalz.friendzy.databinding.ActivityDetailBinding
 import com.zhalz.friendzy.ui.modify.ModifyActivity
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -53,17 +52,16 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>(R.la
         }
     }
 
-    private fun likeFriend() = lifecycleScope.launch(Dispatchers.IO) {
-        viewModel.getUserID().let {
-            viewModel.likeFriend(it, id)
-        }
+    private fun likeFriend() = lifecycleScope.launch {
+        viewModel.likeFriend(viewModel.getUserID() ?: return@launch, id)
     }
 
     private fun checkFav() {
-        viewModel.isFav.observe(this) { liked = it ?: false }
-
-        if (liked) binding.toolbar.menu.findItem(R.id.edit).setIcon(R.drawable.ic_star_empty)
-        else binding.toolbar.menu.findItem(R.id.edit).setIcon(R.drawable.ic_star_filled)
+        viewModel.isFav.observe(this) {
+            liked = it ?: false
+            if (liked) binding.toolbar.menu.findItem(R.id.edit).setIcon(R.drawable.ic_star_empty)
+            else binding.toolbar.menu.findItem(R.id.edit).setIcon(R.drawable.ic_star_filled)
+        }
     }
 
     fun toEdit() {
